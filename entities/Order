@@ -1,0 +1,106 @@
+{
+  "name": "Order",
+  "type": "object",
+  "properties": {
+    "customer_name": {
+      "type": "string",
+      "description": "Customer full name"
+    },
+    "customer_email": {
+      "type": "string",
+      "format": "email",
+      "description": "Customer email address"
+    },
+    "customer_phone": {
+      "type": "string",
+      "description": "Customer phone number"
+    },
+    "product_type": {
+      "type": "string",
+      "enum": [
+        "brochure",
+        "flyer",
+        "calendar",
+        "roll_up",
+        "business_cards",
+        "posters",
+        "banners",
+        "stickers"
+      ],
+      "description": "Type of print product"
+    },
+    "width_cm": {
+      "type": "number",
+      "description": "Width in centimeters"
+    },
+    "height_cm": {
+      "type": "number",
+      "description": "Height in centimeters"
+    },
+    "length_cm": {
+      "type": "number",
+      "description": "Length in centimeters (optional)"
+    },
+    "quantity": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Number of items to print"
+    },
+    "paper_type": {
+      "type": "string",
+      "enum": [
+        "standard",
+        "premium",
+        "glossy",
+        "matte",
+        "canvas"
+      ],
+      "default": "standard",
+      "description": "Type of paper/material"
+    },
+    "color_type": {
+      "type": "string",
+      "enum": [
+        "color",
+        "black_white"
+      ],
+      "default": "color",
+      "description": "Color or black and white printing"
+    },
+    "special_instructions": {
+      "type": "string",
+      "description": "Additional instructions or notes"
+    },
+    "file_urls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Uploaded design files"
+    },
+    "estimated_price": {
+      "type": "number",
+      "description": "Estimated price in ILS"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "confirmed",
+        "in_production",
+        "ready",
+        "completed"
+      ],
+      "default": "pending",
+      "description": "Order status"
+    }
+  },
+  "required": [
+    "customer_name",
+    "customer_email",
+    "product_type",
+    "width_cm",
+    "height_cm",
+    "quantity"
+  ]
+}
