@@ -1,0 +1,264 @@
+
+import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { 
+  MapPin, 
+  Phone, 
+  Mail, 
+  Clock, 
+  Award, 
+  Users,
+  CheckCircle,
+  History,
+  Target
+} from "lucide-react";
+
+export default function About() {
+  const values = [
+    {
+      icon: Award,
+      title: "איכות לפני הכל",
+      description: "אנו משתמשים רק בחומרים האיכותיים ביותר ובטכנולוגיית הדפסה מתקדמת כדי להבטיח שכל פרויקט עומד בסטנדרטים הגבוהים ביותר."
+    },
+    {
+      icon: Clock,
+      title: "עמידה בזמנים",
+      description: "אנו מבינים שלוחות זמנים הם קריטיים. התהליכים היעילים שלנו מבטיחים שההזמנות שלכם יושלמו בזמן, כל פעם מחדש."
+    },
+    {
+      icon: Users,
+      title: "שירות לקוחות",
+      description: "הצוות המנוסה שלנו מספק שירות אישי וייעוץ מומחה לכל צרכי ההדפסה שלכם."
+    },
+    {
+      icon: Target,
+      title: "מחירים תחרותיים",
+      description: "דפוס איכותי לא חייב להיות יקר. אנו מציעים מחירים תחרותיים מבלי להתפשר על האיכות."
+    }
+  ];
+
+  const capabilities = [
+    "דפוס דיגיטלי ואופסט",
+    "הדפסה בפורמט רחב",
+    "שירותי עיצוב גרפי",
+    "גימורים וכריכה",
+    "הזמנות דחופות",
+    "שירות משלוחים"
+  ];
+
+  return (
+    <div className="space-y-16 text-right">
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-gray-50 to-blue-50 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                אודות דפוס כתר
+              </h1>
+              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                ממוקם בלב תל אביב, דפוס כתר משרת את הקהילה עם שירותי דפוס מקצועיים כבר למעלה מ-40 שנה. אנו משלבים אומנות מסורתית עם טכנולוגיה מודרנית כדי לספק תוצאות יוצאות דופן.
+              </p>
+              <div className="grid grid-cols-2 gap-6">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-blue-600 mb-2">40+</div>
+                  <div className="text-gray-600">שנות ניסיון</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-blue-600 mb-2">5000+</div>
+                  <div className="text-gray-600">לקוחות מרוצים</div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="relative">
+              <div className="bg-white rounded-3xl p-8 shadow-2xl">
+                <img 
+                  src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=600&h=400&fit=crop" 
+                  alt="סדנת דפוס כתר"
+                  className="w-full h-64 object-cover rounded-2xl mb-6"
+                />
+                <div className="text-center">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">הסדנה שלנו</h3>
+                  <p className="text-gray-600">ציוד הדפסה מהמתקדמים בעולם</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Story */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <div className="flex items-center mb-6">
+              <History className="w-8 h-8 text-blue-600 ml-3" />
+              <h2 className="text-3xl font-bold text-gray-900">על הדפוס</h2>
+            </div>
+            <div className="space-y-4 text-gray-600 text-lg leading-relaxed">
+              <p>
+                דפוס כתר, הפועל בלב תל אביב למעלה מ-40 שנה, הוא מוסד ותיק ומוערך של איכות ומקצועיות. התחלנו כעסק משפחתי קטן, ועם השנים צמחנו והתפתחנו, תוך שאנו שומרים על אותם ערכי ליבה: אמינות, שירות אישי, והתחייבות בלתי מתפשרת לתוצאה המושלמת.
+              </p>
+              <p>
+                הניסיון רב השנים שלנו מאפשר לנו להעניק פתרונות יצירתיים ומדויקים לכל פרויקט, מהזמנה קטנה ועד להפקה מורכבת. אנו גאים להיות שותפים להצלחה של מאות עסקים ולקוחות פרטיים.
+              </p>
+            </div>
+          </div>
+          
+          <div className="relative">
+            <img 
+              src="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=600&h=400&fit=crop" 
+              alt="Printing process"
+              className="w-full h-80 object-cover rounded-3xl shadow-2xl"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Our Values */}
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              הערכים שלנו
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              הערכים שלנו מנחים כל מה שאנחנו עושים, מכרטיס הביקור הקטן ביותר ועד לבאנר הגדול ביותר
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {values.map((value, index) => (
+              <Card key={index} className="text-center border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <CardContent className="p-8">
+                  <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <value.icon className="w-8 h-8 text-blue-600" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                    {value.title}
+                  </h3>
+                  <p className="text-gray-600">
+                    {value.description}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Capabilities */}
+      <section className="bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-8">
+                היכולות שלנו
+              </h2>
+              <div className="grid grid-cols-1 gap-4">
+                {capabilities.map((capability, index) => (
+                  <div key={index} className="flex items-center space-x-reverse space-x-3">
+                    <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0" />
+                    <span className="text-lg text-gray-700">{capability}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div className="relative">
+              <img 
+                src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop" 
+                alt="Printing equipment"
+                className="w-full h-80 object-cover rounded-3xl shadow-2xl"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Information */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            בואו לבקר בסדנה
+          </h2>
+          <p className="text-xl text-gray-600">
+            ממוקמים בלב תל-אביב, קל למצוא אותנו ותמיד מוכנים לעזור
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-16">
+          {/* Contact Details */}
+          <div className="space-y-8">
+            <Card className="border-0 shadow-lg">
+              <CardContent className="p-8">
+                <div className="flex items-start space-x-reverse space-x-4">
+                  <MapPin className="w-6 h-6 text-blue-600 mt-1" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">כתובת</h3>
+                    <p className="text-gray-600">
+                      דיזנגוף 123<br />
+                      תל-אביב, ישראל 6470123
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg">
+              <CardContent className="p-8">
+                <div className="flex items-start space-x-reverse space-x-4">
+                  <Phone className="w-6 h-6 text-blue-600 mt-1" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">טלפון</h3>
+                    <p className="text-gray-600">03-555-0123</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg">
+              <CardContent className="p-8">
+                <div className="flex items-start space-x-reverse space-x-4">
+                  <Mail className="w-6 h-6 text-blue-600 mt-1" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">אימייל</h3>
+                    <p className="text-gray-600">info@keterprint.co.il</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg">
+              <CardContent className="p-8">
+                <div className="flex items-start space-x-reverse space-x-4">
+                  <Clock className="w-6 h-6 text-blue-600 mt-1" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">שעות פעילות</h3>
+                    <div className="text-gray-600 space-y-1">
+                      <p>ראשון - חמישי: 8:00 - 18:00</p>
+                      <p>שישי: 8:00 - 14:00</p>
+                      <p>שבת: סגור</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Map placeholder */}
+          <div className="relative">
+            <div className="w-full h-96 bg-gray-200 rounded-3xl shadow-2xl flex items-center justify-center">
+              <div className="text-center">
+                <MapPin className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                <p className="text-gray-500 text-lg">מיקום על המפה</p>
+                <p className="text-gray-400">דיזנגוף 123, תל-אביב</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
