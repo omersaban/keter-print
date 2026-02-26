@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// שים לב: הייבוא עכשיו מתחיל באותיות גדולות ותואם לנתיבים שלנו!
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -61,7 +60,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="space-y-16 text-right">
+    <div className="space-y-16 text-right" dir="rtl">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800">
         <div className="absolute inset-0 bg-black/10"></div>
@@ -75,7 +74,6 @@ export default function Home() {
                 מכרטיסי ביקור ועד באנרים ענקיים, אנו מספקים הדפסות באיכות יוצאת דופן ובזמני אספקה מהירים. החזון שלכם, מודפס באופן מושלם.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                {/* הוחלף לשימוש בנתיב פשוט של React */}
                 <Link to="/Order">
                   <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50 font-semibold px-8 py-4 text-lg">
                     הזמנה אונליין
@@ -83,7 +81,7 @@ export default function Home() {
                   </Button>
                 </Link>
                 <Link to="/About">
-                  <Button variant="outline" size="lg" className="border-white bg-white text-blue-600 font-semibold px-8 py-4 text-lg">
+                  <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/10 font-semibold px-8 py-4 text-lg">
                     למידע נוסף
                   </Button>
                 </Link>
@@ -201,8 +199,8 @@ export default function Home() {
               }
             ].map((testimonial, index) => (
               <Card key={index} className="border-0 shadow-lg">
-                <CardContent className="p-8">
-                  <div className="flex text-yellow-400 mb-4 justify-end">
+                <CardContent className="p-8 text-center md:text-right">
+                  <div className="flex text-yellow-400 mb-4 justify-center md:justify-start">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="w-5 h-5 fill-current" />
                     ))}
