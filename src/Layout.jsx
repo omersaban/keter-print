@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { createPageUrl } from "@/utils";
-import { Button } from "./components/ui/button.jsx";
+import { Button } from "@/components/ui/button";
 import { Printer, Phone, Mail, MapPin, Clock, CloudUpload } from "lucide-react";
 
 export default function Layout({ children, currentPageName }) {
@@ -63,7 +62,6 @@ export default function Layout({ children, currentPageName }) {
                         כתבו לנו
                     </Button>
                 </a>
-                {/* New Upload Button */}
                 <Link to="/Upload">
                     <Button variant="ghost" size="sm" className="flex items-center gap-2 text-gray-700 hover:text-blue-600">
                         <CloudUpload className="w-4 h-4" />
@@ -114,9 +112,6 @@ export default function Layout({ children, currentPageName }) {
               <p className="text-gray-300 mb-4">
                 שירותי דפוס מקצועיים בתל אביב. הדפסות איכותיות, אספקה מהירה, מחירים תחרותיים.
               </p>
-              <p className="text-gray-300">
-                Professional printing services in Tel-Aviv. Quality prints, fast delivery, competitive prices.
-              </p>
             </div>
 
             {/* Contact Info */}
@@ -125,7 +120,7 @@ export default function Layout({ children, currentPageName }) {
               <div className="space-y-3">
                 <div className="flex items-center space-x-reverse space-x-3">
                   <MapPin className="w-5 h-5 text-blue-400" />
-                  <span className="text-gray-300">בן שמן 3, תל אביב-יפו (צמוד למגדלי עזריאלי)</span>
+                  <span className="text-gray-300">בן שמן 6, תל אביב-יפו (צמוד למגדלי עזריאלי)</span>
                 </div>
                 <div className="flex items-center space-x-reverse space-x-3">
                   <Phone className="w-5 h-5 text-blue-400" />
