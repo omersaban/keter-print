@@ -72,18 +72,6 @@ export default function OrderPage() {
     }
   };
 
-  const calculatePrice = () => {
-    const { product_type, width_cm, height_cm, quantity, paper_type, color_type } = orderData;
-    if (!product_type || !width_cm || !height_cm || !quantity) return 0;
-    const area = (parseFloat(width_cm) / 100) * (parseFloat(height_cm) / 100);
-    const basePrices = { brochure: 15, flyer: 8, calendar: 25, roll_up: 120, business_cards: 0.5, posters: 20, banners: 30, stickers: 5 };
-    const paperMultipliers = { standard: 1, premium: 1.3, glossy: 1.2, matte: 1.1, canvas: 1.5 };
-    const colorMultiplier = color_type === "color" ? 1 : 0.7;
-    let basePrice = basePrices[product_type] || 10;
-    let totalPrice = basePrice * area * quantity * paperMultipliers[paper_type] * colorMultiplier;
-    return Math.round(Math.max(totalPrice, 20));
-  };
-
   const handleSubmit = async () => {
     setIsSubmitting(true);
     await new Promise(resolve => setTimeout(resolve, 1500));
