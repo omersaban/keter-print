@@ -1,9 +1,8 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
-import { createPageUrl } from "@/utils";
-import { button } from "@/components/ui/button";
-import { card, CardContent } from "@/components/ui/card";
+// שים לב: הייבוא עכשיו מתחיל באותיות גדולות ותואם לנתיבים שלנו!
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Printer,
   Award,
@@ -76,13 +75,14 @@ export default function Home() {
                 מכרטיסי ביקור ועד באנרים ענקיים, אנו מספקים הדפסות באיכות יוצאת דופן ובזמני אספקה מהירים. החזון שלכם, מודפס באופן מושלם.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to={createPageUrl("Order")}>
+                {/* הוחלף לשימוש בנתיב פשוט של React */}
+                <Link to="/Order">
                   <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50 font-semibold px-8 py-4 text-lg">
                     הזמנה אונליין
                     <ArrowRight className="mr-2 w-5 h-5 transform -scale-x-100" />
                   </Button>
                 </Link>
-                <Link to={createPageUrl("About")}>
+                <Link to="/About">
                   <Button variant="outline" size="lg" className="border-white bg-white text-blue-600 font-semibold px-8 py-4 text-lg">
                     למידע נוסף
                   </Button>
@@ -230,10 +230,10 @@ export default function Home() {
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
             התחילו עם פרויקט ההדפסה שלכם עוד היום. מהיר, מקצועי ובמחיר משתלם.
           </p>
-          <Link to={createPageUrl("Order")}>
+          <Link to="/Order">
             <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50 font-semibold px-8 py-4 text-lg">
-              <ArrowRight className="mr-2 w-5 h-5 transform -scale-x-100" />
               התחילו הזמנה
+              <ArrowRight className="mr-2 w-5 h-5 transform -scale-x-100" />
             </Button>
           </Link>
         </div>
