@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { CheckCircle, ShoppingCart, Calculator, Package, Upload as UploadIcon, X } from "lucide-react";
-import ProductSelector from "@/components/order/ProductSelector.jsx";
-import PriceCalculator from "@/components/order/PriceCalculator.jsx";
-import OrderSummary from "@/components/order/OrderSummary.jsx";
-import FileUpload from "@/components/order/FileUpload.jsx";
+
+// ייבוא רכיבי ההזמנה - הנתיב תוקן (הוסר /order/) והתווספה סיומת .jsx למניעת שגיאות ENOENT
+import ProductSelector from "@/components/ProductSelector.jsx";
+import PriceCalculator from "@/components/PriceCalculator.jsx";
+import OrderSummary from "@/components/OrderSummary.jsx";
+import FileUpload from "@/components/FileUpload.jsx";
 
 // רכיבי עזר פנימיים למניעת שגיאות ייבוא מה-UI - עוקפים את הצורך בקבצים חיצוניים בתיקיית ה-UI
 const LocalCard = ({ children, className = "" }) => (
@@ -96,16 +98,16 @@ export default function OrderPage() {
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 text-green-600">
             <CheckCircle size={40} />
           </div>
-          <h1 className="text-2xl font-bold mb-4">בקשתך התקבלה!</h1>
-          <p className="text-gray-600 mb-8">נציג מדפוס כתר יחזור אליך עם הצעת מחיר סופית תוך זמן קצר.</p>
-          <LocalButton onClick={() => window.location.reload()}>חזרה לדף הבית</LocalButton>
+          <h1 className="text-2xl font-bold mb-4">בקשתך נשלחה!</h1>
+          <p className="text-gray-600 mb-8">נציג מדפוס כתר יחזור אליך תוך זמן קצר עם הצעה מפורטת.</p>
+          <LocalButton onClick={() => window.location.reload()}>שלח בקשה נוספת</LocalButton>
         </LocalCard>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 text-right" dir="rtl">
+    <div className="min-h-screen bg-gray-50 py-12 text-right font-sans" dir="rtl">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">מערכת הזמנות אונליין</h1>
@@ -125,7 +127,6 @@ export default function OrderPage() {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Main Form Area */}
           <div className="lg:col-span-2">
             {currentStep === 1 && (
               <ProductSelector orderData={orderData} onInputChange={handleInputChange} onNext={() => setCurrentStep(2)} />
@@ -165,7 +166,6 @@ export default function OrderPage() {
             )}
           </div>
 
-          {/* Sidebar Summary Area */}
           <div className="lg:col-span-1">
             <OrderSummary orderData={orderData} estimatedPrice={calculatePrice()} />
           </div>
