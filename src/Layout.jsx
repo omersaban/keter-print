@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { button } from "@/components/ui/button";
 import { Printer, Phone, Mail, MapPin, Clock, CloudUpload } from "lucide-react";
 
 export default function Layout({ children, currentPageName }) {
