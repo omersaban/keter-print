@@ -6,7 +6,6 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { CheckCircle, ShoppingCart, Calculator, Package } from "lucide-react";
 
-// תוקנו הנתיבים לשימוש ב-@ שהוא הרבה יותר בטוח
 import ProductSelector from "@/components/order/ProductSelector";
 import PriceCalculator from "@/components/order/PriceCalculator";
 import OrderSummary from "@/components/order/OrderSummary";
@@ -47,8 +46,7 @@ export default function OrderPage() {
 
   const handleFileUpload = async (files) => {
     try {
-      // סימולציה של העלאת קבצים (מכיוון שהורדנו את שרתי Base44)
-      // בעתיד תוכל לחבר כאן שירות כמו Firebase Storage או AWS S3
+      // סימולציה של העלאת קבצים
       const simulatedUrls = files.map(file => URL.createObjectURL(file));
       
       setOrderData(prev => ({
@@ -114,11 +112,9 @@ export default function OrderPage() {
         quantity: parseInt(orderData.quantity)
       };
 
-      // מדמה שליחה לשרת - המתנה של שנייה וחצי
       await new Promise(resolve => setTimeout(resolve, 1500));
       
       console.log("Order submitted successfully:", finalOrderData);
-      // הערה לעתיד: כאן נחבר את שירות שליחת המיילים (כמו EmailJS) במקום הקוד הישן
       
       setSubmitSuccess(true);
     } catch (error) {
@@ -163,13 +159,11 @@ export default function OrderPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-8 text-right">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">בצעו הזמנה</h1>
           <p className="text-xl text-gray-600">דפוס מקצועי בקלות</p>
         </div>
 
-        {/* Progress Steps */}
         <div className="mb-12">
           <div className="flex items-center justify-center space-x-reverse space-x-8">
             {steps.map((step) => (
@@ -206,7 +200,6 @@ export default function OrderPage() {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Main Form */}
           <div className="lg:col-span-2">
             {currentStep === 1 && (
               <ProductSelector
@@ -308,7 +301,6 @@ export default function OrderPage() {
             )}
           </div>
 
-          {/* Order Summary */}
           <div className="lg:col-span-1">
             <OrderSummary 
               orderData={orderData}
