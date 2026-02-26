@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { base44 } from "@/api/base44Client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -7,10 +6,11 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { CheckCircle, ShoppingCart, Calculator, Package } from "lucide-react";
 
-import ProductSelector from "../components/order/ProductSelector";
-import PriceCalculator from "../components/order/PriceCalculator";
-import OrderSummary from "../components/order/OrderSummary";
-import FileUpload from "../components/order/FileUpload";
+// תוקנו הנתיבים לשימוש ב-@ שהוא הרבה יותר בטוח
+import ProductSelector from "@/components/order/ProductSelector";
+import PriceCalculator from "@/components/order/PriceCalculator";
+import OrderSummary from "@/components/order/OrderSummary";
+import FileUpload from "@/components/order/FileUpload";
 
 export default function OrderPage() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -26,7 +26,7 @@ export default function OrderPage() {
     paper_type: "standard",
     color_type: "color",
     special_instructions: "",
-    file_urls: [], // Added file_urls to orderData state
+    file_urls: [], 
     estimated_price: 0
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -47,13 +47,13 @@ export default function OrderPage() {
 
   const handleFileUpload = async (files) => {
     try {
-      const uploadPromises = files.map(file => base44.integrations.Core.UploadFile({ file }));
-      const results = await Promise.all(uploadPromises);
-      const fileUrls = results.map(result => result.file_url);
+      // סימולציה של העלאת קבצים (מכיוון שהורדנו את שרתי Base44)
+      // בעתיד תוכל לחבר כאן שירות כמו Firebase Storage או AWS S3
+      const simulatedUrls = files.map(file => URL.createObjectURL(file));
       
       setOrderData(prev => ({
         ...prev,
-        file_urls: [...prev.file_urls, ...fileUrls]
+        file_urls: [...prev.file_urls, ...simulatedUrls]
       }));
     } catch (error) {
       console.error("Error uploading files:", error);
@@ -72,7 +72,7 @@ export default function OrderPage() {
     
     if (!product_type || !width_cm || !height_cm || !quantity) return 0;
 
-    const area = (parseFloat(width_cm) / 100) * (parseFloat(height_cm) / 100); // Convert cm to m²
+    const area = (parseFloat(width_cm) / 100) * (parseFloat(height_cm) / 100); 
     
     const basePrices = {
       brochure: 15,
@@ -98,7 +98,6 @@ export default function OrderPage() {
     let basePrice = basePrices[product_type] || 10;
     let totalPrice = basePrice * area * quantity * paperMultipliers[paper_type] * colorMultiplier;
 
-    // Minimum price
     totalPrice = Math.max(totalPrice, 20);
 
     return Math.round(totalPrice);
@@ -115,103 +114,11 @@ export default function OrderPage() {
         quantity: parseInt(orderData.quantity)
       };
 
-      await base44.entities.Order.create(finalOrderData);
+      // מדמה שליחה לשרת - המתנה של שנייה וחצי
+      await new Promise(resolve => setTimeout(resolve, 1500));
       
-      // Send email with quote request
-      const productNames = {
-        brochure: "ברושורים",
-        flyer: "פליירים", 
-        calendar: "לוחות שנה",
-        roll_up: "רול-אפים",
-        business_cards: "כרטיסי ביקור",
-        posters: "פוסטרים",
-        banners: "באנרים",
-        stickers: "מדבקות"
-      };
-      
-      const paperTypes = {
-        standard: "נייר סטנדרטי",
-        premium: "נייר פרימיום",
-        glossy: "גימור מבריק",
-        matte: "גימור מט",
-        canvas: "בד קנבס"
-      };
-      
-      const emailBody = `
-        <div dir="rtl" style="font-family: Arial, sans-serif;">
-          <h2>בקשה חדשה להצעת מחיר</h2>
-          
-          <h3>פרטי הלקוח:</h3>
-          <table style="border-collapse: collapse; width: 100%; margin-bottom: 20px;">
-            <tr style="background-color: #f0f0f0;">
-              <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">שם</td>
-              <td style="border: 1px solid #ddd; padding: 8px;">${orderData.customer_name}</td>
-            </tr>
-            <tr>
-              <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">אימייל</td>
-              <td style="border: 1px solid #ddd; padding: 8px;">${orderData.customer_email}</td>
-            </tr>
-            <tr style="background-color: #f0f0f0;">
-              <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">טלפון</td>
-              <td style="border: 1px solid #ddd; padding: 8px;">${orderData.customer_phone}</td>
-            </tr>
-          </table>
-          
-          <h3>פרטי ההזמנה:</h3>
-          <table style="border-collapse: collapse; width: 100%; margin-bottom: 20px;">
-            <tr style="background-color: #f0f0f0;">
-              <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">מוצר</td>
-              <td style="border: 1px solid #ddd; padding: 8px;">${productNames[orderData.product_type] || orderData.product_type}</td>
-            </tr>
-            <tr>
-              <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">רוחב</td>
-              <td style="border: 1px solid #ddd; padding: 8px;">${orderData.width_cm} ס״מ</td>
-            </tr>
-            <tr style="background-color: #f0f0f0;">
-              <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">גובה</td>
-              <td style="border: 1px solid #ddd; padding: 8px;">${orderData.height_cm} ס״מ</td>
-            </tr>
-            ${orderData.length_cm ? `
-            <tr>
-              <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">אורך</td>
-              <td style="border: 1px solid #ddd; padding: 8px;">${orderData.length_cm} ס״מ</td>
-            </tr>
-            ` : ''}
-            <tr style="background-color: #f0f0f0;">
-              <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">כמות</td>
-              <td style="border: 1px solid #ddd; padding: 8px;">${orderData.quantity} יחידות</td>
-            </tr>
-            <tr>
-              <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">סוג נייר/חומר</td>
-              <td style="border: 1px solid #ddd; padding: 8px;">${paperTypes[orderData.paper_type] || orderData.paper_type}</td>
-            </tr>
-            <tr style="background-color: #f0f0f0;">
-              <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">סוג הדפסה</td>
-              <td style="border: 1px solid #ddd; padding: 8px;">${orderData.color_type === 'color' ? 'צבע מלא' : 'שחור-לבן'}</td>
-            </tr>
-            ${orderData.special_instructions ? `
-            <tr>
-              <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">הוראות מיוחדות</td>
-              <td style="border: 1px solid #ddd; padding: 8px;">${orderData.special_instructions}</td>
-            </tr>
-            ` : ''}
-            ${orderData.file_urls && orderData.file_urls.length > 0 ? `
-            <tr style="background-color: #f0f0f0;">
-              <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">קבצים מצורפים</td>
-              <td style="border: 1px solid #ddd; padding: 8px;">
-                ${orderData.file_urls.map((url, i) => `<a href="${url}">קובץ ${i + 1}</a>`).join('<br>')}
-              </td>
-            </tr>
-            ` : ''}
-          </table>
-        </div>
-      `;
-      
-      await base44.integrations.Core.SendEmail({
-        to: "keter-ta@zahav.net.il",
-        subject: `בקשה להצעת מחיר - ${orderData.customer_name}`,
-        body: emailBody
-      });
+      console.log("Order submitted successfully:", finalOrderData);
+      // הערה לעתיד: כאן נחבר את שירות שליחת המיילים (כמו EmailJS) במקום הקוד הישן
       
       setSubmitSuccess(true);
     } catch (error) {
@@ -310,7 +217,7 @@ export default function OrderPage() {
             )}
 
             {currentStep === 2 && (
-              <div className="space-y-6"> {/* Added div to contain PriceCalculator and FileUpload */}
+              <div className="space-y-6">
                 <PriceCalculator
                   orderData={orderData}
                   onInputChange={handleInputChange}
