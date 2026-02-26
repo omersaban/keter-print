@@ -1,11 +1,33 @@
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { CheckCircle, ShoppingCart, Calculator, Package } from "lucide-react";
+import { CheckCircle, ShoppingCart, Calculator, Package, Upload as UploadIcon, X } from "lucide-react";
 
+// רכיבי עזר פנימיים למניעת שגיאות ייבוא מה-UI
+const LocalCard = ({ children, className = "" }) => (
+  <div className={`bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden ${className}`}>{children}</div>
+);
+
+const LocalButton = ({ children, onClick, disabled, variant = "primary", className = "" }) => {
+  const base = "inline-flex items-center justify-center px-6 py-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed";
+  const styles = variant === "primary" ? "bg-blue-600 text-white hover:bg-blue-700" : "border border-gray-300 text-gray-700 hover:bg-gray-50";
+  return (
+    <button onClick={onClick} disabled={disabled} className={`${base} ${styles} ${className}`}>
+      {children}
+    </button>
+  );
+};
+
+const LocalInput = ({ id, value, onChange, placeholder, type = "text", className = "" }) => (
+  <input
+    id={id}
+    type={type}
+    value={value}
+    onChange={onChange}
+    placeholder={placeholder}
+    className={`w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all ${className}`}
+  />
+);
+
+// ייבוא רכיבי ההזמנה (וודא שהם קיימים בתיקיית order)
 import ProductSelector from "@/components/order/ProductSelector";
 import PriceCalculator from "@/components/order/PriceCalculator";
 import OrderSummary from "@/components/order/OrderSummary";
@@ -38,274 +60,113 @@ export default function OrderPage() {
   ];
 
   const handleInputChange = (field, value) => {
-    setOrderData(prev => ({
-      ...prev,
-      [field]: value
-    }));
+    setOrderData(prev => ({ ...prev, [field]: value }));
   };
 
   const handleFileUpload = async (files) => {
     try {
-      // סימולציה של העלאת קבצים
       const simulatedUrls = files.map(file => URL.createObjectURL(file));
-      
-      setOrderData(prev => ({
-        ...prev,
-        file_urls: [...prev.file_urls, ...simulatedUrls]
-      }));
+      setOrderData(prev => ({ ...prev, file_urls: [...prev.file_urls, ...simulatedUrls] }));
     } catch (error) {
       console.error("Error uploading files:", error);
     }
   };
 
-  const removeFile = (indexToRemove) => {
-    setOrderData(prev => ({
-      ...prev,
-      file_urls: prev.file_urls.filter((_, index) => index !== indexToRemove)
-    }));
-  };
-
   const calculatePrice = () => {
     const { product_type, width_cm, height_cm, quantity, paper_type, color_type } = orderData;
-    
     if (!product_type || !width_cm || !height_cm || !quantity) return 0;
-
-    const area = (parseFloat(width_cm) / 100) * (parseFloat(height_cm) / 100); 
-    
-    const basePrices = {
-      brochure: 15,
-      flyer: 8,
-      calendar: 25,
-      roll_up: 120,
-      business_cards: 0.5,
-      posters: 20,
-      banners: 30,
-      stickers: 5
-    };
-
-    const paperMultipliers = {
-      standard: 1,
-      premium: 1.3,
-      glossy: 1.2,
-      matte: 1.1,
-      canvas: 1.5
-    };
-
+    const area = (parseFloat(width_cm) / 100) * (parseFloat(height_cm) / 100);
+    const basePrices = { brochure: 15, flyer: 8, calendar: 25, roll_up: 120, business_cards: 0.5, posters: 20, banners: 30, stickers: 5 };
+    const paperMultipliers = { standard: 1, premium: 1.3, glossy: 1.2, matte: 1.1, canvas: 1.5 };
     const colorMultiplier = color_type === "color" ? 1 : 0.7;
-
     let basePrice = basePrices[product_type] || 10;
     let totalPrice = basePrice * area * quantity * paperMultipliers[paper_type] * colorMultiplier;
-
-    totalPrice = Math.max(totalPrice, 20);
-
-    return Math.round(totalPrice);
+    return Math.round(Math.max(totalPrice, 20));
   };
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
-    try {
-      const finalOrderData = {
-        ...orderData,
-        width_cm: parseFloat(orderData.width_cm),
-        height_cm: parseFloat(orderData.height_cm),
-        length_cm: orderData.length_cm ? parseFloat(orderData.length_cm) : undefined,
-        quantity: parseInt(orderData.quantity)
-      };
-
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      console.log("Order submitted successfully:", finalOrderData);
-      
-      setSubmitSuccess(true);
-    } catch (error) {
-      console.error("Error submitting order:", error);
-    }
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    setSubmitSuccess(true);
     setIsSubmitting(false);
   };
 
   if (submitSuccess) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4 text-right">
-        <Card className="max-w-2xl w-full border-0 shadow-2xl">
-          <CardContent className="p-12 text-center">
-            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="w-12 h-12 text-green-600" />
-            </div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">בקשתך נשלחה בהצלחה!</h1>
-            <p className="text-xl text-gray-600 mb-8">
-              תודה שפנית לדפוס כתר. קיבלנו את בקשתך להצעת מחיר וניצור עמך קשר תוך 24 שעות עם הצעת מחיר מפורטת.
-            </p>
-            <div className="bg-gray-50 rounded-lg p-6 mb-8">
-              <h3 className="font-semibold text-gray-900 mb-2">מה השלב הבא?</h3>
-              <ul className="text-gray-600 space-y-2 text-right">
-                <li>• נבדוק את המפרט שלכם ונכין הצעת מחיר</li>
-                <li>• ניצור קשר תוך 24 שעות עם הצעת מחיר מפורטת</li>
-                <li>• לאחר אישור נתחיל בייצור</li>
-                <li>• נודיע לכם כשההזמנה מוכנה לאיסוף/משלוח</li>
-              </ul>
-            </div>
-            <Button 
-              onClick={() => window.location.reload()} 
-              className="bg-blue-600 hover:bg-blue-700 px-8 py-3"
-            >
-              שלח בקשה נוספת
-            </Button>
-          </CardContent>
-        </Card>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 text-right" dir="rtl">
+        <LocalCard className="max-w-xl w-full p-12 text-center">
+          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 text-green-600">
+            <CheckCircle size={40} />
+          </div>
+          <h1 className="text-2xl font-bold mb-4">בקשתך התקבלה!</h1>
+          <p className="text-gray-600 mb-8">נציג מדפוס כתר יחזור אליך עם הצעת מחיר סופית תוך זמן קצר.</p>
+          <LocalButton onClick={() => window.location.reload()}>חזרה לדף הבית</LocalButton>
+        </LocalCard>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-8 text-right">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 py-12 text-right" dir="rtl">
+      <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">בצעו הזמנה</h1>
-          <p className="text-xl text-gray-600">דפוס מקצועי בקלות</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">מערכת הזמנות אונליין</h1>
+          <p className="text-gray-600">דפוס כתר - איכות ומקצועיות כבר 40 שנה!</p>
         </div>
 
-        <div className="mb-12">
-          <div className="flex items-center justify-center space-x-reverse space-x-8">
-            {steps.map((step) => (
-              <React.Fragment key={step.number}>
-                <div className="flex items-center">
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                    currentStep >= step.number 
-                      ? 'bg-blue-600 text-white' 
-                      : 'bg-gray-200 text-gray-400'
-                  }`}>
-                    <step.icon className="w-6 h-6" />
-                  </div>
-                  <div className="mr-3 hidden sm:block">
-                    <p className={`text-sm font-medium ${
-                      currentStep >= step.number ? 'text-blue-600' : 'text-gray-400'
-                    }`}>
-                      שלב {step.number}
-                    </p>
-                    <p className={`text-xs ${
-                      currentStep >= step.number ? 'text-gray-900' : 'text-gray-400'
-                    }`}>
-                      {step.title}
-                    </p>
-                  </div>
-                </div>
-                {step.number < steps.length && (
-                  <div className={`w-16 h-1 mx-4 ${
-                    currentStep > step.number ? 'bg-blue-600' : 'bg-gray-200'
-                  }`} />
-                )}
-              </React.Fragment>
-            ))}
-          </div>
+        {/* Steps */}
+        <div className="flex justify-center mb-12 space-x-reverse space-x-4">
+          {steps.map(s => (
+            <div key={s.number} className="flex items-center">
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${currentStep >= s.number ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-400'}`}>
+                <s.icon size={20} />
+              </div>
+              <span className={`mr-2 hidden sm:inline ${currentStep >= s.number ? 'text-blue-600 font-bold' : 'text-gray-400'}`}>{s.title}</span>
+            </div>
+          ))}
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             {currentStep === 1 && (
-              <ProductSelector
-                orderData={orderData}
-                onInputChange={handleInputChange}
-                onNext={() => setCurrentStep(2)}
-              />
+              <ProductSelector orderData={orderData} onInputChange={handleInputChange} onNext={() => setCurrentStep(2)} />
             )}
-
             {currentStep === 2 && (
               <div className="space-y-6">
-                <PriceCalculator
-                  orderData={orderData}
-                  onInputChange={handleInputChange}
-                  calculatePrice={calculatePrice}
-                  onNext={() => setCurrentStep(3)}
-                  onBack={() => setCurrentStep(1)}
-                />
-                
-                <FileUpload
-                  files={orderData.file_urls}
-                  onFileUpload={handleFileUpload}
-                  onRemoveFile={removeFile}
-                />
+                <PriceCalculator orderData={orderData} onInputChange={handleInputChange} calculatePrice={calculatePrice} onNext={() => setCurrentStep(3)} onBack={() => setCurrentStep(1)} />
+                <FileUpload files={orderData.file_urls} onFileUpload={handleFileUpload} onRemoveFile={(i) => handleInputChange('file_urls', orderData.file_urls.filter((_, idx) => idx !== i))} />
               </div>
             )}
-
             {currentStep === 3 && (
-              <Card className="border-0 shadow-xl">
-                <CardHeader className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-t-lg">
-                  <CardTitle className="text-2xl">פרטי התקשרות</CardTitle>
-                </CardHeader>
-                <CardContent className="p-8 space-y-6">
+              <LocalCard>
+                <div className="bg-blue-600 p-4 text-white font-bold text-xl">פרטי התקשרות</div>
+                <div className="p-8 space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <Label htmlFor="customer_name">שם מלא *</Label>
-                      <Input
-                        id="customer_name"
-                        value={orderData.customer_name}
-                        onChange={(e) => handleInputChange('customer_name', e.target.value)}
-                        placeholder="השם המלא שלך"
-                        className="mt-2"
-                      />
+                      <label className="block text-sm font-medium mb-1">שם מלא *</label>
+                      <LocalInput value={orderData.customer_name} onChange={(e) => handleInputChange('customer_name', e.target.value)} placeholder="ישראל ישראלי" />
                     </div>
                     <div>
-                      <Label htmlFor="customer_phone">מספר טלפון *</Label>
-                      <Input
-                        id="customer_phone"
-                        value={orderData.customer_phone}
-                        onChange={(e) => handleInputChange('customer_phone', e.target.value)}
-                        placeholder="050-123-4567"
-                        className="mt-2"
-                      />
+                      <label className="block text-sm font-medium mb-1">טלפון *</label>
+                      <LocalInput value={orderData.customer_phone} onChange={(e) => handleInputChange('customer_phone', e.target.value)} placeholder="050-0000000" />
                     </div>
                   </div>
-
                   <div>
-                    <Label htmlFor="customer_email">כתובת אימייל *</Label>
-                    <Input
-                      id="customer_email"
-                      type="email"
-                      value={orderData.customer_email}
-                      onChange={(e) => handleInputChange('customer_email', e.target.value)}
-                      placeholder="your.email@example.com"
-                      className="mt-2"
-                    />
+                    <label className="block text-sm font-medium mb-1">אימייל *</label>
+                    <LocalInput type="email" value={orderData.customer_email} onChange={(e) => handleInputChange('customer_email', e.target.value)} placeholder="email@example.com" />
                   </div>
-
-                  <div>
-                    <Label htmlFor="special_instructions">הוראות מיוחדות (אופציונלי)</Label>
-                    <Textarea
-                      id="special_instructions"
-                      value={orderData.special_instructions}
-                      onChange={(e) => handleInputChange('special_instructions', e.target.value)}
-                      placeholder="כל בקשה מיוחדת או הערה..."
-                      rows={4}
-                      className="mt-2"
-                    />
+                  <div className="flex justify-between mt-8">
+                    <LocalButton variant="outline" onClick={() => setCurrentStep(2)}>חזור</LocalButton>
+                    <LocalButton onClick={handleSubmit} disabled={!orderData.customer_name || isSubmitting}>
+                      {isSubmitting ? "שולח..." : "סיים הזמנה"}
+                    </LocalButton>
                   </div>
-
-                  <div className="flex justify-between pt-6">
-                    <Button 
-                      variant="outline" 
-                      onClick={() => setCurrentStep(2)}
-                      className="px-8"
-                    >
-                      חזור
-                    </Button>
-                    <Button
-                      onClick={handleSubmit}
-                      disabled={!orderData.customer_name || !orderData.customer_email || !orderData.customer_phone || isSubmitting}
-                      className="bg-blue-600 hover:bg-blue-700 px-8"
-                    >
-                      {isSubmitting ? "שולח..." : "שלח בקשה להצעת מחיר"}
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+                </div>
+              </LocalCard>
             )}
           </div>
-
           <div className="lg:col-span-1">
-            <OrderSummary 
-              orderData={orderData}
-              estimatedPrice={calculatePrice()}
-            />
+            <OrderSummary orderData={orderData} estimatedPrice={calculatePrice()} />
           </div>
         </div>
       </div>
