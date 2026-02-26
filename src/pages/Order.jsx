@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { CheckCircle, ShoppingCart, Calculator, Package, Upload as UploadIcon, X } from "lucide-react";
 
-// ייבוא רכיבי ההזמנה - הנתיב תוקן (הוסר /order/) והתווספה סיומת .jsx למניעת שגיאות ENOENT
+// ייבוא רכיבי ההזמנה המעודכנים
 import ProductSelector from "@/components/order/ProductSelector.jsx";
 import OrderSpecs from "@/components/order/OrderSpecs.jsx";
 import OrderSummary from "@/components/order/OrderSummary.jsx";
 import FileUpload from "@/components/order/FileUpload.jsx";
 
-// רכיבי עזר פנימיים למניעת שגיאות ייבוא מה-UI - עוקפים את הצורך בקבצים חיצוניים בתיקיית ה-UI
+// רכיבי עזר פנימיים (Local Components)
 const LocalCard = ({ children, className = "" }) => (
   <div className={`bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden ${className}`}>{children}</div>
 );
@@ -47,8 +47,7 @@ export default function OrderPage() {
     paper_type: "standard",
     color_type: "color",
     special_instructions: "",
-    file_urls: [], 
-    estimated_price: 0
+    file_urls: []
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -74,6 +73,7 @@ export default function OrderPage() {
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
+    // כאן בעתיד תבוא הקריאה ל-API או ל-EmailJS
     await new Promise(resolve => setTimeout(resolve, 1500));
     setSubmitSuccess(true);
     setIsSubmitting(false);
@@ -117,14 +117,29 @@ export default function OrderPage() {
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             {currentStep === 1 && (
-              <ProductSelector orderData={orderData} onInputChange={handleInputChange} onNext={() => setCurrentStep(2)} />
+              <ProductSelector 
+                orderData={orderData} 
+                onInputChange={handleInputChange} 
+                onNext={() => setCurrentStep(2)} 
+              />
             )}
+            
             {currentStep === 2 && (
               <div className="space-y-6">
-                <PriceCalculator orderData={orderData} onInputChange={handleInputChange} calculatePrice={calculatePrice} onNext={() => setCurrentStep(3)} onBack={() => setCurrentStep(1)} />
-                <FileUpload files={orderData.file_urls} onFileUpload={handleFileUpload} onRemoveFile={(i) => handleInputChange('file_urls', orderData.file_urls.filter((_, idx) => idx !== i))} />
+                <OrderSpecs 
+                  orderData={orderData} 
+                  onInputChange={handleInputChange} 
+                  onNext={() => setCurrentStep(3)} 
+                  onBack={() => setCurrentStep(1)} 
+                />
+                <FileUpload 
+                  files={orderData.file_urls} 
+                  onFileUpload={handleFileUpload} 
+                  onRemoveFile={(i) => handleInputChange('file_urls', orderData.file_urls.filter((_, idx) => idx !== i))} 
+                />
               </div>
             )}
+
             {currentStep === 3 && (
               <LocalCard>
                 <div className="bg-blue-600 p-4 text-white font-bold text-xl">פרטי התקשרות</div>
@@ -155,7 +170,8 @@ export default function OrderPage() {
           </div>
 
           <div className="lg:col-span-1">
-            <OrderSummary orderData={orderData} estimatedPrice={calculatePrice()} />
+            {/* הסרנו את ה-estimatedPrice שגרם לקריסה */}
+            <OrderSummary orderData={orderData} />
           </div>
         </div>
       </div>
