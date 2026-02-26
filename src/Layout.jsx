@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button"; // שינוי ל-B גדולה
 import { Printer, Phone, Mail, MapPin, Clock, CloudUpload } from "lucide-react";
 
 export default function Layout({ children }) {
@@ -67,15 +67,13 @@ export default function Layout({ children }) {
         </div>
       </header>
 
-      {/* Main Content */}
       <main className="flex-1">
         {children}
       </main>
 
-      {/* Footer */}
       <footer className="bg-gray-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-right">
             <div>
               <div className="flex items-center space-x-reverse space-x-3 mb-4">
                 <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
