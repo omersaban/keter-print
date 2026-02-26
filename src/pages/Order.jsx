@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { CheckCircle, ShoppingCart, Calculator, Package, Upload as UploadIcon, X } from "lucide-react";
+import ProductSelector from "@/components/order/ProductSelector.jsx";
+import PriceCalculator from "@/components/order/PriceCalculator.jsx";
+import OrderSummary from "@/components/order/OrderSummary.jsx";
+import FileUpload from "@/components/order/FileUpload.jsx";
 
-// רכיבי עזר פנימיים למניעת שגיאות ייבוא מה-UI
+// רכיבי עזר פנימיים למניעת שגיאות ייבוא מה-UI - עוקפים את הצורך בקבצים חיצוניים בתיקיית ה-UI
 const LocalCard = ({ children, className = "" }) => (
   <div className={`bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden ${className}`}>{children}</div>
 );
 
 const LocalButton = ({ children, onClick, disabled, variant = "primary", className = "" }) => {
-  const base = "inline-flex items-center justify-center px-6 py-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed";
+  const base = "inline-flex items-center justify-center px-6 py-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed outline-none";
   const styles = variant === "primary" ? "bg-blue-600 text-white hover:bg-blue-700" : "border border-gray-300 text-gray-700 hover:bg-gray-50";
   return (
     <button onClick={onClick} disabled={disabled} className={`${base} ${styles} ${className}`}>
@@ -26,12 +30,6 @@ const LocalInput = ({ id, value, onChange, placeholder, type = "text", className
     className={`w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all ${className}`}
   />
 );
-
-// ייבוא רכיבי ההזמנה (וודא שהם קיימים בתיקיית order)
-import ProductSelector from "@/components/order/ProductSelector";
-import PriceCalculator from "@/components/order/PriceCalculator";
-import OrderSummary from "@/components/order/OrderSummary";
-import FileUpload from "@/components/order/FileUpload";
 
 export default function OrderPage() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -114,7 +112,7 @@ export default function OrderPage() {
           <p className="text-gray-600">דפוס כתר - איכות ומקצועיות כבר 40 שנה!</p>
         </div>
 
-        {/* Steps */}
+        {/* Steps Navbar */}
         <div className="flex justify-center mb-12 space-x-reverse space-x-4">
           {steps.map(s => (
             <div key={s.number} className="flex items-center">
@@ -127,6 +125,7 @@ export default function OrderPage() {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
+          {/* Main Form Area */}
           <div className="lg:col-span-2">
             {currentStep === 1 && (
               <ProductSelector orderData={orderData} onInputChange={handleInputChange} onNext={() => setCurrentStep(2)} />
@@ -165,6 +164,8 @@ export default function OrderPage() {
               </LocalCard>
             )}
           </div>
+
+          {/* Sidebar Summary Area */}
           <div className="lg:col-span-1">
             <OrderSummary orderData={orderData} estimatedPrice={calculatePrice()} />
           </div>
