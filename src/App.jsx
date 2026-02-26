@@ -1,20 +1,19 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Toaster } from "@/components/ui/toaster";
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClientInstance } from '@/lib/query-client';
 import NavigationTracker from '@/lib/NavigationTracker';
-import PageNotFound from './lib/PageNotFound'; // ודא שהקובץ הזה קיים בנתיב הזה
+import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 
-// 1. ייבוא ידני של העמודים וה-Layout שלך
+// ייבוא ידני של העמודים וה-Layout שלך
 import Layout from './Layout';
 import Home from './pages/Home';
 import About from './pages/About';
 import Order from './pages/Order';
 
-// 2. עטיפת ה-Layout - נשאר דומה כדי לא לשבור את מה שהיה
+// עטיפת ה-Layout
 const LayoutWrapper = ({ children, currentPageName }) => {
   return Layout ? (
     <Layout currentPageName={currentPageName}>{children}</Layout>
@@ -45,17 +44,15 @@ const AuthenticatedApp = () => {
     }
   }
 
-  // 3. הראוטר החדש - הגדרת נתיבים ידנית במקום דינמית
+  // הראוטר החדש
   return (
     <Routes>
-      {/* עמוד הבית הראשי */}
       <Route path="/" element={
         <LayoutWrapper currentPageName="Home">
           <Home />
         </LayoutWrapper>
       } />
 
-      {/* שאר העמודים (למקרה שמנווטים ישירות אליהם) */}
       <Route path="/Home" element={
         <LayoutWrapper currentPageName="Home">
           <Home />
@@ -74,7 +71,6 @@ const AuthenticatedApp = () => {
         </LayoutWrapper>
       } />
 
-      {/* עמוד 404 לא נמצא */}
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
@@ -88,7 +84,6 @@ function App() {
           <NavigationTracker />
           <AuthenticatedApp />
         </Router>
-        <Toaster />
       </QueryClientProvider>
     </AuthProvider>
   );
