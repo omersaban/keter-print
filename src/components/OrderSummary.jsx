@@ -70,7 +70,7 @@ export default function OrderSummary({ orderData }) {
         <div className="pt-4 border-t border-gray-100">
            <div className="flex items-center justify-between mb-4">
              <span className="text-sm font-bold text-gray-900">סוג הדפסה:</span>
-             <span className={`px-3 py-1 rounded-full text-xs font-bold ${orderData.color_type === 'color' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}>
+             <span className={`px-3 py-1 rounded-full text-xs font-bold ${orderData.color_type === 'color' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-600'}`}>
                {orderData.color_type === 'color' ? 'צבע מלא' : 'שחור-לבן'}
              </span>
            </div>
@@ -82,7 +82,7 @@ export default function OrderSummary({ orderData }) {
         </div>
 
         <div className="bg-gray-50 rounded-xl p-4">
-          <h4 className="font-bold text-gray-900 text-xs mb-3">השירות כולל:</h4>
+          <h4 className="font-bold text-gray-900 text-xs mb-3 font-sans">השירות כולל:</h4>
           <ul className="text-xs text-gray-600 space-y-2">
             <li className="flex items-center gap-2 font-medium">
               <CheckCircle2 className="w-3.5 h-3.5 text-green-500" />
