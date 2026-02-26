@@ -133,7 +133,7 @@ export default function Layout({ children, currentPageName }) {
                 </div>
                 <div className="flex items-center space-x-reverse space-x-3">
                   <Mail className="w-5 h-5 text-blue-400" />
-                  <span className="text-gray-300">info@keterprint.co.il</span>
+                  <span className="text-gray-300">keter-ta@zahav.net.il</span>
                 </div>
               </div>
             </div>
