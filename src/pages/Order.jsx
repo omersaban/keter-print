@@ -3,7 +3,7 @@ import { CheckCircle, ShoppingCart, Calculator, Package, Upload as UploadIcon, X
 
 // ייבוא רכיבי ההזמנה - הנתיב תוקן (הוסר /order/) והתווספה סיומת .jsx למניעת שגיאות ENOENT
 import ProductSelector from "@/components/order/ProductSelector.jsx";
-import PriceCalculator from "@/components/order/PriceCalculator.jsx";
+import OrderSpecs from "@/components/order/OrderSpecs.jsx";
 import OrderSummary from "@/components/order/OrderSummary.jsx";
 import FileUpload from "@/components/order/FileUpload.jsx";
 
