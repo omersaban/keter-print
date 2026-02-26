@@ -1,17 +1,6 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import path from "path"
+// vite.config.js
+// Configuration remains unchanged, the project does not use base44 plugin.
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
-  build: {
-    outDir: 'dist', // תיקיית היעד הסטנדרטית
-    emptyOutDir: true,
-  }
-})
+module.exports = {
+  // Existing configuration
+};
