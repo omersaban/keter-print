@@ -1,16 +1,16 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { createPageUrl } from "@/utils";
 import { Button } from "@/components/ui/button";
-import { Printer, Phone, Mail, MapPin, Clock, CloudUpload } from "lucide-react"; // Added CloudUpload
+import { Printer, Phone, Mail, MapPin, Clock, CloudUpload } from "lucide-react";
 
 export default function Layout({ children, currentPageName }) {
   const location = useLocation();
 
+  // שימוש בנתיבים סטנדרטיים של React Router
   const navigationItems = [
-    { name: "דף הבית", path: createPageUrl("Home") },
-    { name: "אודות", path: createPageUrl("About") },
-    { name: "הזמנה אונליין", path: createPageUrl("Order") }
+    { name: "דף הבית", path: "/" },
+    { name: "אודות", path: "/About" },
+    { name: "הזמנה אונליין", path: "/Order" }
   ];
 
   const isActive = (path) => location.pathname === path;
@@ -22,7 +22,7 @@ export default function Layout({ children, currentPageName }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             {/* Logo */}
-            <Link to={createPageUrl("Home")} className="flex items-center space-x-reverse space-x-3">
+            <Link to="/" className="flex items-center space-x-reverse space-x-3">
               <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
                 <Printer className="w-6 h-6 text-white" />
               </div>
@@ -64,7 +64,7 @@ export default function Layout({ children, currentPageName }) {
                     </Button>
                 </a>
                 {/* New Upload Button */}
-                <Link to={createPageUrl("Upload")}>
+                <Link to="/Upload">
                     <Button variant="ghost" size="sm" className="flex items-center gap-2 text-gray-700 hover:text-blue-600">
                         <CloudUpload className="w-4 h-4" />
                         העלאת קבצים
@@ -125,11 +125,11 @@ export default function Layout({ children, currentPageName }) {
               <div className="space-y-3">
                 <div className="flex items-center space-x-reverse space-x-3">
                   <MapPin className="w-5 h-5 text-blue-400" />
-                  <span className="text-gray-300">בן שמן 3, תל אביב-יפו (צמוד למגדלי עזריאלי)</span>
+                  <span className="text-gray-300">בן שמן 6, תל אביב-יפו (צמוד למגדלי עזריאלי)</span>
                 </div>
                 <div className="flex items-center space-x-reverse space-x-3">
                   <Phone className="w-5 h-5 text-blue-400" />
-                  <span className="text-gray-300">03-555-0123</span>
+                  <span className="text-gray-300">050-5999-617</span>
                 </div>
                 <div className="flex items-center space-x-reverse space-x-3">
                   <Mail className="w-5 h-5 text-blue-400" />
