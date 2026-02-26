@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { CheckCircle, ShoppingCart, Calculator, Package, Upload as UploadIcon, X } from "lucide-react";
 
 // ייבוא רכיבי ההזמנה - הנתיב תוקן (הוסר /order/) והתווספה סיומת .jsx למניעת שגיאות ENOENT
-import ProductSelector from "@/components/ProductSelector.jsx";
-import PriceCalculator from "@/components/PriceCalculator.jsx";
-import OrderSummary from "@/components/OrderSummary.jsx";
-import FileUpload from "@/components/FileUpload.jsx";
+import ProductSelector from "@/components/order/ProductSelector.jsx";
+import PriceCalculator from "@/components/order/PriceCalculator.jsx";
+import OrderSummary from "@/components/order/OrderSummary.jsx";
+import FileUpload from "@/components/order/FileUpload.jsx";
 
 // רכיבי עזר פנימיים למניעת שגיאות ייבוא מה-UI - עוקפים את הצורך בקבצים חיצוניים בתיקיית ה-UI
 const LocalCard = ({ children, className = "" }) => (
