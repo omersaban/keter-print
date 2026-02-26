@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { card, CardContent } from "@/components/ui/card";
 import { 
   MapPin, 
   Phone, 
