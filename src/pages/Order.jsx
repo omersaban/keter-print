@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CheckCircle, ShoppingCart, Calculator, Package, Upload as UploadIcon, X } from "lucide-react";
 
-// ייבוא רכיבי ההזמנה המעודכנים
+// ייבוא רכיבי ההזמנה - וודא שהקבצים קיימים בנתיבים אלו
 import ProductSelector from "@/components/order/ProductSelector.jsx";
 import OrderSpecs from "@/components/order/OrderSpecs.jsx";
 import OrderSummary from "@/components/order/OrderSummary.jsx";
@@ -49,8 +49,29 @@ export default function OrderPage() {
     special_instructions: "",
     file_urls: []
   });
+  
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  // פונקציית איפוס - מונעת 404 כי היא לא מרעננת את הדפדפן
+  const handleReset = () => {
+    setOrderData({
+      customer_name: "",
+      customer_email: "",
+      customer_phone: "",
+      product_type: "",
+      width_cm: "",
+      height_cm: "",
+      length_cm: "",
+      quantity: 1,
+      paper_type: "standard",
+      color_type: "color",
+      special_instructions: "",
+      file_urls: []
+    });
+    setSubmitSuccess(false);
+    setCurrentStep(1);
+  };
 
   const steps = [
     { number: 1, title: "בחירת מוצר", icon: Package },
@@ -73,12 +94,13 @@ export default function OrderPage() {
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
-    // כאן בעתיד תבוא הקריאה ל-API או ל-EmailJS
+    // סימולציית שליחה
     await new Promise(resolve => setTimeout(resolve, 1500));
     setSubmitSuccess(true);
     setIsSubmitting(false);
   };
 
+  // מסך הצלחה
   if (submitSuccess) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 text-right" dir="rtl">
@@ -88,7 +110,8 @@ export default function OrderPage() {
           </div>
           <h1 className="text-2xl font-bold mb-4">בקשתך נשלחה!</h1>
           <p className="text-gray-600 mb-8">נציג מדפוס כתר יחזור אליך תוך זמן קצר עם הצעה מפורטת.</p>
-          <LocalButton onClick={() => window.location.reload()}>שלח בקשה נוספת</LocalButton>
+          {/* שינוי קריטי כאן: קריאה ל-handleReset במקום window.location.reload() */}
+          <LocalButton onClick={handleReset}>שלח בקשה נוספת</LocalButton>
         </LocalCard>
       </div>
     );
@@ -170,7 +193,6 @@ export default function OrderPage() {
           </div>
 
           <div className="lg:col-span-1">
-            {/* הסרנו את ה-estimatedPrice שגרם לקריסה */}
             <OrderSummary orderData={orderData} />
           </div>
         </div>
