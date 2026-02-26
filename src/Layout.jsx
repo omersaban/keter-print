@@ -1,12 +1,12 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button.jsx";
+import { createPageUrl } from "@/utils";
+import { Button } from "@/components/ui/button.jsx"; // <-- התיקון כאן
 import { Printer, Phone, Mail, MapPin, Clock, CloudUpload } from "lucide-react";
 
 export default function Layout({ children, currentPageName }) {
   const location = useLocation();
 
-  // שימוש בנתיבים סטנדרטיים של React Router
   const navigationItems = [
     { name: "דף הבית", path: "/" },
     { name: "אודות", path: "/About" },
@@ -125,11 +125,11 @@ export default function Layout({ children, currentPageName }) {
               <div className="space-y-3">
                 <div className="flex items-center space-x-reverse space-x-3">
                   <MapPin className="w-5 h-5 text-blue-400" />
-                  <span className="text-gray-300">בן שמן 6, תל אביב-יפו (צמוד למגדלי עזריאלי)</span>
+                  <span className="text-gray-300">בן שמן 3, תל אביב-יפו (צמוד למגדלי עזריאלי)</span>
                 </div>
                 <div className="flex items-center space-x-reverse space-x-3">
                   <Phone className="w-5 h-5 text-blue-400" />
-                  <span className="text-gray-300">050-5999-617</span>
+                  <span className="text-gray-300">03-555-0123</span>
                 </div>
                 <div className="flex items-center space-x-reverse space-x-3">
                   <Mail className="w-5 h-5 text-blue-400" />
