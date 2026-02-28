@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { CheckCircle, ShoppingCart, Calculator, Package, Upload as UploadIcon, X, FileText } from "lucide-react";
+import { CheckCircle, ShoppingCart, Calculator, Package, Upload as UploadIcon, X } from "lucide-react";
 import emailjs from '@emailjs/browser';
 
+// ייבוא רכיבי ההזמנה
 import ProductSelector from "@/components/order/ProductSelector.jsx";
 import OrderSpecs from "@/components/order/OrderSpecs.jsx";
 import OrderSummary from "@/components/order/OrderSummary.jsx";
@@ -85,13 +86,12 @@ export default function OrderPage() {
     if (e) e.preventDefault();
     setIsSubmitting(true);
 
+    // --- חשוב: החלף את המפתחות האלה מהדשבורד של EmailJS ---
     const SERVICE_ID = "service_xxxxxxx"; 
     const TEMPLATE_ID = "template_xxxxxxx";
     const PUBLIC_KEY = "xxxxxxxxxxxxxxxx";
 
     try {
-      // אנחנו שולחים את ה-URL של הקובץ לתוך פרמטר file_link
-      // ככה נעקוף את חסימת ה-Subscription Limitation
       await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
         customer_name: orderData.customer_name,
         customer_email: orderData.customer_email,
@@ -103,7 +103,7 @@ export default function OrderPage() {
         paper_type: orderData.paper_type,
         color_type: orderData.color_type,
         instructions: orderData.special_instructions || "אין הערות",
-        file_link: orderData.file_urls[0] || "" // שליחת הלינק במקום הקובץ עצמו
+        file_link: orderData.file_urls[0] || "לא הועלה קובץ"
       }, PUBLIC_KEY);
 
       setSubmitSuccess(true);
@@ -123,7 +123,7 @@ export default function OrderPage() {
             <CheckCircle size={40} />
           </div>
           <h1 className="text-2xl font-bold mb-4">בקשתך נשלחה!</h1>
-          <p className="text-gray-600 mb-8">המפרט והקבצים הגיעו למנהל העבודה. נחזור אליך בהקדם.</p>
+          <p className="text-gray-600 mb-8">המפרט והקבצים התקבלו. נחזור אליך בהקדם.</p>
           <LocalButton onClick={handleReset}>שלח בקשה נוספת</LocalButton>
         </LocalCard>
       </div>
@@ -145,7 +145,7 @@ export default function OrderPage() {
             
             {currentStep === 2 && (
               <div className="space-y-6">
-                {/* 1. העלאת קבצים למעלה כפי שביקשת */}
+                {/* 1. קבצים למעלה */}
                 <FileUpload 
                   files={orderData.file_urls} 
                   onFileUpload={handleFileUpload} 
@@ -155,7 +155,7 @@ export default function OrderPage() {
                   }} 
                 />
                 
-                {/* 2. מפרט טכני למטה */}
+                {/* 2. מפרט למטה */}
                 <OrderSpecs 
                   orderData={orderData} 
                   onInputChange={handleInputChange} 
