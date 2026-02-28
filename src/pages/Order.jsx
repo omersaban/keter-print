@@ -34,11 +34,9 @@ const LocalInput = ({ id, value, onChange, placeholder, type = "text", className
 );
 
 export default function OrderPage() {
-  // שינוי כותרת הדף באופן דינמי כשהקומפוננטה נטענת
+  // עדכון כותרת הטאב באופן דינמי
   useEffect(() => {
     document.title = "דפוס כתר - מערכת הזמנות";
-    
-    // החזרת הכותרת למצב המקורי כשעוזבים את הדף
     return () => {
       document.title = "דפוס כתר";
     };
@@ -63,14 +61,14 @@ export default function OrderPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  // פונקציית עזר לקידוד הנתונים עבור Netlify Forms
+  // פונקציית עזר לקידוד נתונים עבור Netlify
   const encode = (data) => {
     return Object.keys(data)
       .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
       .join("&");
   };
 
-  // פונקציית איפוס - מונעת 404 כי היא מאפסת State במקום לרענן דף
+  // איפוס הזמנה - פתרון ה-404 ב-Netlify
   const handleReset = () => {
     setOrderData({
       customer_name: "", customer_email: "", customer_phone: "",
@@ -84,7 +82,7 @@ export default function OrderPage() {
 
   const steps = [
     { number: 1, title: "בחירת מוצר", icon: Package },
-    { number: 2, title: "מפרט טכני", icon: Calculator },
+    { number: 2, title: "מפרט וקבצים", icon: Calculator },
     { number: 3, title: "פרטי התקשרות", icon: ShoppingCart }
   ];
 
@@ -101,7 +99,6 @@ export default function OrderPage() {
     }
   };
 
-  // שליחה אמיתית ל-Netlify Forms
   const handleSubmit = async (e) => {
     if (e) e.preventDefault();
     setIsSubmitting(true);
@@ -117,14 +114,13 @@ export default function OrderPage() {
       });
       setSubmitSuccess(true);
     } catch (error) {
-      console.error("Netlify Form Submission Error:", error);
-      alert("חלה שגיאה בשליחת הטופס. נסה שוב.");
+      console.error("Netlify Submission Error:", error);
+      alert("חלה שגיאה בשליחת הטופס.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // תצוגת מסך הצלחה לאחר שליחה
   if (submitSuccess) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 text-right" dir="rtl">
@@ -133,7 +129,7 @@ export default function OrderPage() {
             <CheckCircle size={40} />
           </div>
           <h1 className="text-2xl font-bold mb-4">בקשתך נשלחה!</h1>
-          <p className="text-gray-600 mb-8">הנתונים נקלטו במערכת, נציג דפוס כתר יחזור אליך בהקדם.</p>
+          <p className="text-gray-600 mb-8">נציג מדפוס כתר יחזור אליך בקרוב למייל/טלפון שציינת.</p>
           <LocalButton onClick={handleReset}>שלח בקשה נוספת</LocalButton>
         </LocalCard>
       </div>
@@ -148,7 +144,7 @@ export default function OrderPage() {
           <p className="text-gray-600">דפוס כתר - איכות ומקצועיות כבר 40 שנה!</p>
         </div>
 
-        {/* בר ניווט שלבים */}
+        {/* שלבי התקדמות */}
         <div className="flex justify-center mb-12 space-x-reverse space-x-4">
           {steps.map(s => (
             <div key={s.number} className="flex items-center">
@@ -161,7 +157,6 @@ export default function OrderPage() {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* אזור הטופס המרכזי */}
           <div className="lg:col-span-2">
             {currentStep === 1 && (
               <ProductSelector 
@@ -173,16 +168,19 @@ export default function OrderPage() {
             
             {currentStep === 2 && (
               <div className="space-y-6">
+                {/* ביצענו את ההחלפה כאן: FileUpload עכשיו למעלה */}
+                <FileUpload 
+                  files={orderData.file_urls} 
+                  onFileUpload={handleFileUpload} 
+                  onRemoveFile={(i) => handleInputChange('file_urls', orderData.file_urls.filter((_, idx) => idx !== i))} 
+                />
+                
+                {/* OrderSpecs עכשיו למטה */}
                 <OrderSpecs 
                   orderData={orderData} 
                   onInputChange={handleInputChange} 
                   onNext={() => setCurrentStep(3)} 
                   onBack={() => setCurrentStep(1)} 
-                />
-                <FileUpload 
-                  files={orderData.file_urls} 
-                  onFileUpload={handleFileUpload} 
-                  onRemoveFile={(i) => handleInputChange('file_urls', orderData.file_urls.filter((_, idx) => idx !== i))} 
                 />
               </div>
             )}
@@ -194,39 +192,20 @@ export default function OrderPage() {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium mb-1">שם מלא *</label>
-                      <LocalInput 
-                        value={orderData.customer_name} 
-                        onChange={(e) => handleInputChange('customer_name', e.target.value)} 
-                        placeholder="ישראל ישראלי" 
-                        required 
-                      />
+                      <LocalInput value={orderData.customer_name} onChange={(e) => handleInputChange('customer_name', e.target.value)} placeholder="ישראל ישראלי" required />
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-1">טלפון *</label>
-                      <LocalInput 
-                        value={orderData.customer_phone} 
-                        onChange={(e) => handleInputChange('customer_phone', e.target.value)} 
-                        placeholder="050-0000000" 
-                        required 
-                      />
+                      <LocalInput value={orderData.customer_phone} onChange={(e) => handleInputChange('customer_phone', e.target.value)} placeholder="050-0000000" required />
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1">אימייל *</label>
-                    <LocalInput 
-                      type="email" 
-                      value={orderData.customer_email} 
-                      onChange={(e) => handleInputChange('customer_email', e.target.value)} 
-                      placeholder="email@example.com" 
-                      required 
-                    />
+                    <LocalInput type="email" value={orderData.customer_email} onChange={(e) => handleInputChange('customer_email', e.target.value)} placeholder="email@example.com" required />
                   </div>
                   <div className="flex justify-between mt-8">
                     <LocalButton variant="outline" onClick={() => setCurrentStep(2)} type="button">חזור</LocalButton>
-                    <LocalButton 
-                      disabled={!orderData.customer_name || isSubmitting} 
-                      type="submit"
-                    >
+                    <LocalButton disabled={!orderData.customer_name || isSubmitting} type="submit">
                       {isSubmitting ? "שולח..." : "סיים הזמנה"}
                     </LocalButton>
                   </div>
@@ -235,7 +214,6 @@ export default function OrderPage() {
             )}
           </div>
 
-          {/* סיכום הזמנה צדדי */}
           <div className="lg:col-span-1">
             <OrderSummary orderData={orderData} />
           </div>
