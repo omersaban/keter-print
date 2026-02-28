@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
-// ייבוא Link מהראוטר כדי שהלחיצה תעבוד
 import { Link } from "react-router-dom"; 
-// הוספתי את BookOpen לאייקונים
-import { Microscope, Zap, Droplets, Layout, BookOpen } from "lucide-react";
+import { Microscope, Layout, BookOpen, Printer } from "lucide-react";
 
-// שינוי קטן: הוספנו את path לפרופס, והחלפנו את ה-button ב-Link
 const ArticleCard = ({ title, content, icon: Icon, tag, path }) => (
   <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 hover:shadow-md transition-all text-right flex flex-col h-full" dir="rtl">
     <div className="flex items-center justify-between mb-6">
@@ -18,7 +15,6 @@ const ArticleCard = ({ title, content, icon: Icon, tag, path }) => (
       {content}
     </div>
     
-    {/* התיקון: מעבר לעמוד המאמר */}
     <Link to={path} className="mt-8 text-blue-600 font-bold flex items-center hover:gap-2 transition-all w-max">
       <span className="ml-2">←</span>
       קרא את המאמר המלא 
@@ -31,7 +27,6 @@ export default function ArticlesPage() {
     document.title = "דפוס כתר - מדע הדפוס ומאמרים מקצועיים";
   }, []);
 
-  // הוספנו את המאמר החדש על הברושורים למערך עם הנתיב שלו
   const articles = [
     {
       tag: "הנדסת חומרים",
@@ -41,11 +36,11 @@ export default function ArticlesPage() {
       content: "ברושור הוא לא רק דף מקופל, הוא מבנה תלת-ממדי. ננתח את החשיבות של כיוון סיבי הנייר (Grain Direction) ואת המכניקה של תהליך הביג (Creasing) המונעת מתיחה ושבירה של שכבת הדיו והפולימר בנקודת הכיפוף."
     },
     {
-      tag: "פיזיקה",
-      title: "אלקטרוסטטיקה וטונר: המדע שמאחורי ה-Xerography",
-      icon: Zap,
-      path: "/Articles/Electrostatics", // נתיב עתידי
-      content: "הדפוס הדיגיטלי המודרני מבוסס על עקרונות פוטו-קונדוקטיביים. במאמר זה נסקור כיצד קרן לייזר יוצרת תמונת מטען חשמלי על תוף, ומושכת חלקיקי פולימר (טונר) בדיוק של מיקרונים בודדים."
+      tag: "כימיה ומכניקה",
+      title: "מדע האופסט: למה שמן ומים לא מתערבבים?",
+      icon: Printer,
+      path: "/Articles/Offset",
+      content: "דפוס אופסט הוא הבסיס לתעשיית ההדפסה המסחרית. נחקור את העיקרון הליתוגרפי של דחיית מים ושמן, ואת המעבר המכני של הדיו מגלופת האלומיניום אל גליל הגומי הרך ומשם אל הנייר."
     },
     {
       tag: "כימיה",
