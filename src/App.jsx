@@ -15,6 +15,7 @@ import About from './pages/About';
 import Order from './pages/Order';
 import Articles from './pages/Articles'; 
 import BrochuresArticle from './pages/articles/BrochuresArticle'; // הייבוא של עמוד מאמר
+import OffsetArticle from './pages/articles/OffsetArticle'; // <--- תוספת חדשה: ייבוא מאמר אופסט
 
 // עטיפת ה-Layout המקורית שלך
 const LayoutWrapper = ({ children, currentPageName }) => {
@@ -87,6 +88,13 @@ const AuthenticatedApp = () => {
         <Route path="/Articles/Brochures" element={
           <LayoutWrapper currentPageName="Articles">
             <BrochuresArticle />
+          </LayoutWrapper>
+        } />
+
+        {/* <--- תוספת הראוט החדש למאמר אופסט ---> */}
+        <Route path="/Articles/Offset" element={
+          <LayoutWrapper currentPageName="Articles">
+            <OffsetArticle />
           </LayoutWrapper>
         } />
   
