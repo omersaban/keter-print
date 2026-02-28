@@ -13,7 +13,8 @@ import Layout from './Layout';
 import Home from './pages/Home';
 import About from './pages/About';
 import Order from './pages/Order';
-import Articles from './pages/Articles'; // העמוד החדש
+import Articles from './pages/Articles'; 
+import BrochuresArticle from './pages/BrochuresArticle'; // <--- הייבוא של העמוד החדש שיצרנו
 
 // עטיפת ה-Layout המקורית שלך
 const LayoutWrapper = ({ children, currentPageName }) => {
@@ -75,14 +76,21 @@ const AuthenticatedApp = () => {
           </LayoutWrapper>
         } />
   
-        {/* מאמרים ומדע */}
+        {/* מאמרים ומדע (העמוד הראשי של המאמרים) */}
         <Route path="/Articles" element={
           <LayoutWrapper currentPageName="Articles">
             <Articles />
           </LayoutWrapper>
         } />
+
+        {/* <--- תוספת הראוט החדש למאמר הברושורים ---> */}
+        <Route path="/Articles/Brochures" element={
+          <LayoutWrapper currentPageName="Articles">
+            <BrochuresArticle />
+          </LayoutWrapper>
+        } />
   
-        {/* הצהרת נגישות - הנתיב החדש עבור הווידג'ט */}
+        {/* הצהרת נגישות */}
         <Route path="/AccessibilityStatement" element={
           <LayoutWrapper currentPageName="Accessibility">
             <AccessibilityStatement />
