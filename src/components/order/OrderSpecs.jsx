@@ -59,7 +59,7 @@ export default function OrderSpecs({ orderData, onInputChange, onNext, onBack })
             disabled={!orderData.width_cm || !orderData.height_cm || !orderData.quantity}
             className="bg-blue-600 hover:bg-blue-700 flex items-center gap-2"
           >
-            המשך להעלאת קבצים <ArrowLeft className="w-4 h-4" />
+            המשך למילוי פרטי קשר <ArrowLeft className="w-4 h-4" />
           </Button>
         </div>
       </CardContent>
