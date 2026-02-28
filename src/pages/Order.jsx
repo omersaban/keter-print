@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CheckCircle, ShoppingCart, Calculator, Package, Upload as UploadIcon, X } from "lucide-react";
 
 // ייבוא רכיבי ההזמנה
@@ -7,7 +7,7 @@ import OrderSpecs from "@/components/order/OrderSpecs.jsx";
 import OrderSummary from "@/components/order/OrderSummary.jsx";
 import FileUpload from "@/components/order/FileUpload.jsx";
 
-// רכיבי עזר פנימיים
+// רכיבי עזר פנימיים (Local Components)
 const LocalCard = ({ children, className = "" }) => (
   <div className={`bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden ${className}`}>{children}</div>
 );
@@ -34,6 +34,16 @@ const LocalInput = ({ id, value, onChange, placeholder, type = "text", className
 );
 
 export default function OrderPage() {
+  // שינוי כותרת הדף באופן דינמי כשהקומפוננטה נטענת
+  useEffect(() => {
+    document.title = "דפוס כתר - מערכת הזמנות";
+    
+    // החזרת הכותרת למצב המקורי כשעוזבים את הדף
+    return () => {
+      document.title = "דפוס כתר";
+    };
+  }, []);
+
   const [currentStep, setCurrentStep] = useState(1);
   const [orderData, setOrderData] = useState({
     customer_name: "",
@@ -53,13 +63,14 @@ export default function OrderPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  // פונקציית עזר לקידוד הנתונים עבור Netlify
+  // פונקציית עזר לקידוד הנתונים עבור Netlify Forms
   const encode = (data) => {
     return Object.keys(data)
       .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
       .join("&");
   };
 
+  // פונקציית איפוס - מונעת 404 כי היא מאפסת State במקום לרענן דף
   const handleReset = () => {
     setOrderData({
       customer_name: "", customer_email: "", customer_phone: "",
@@ -113,6 +124,7 @@ export default function OrderPage() {
     }
   };
 
+  // תצוגת מסך הצלחה לאחר שליחה
   if (submitSuccess) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 text-right" dir="rtl">
@@ -136,6 +148,7 @@ export default function OrderPage() {
           <p className="text-gray-600">דפוס כתר - איכות ומקצועיות כבר 40 שנה!</p>
         </div>
 
+        {/* בר ניווט שלבים */}
         <div className="flex justify-center mb-12 space-x-reverse space-x-4">
           {steps.map(s => (
             <div key={s.number} className="flex items-center">
@@ -148,15 +161,29 @@ export default function OrderPage() {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
+          {/* אזור הטופס המרכזי */}
           <div className="lg:col-span-2">
             {currentStep === 1 && (
-              <ProductSelector orderData={orderData} onInputChange={handleInputChange} onNext={() => setCurrentStep(2)} />
+              <ProductSelector 
+                orderData={orderData} 
+                onInputChange={handleInputChange} 
+                onNext={() => setCurrentStep(2)} 
+              />
             )}
             
             {currentStep === 2 && (
               <div className="space-y-6">
-                <OrderSpecs orderData={orderData} onInputChange={handleInputChange} onNext={() => setCurrentStep(3)} onBack={() => setCurrentStep(1)} />
-                <FileUpload files={orderData.file_urls} onFileUpload={handleFileUpload} onRemoveFile={(i) => handleInputChange('file_urls', orderData.file_urls.filter((_, idx) => idx !== i))} />
+                <OrderSpecs 
+                  orderData={orderData} 
+                  onInputChange={handleInputChange} 
+                  onNext={() => setCurrentStep(3)} 
+                  onBack={() => setCurrentStep(1)} 
+                />
+                <FileUpload 
+                  files={orderData.file_urls} 
+                  onFileUpload={handleFileUpload} 
+                  onRemoveFile={(i) => handleInputChange('file_urls', orderData.file_urls.filter((_, idx) => idx !== i))} 
+                />
               </div>
             )}
 
@@ -167,20 +194,39 @@ export default function OrderPage() {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium mb-1">שם מלא *</label>
-                      <LocalInput value={orderData.customer_name} onChange={(e) => handleInputChange('customer_name', e.target.value)} placeholder="ישראל ישראלי" required />
+                      <LocalInput 
+                        value={orderData.customer_name} 
+                        onChange={(e) => handleInputChange('customer_name', e.target.value)} 
+                        placeholder="ישראל ישראלי" 
+                        required 
+                      />
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-1">טלפון *</label>
-                      <LocalInput value={orderData.customer_phone} onChange={(e) => handleInputChange('customer_phone', e.target.value)} placeholder="050-0000000" required />
+                      <LocalInput 
+                        value={orderData.customer_phone} 
+                        onChange={(e) => handleInputChange('customer_phone', e.target.value)} 
+                        placeholder="050-0000000" 
+                        required 
+                      />
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1">אימייל *</label>
-                    <LocalInput type="email" value={orderData.customer_email} onChange={(e) => handleInputChange('customer_email', e.target.value)} placeholder="email@example.com" required />
+                    <LocalInput 
+                      type="email" 
+                      value={orderData.customer_email} 
+                      onChange={(e) => handleInputChange('customer_email', e.target.value)} 
+                      placeholder="email@example.com" 
+                      required 
+                    />
                   </div>
                   <div className="flex justify-between mt-8">
                     <LocalButton variant="outline" onClick={() => setCurrentStep(2)} type="button">חזור</LocalButton>
-                    <LocalButton onClick={handleSubmit} disabled={!orderData.customer_name || isSubmitting} type="submit">
+                    <LocalButton 
+                      disabled={!orderData.customer_name || isSubmitting} 
+                      type="submit"
+                    >
                       {isSubmitting ? "שולח..." : "סיים הזמנה"}
                     </LocalButton>
                   </div>
@@ -189,6 +235,7 @@ export default function OrderPage() {
             )}
           </div>
 
+          {/* סיכום הזמנה צדדי */}
           <div className="lg:col-span-1">
             <OrderSummary orderData={orderData} />
           </div>
