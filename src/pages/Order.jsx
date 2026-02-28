@@ -50,7 +50,7 @@ export default function OrderPage() {
     quantity: 1,
     paper_type: "standard",
     color_type: "color",
-    special_instructions: "", // שדה זה כבר קיים ב-State
+    special_instructions: "",
     file_urls: [],
     raw_files: [] 
   });
@@ -91,19 +91,16 @@ export default function OrderPage() {
   const uploadToCloudinary = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "keterprintfiles"); // ה-Preset שלך
+    formData.append("upload_preset", "keterprintfiles");
     
-    const response = await fetch("https://api.cloudinary.com/v1_1/dzchcrnje/image/upload", { // ה-Cloud Name שלך
+    const response = await fetch("https://api.cloudinary.com/v1_1/dzchcrnje/image/upload", {
       method: "POST",
       body: formData,
     });
 
     if (!response.ok) throw new Error("Cloudinary upload failed");
-    
     const data = await response.json();
-    
-    // טריק ה-QA: שינוי ה-URL כדי לאלץ הורדה (fl_attachment)
-    // זה הופך את הלינק מ-תצוגה ל-הורדה ישירה
+    // אילוץ הורדה ישירה
     return data.secure_url.replace("/upload/", "/upload/fl_attachment/");
   };
 
@@ -115,9 +112,19 @@ export default function OrderPage() {
     const TEMPLATE_ID = "template_d8fln9g";
     const PUBLIC_KEY = "Dhkw_j_fflQgeu4GQ";
 
+    // תרגום סוגי מוצרים לעברית עבור האימייל
+    const productTranslation = {
+      "calendar": "לוח-שנה",
+      "business-card": "כרטיס ביקור",
+      "flyer": "פלייר",
+      "poster": "פוסטר"
+      // תוכל להוסיף כאן עוד תרגומים לפי הצורך
+    };
+
+    const translatedProduct = productTranslation[orderData.product_type] || orderData.product_type;
+
     try {
       let finalFileUrl = "לא הועלה קובץ";
-
       if (orderData.raw_files.length > 0) {
         finalFileUrl = await uploadToCloudinary(orderData.raw_files[0]);
       }
@@ -126,13 +133,13 @@ export default function OrderPage() {
         customer_name: orderData.customer_name,
         customer_email: orderData.customer_email,
         customer_phone: orderData.customer_phone,
-        product_type: orderData.product_type,
+        product_type: translatedProduct, // כאן נשלח הערך המתורגם
         width_cm: orderData.width_cm,
         height_cm: orderData.height_cm,
         quantity: orderData.quantity,
         paper_type: orderData.paper_type,
         color_type: orderData.color_type,
-        instructions: orderData.special_instructions || "אין הערות", // שולח את ההערות מה-textarea
+        instructions: orderData.special_instructions || "אין הערות",
         file_link: finalFileUrl
       }, PUBLIC_KEY);
 
@@ -186,6 +193,7 @@ export default function OrderPage() {
             
             {currentStep === 2 && (
               <div className="space-y-6">
+                {/* העלאת קבצים למעלה */}
                 <FileUpload 
                   files={orderData.file_urls} 
                   onFileUpload={handleFileUpload} 
@@ -202,11 +210,11 @@ export default function OrderPage() {
                   onBack={() => setCurrentStep(1)} 
                 />
 
-                {/* הוספת שדה הערות מיוחדות */}
+                {/* שדה הערות מיוחדות */}
                 <LocalCard className="p-6">
-                  <label className="block text-sm font-medium mb-2 text-gray-700">הערות מיוחדות להזמנה (אופציונלי)</label>
+                  <label className="block text-sm font-medium mb-2 text-gray-700">הערות מיוחדות להזמנה</label>
                   <textarea 
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all min-h-[100px] text-right"
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none min-h-[100px] text-right"
                     placeholder="למשל: דחוף למחר, חיתוך פינות מעוגלות, סוג ציפוי מיוחד..."
                     value={orderData.special_instructions}
                     onChange={(e) => handleInputChange('special_instructions', e.target.value)}
@@ -222,7 +230,7 @@ export default function OrderPage() {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium mb-1">שם מלא *</label>
-                      <LocalInput value={orderData.customer_name} onChange={(e) => handleInputChange('customer_name', e.target.value)} required />
+                      <LocalInput value={orderData.customer_name} onChange={(e) => handleInputChange('customer_name', e.target.value)} placeholder="ישראל ישראלי" required />
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-1">טלפון *</label>
