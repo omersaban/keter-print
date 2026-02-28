@@ -1,13 +1,27 @@
 <!doctype html>
-<html lang="en">
+<html lang="he" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="https://base44.com/logo_v2.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="manifest" href="/manifest.json" />
-    <title>Base44 APP</title>
+    <title>דפוס כתר - מערכת הזמנות</title>
   </head>
   <body>
+    <form name="order-form" netlify netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="order-form" />
+      <input type="text" name="customer_name" />
+      <input type="email" name="customer_email" />
+      <input type="tel" name="customer_phone" />
+      <input type="text" name="product_type" />
+      <input type="text" name="width_cm" />
+      <input type="text" name="height_cm" />
+      <input type="text" name="quantity" />
+      <input type="text" name="paper_type" />
+      <input type="text" name="color_type" />
+      <textarea name="special_instructions"></textarea>
+    </form>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
