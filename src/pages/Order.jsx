@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import { CheckCircle, ShoppingCart, Calculator, Package, Upload as UploadIcon, X, Loader2 } from "lucide-react";
 import emailjs from '@emailjs/browser';
 
-// ייבוא רכיבי ההזמנה - וודא שהקבצים קיימים בנתיבים אלו
+// ייבוא רכיבי ההזמנה
 import ProductSelector from "@/components/order/ProductSelector.jsx";
 import OrderSpecs from "@/components/order/OrderSpecs.jsx";
 import OrderSummary from "@/components/order/OrderSummary.jsx";
 import FileUpload from "@/components/order/FileUpload.jsx";
 
-// רכיבי עזר פנימיים
 const LocalCard = ({ children, className = "" }) => (
   <div className={`bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden ${className}`}>{children}</div>
 );
@@ -51,7 +50,7 @@ export default function OrderPage() {
     quantity: 1,
     paper_type: "standard",
     color_type: "color",
-    special_instructions: "",
+    special_instructions: "", // שדה זה כבר קיים ב-State
     file_urls: [],
     raw_files: [] 
   });
@@ -89,11 +88,10 @@ export default function OrderPage() {
     }));
   };
 
-  // פונקציית העלאת הקובץ לענן Cloudinary עם הפרטים שסיפקת
   const uploadToCloudinary = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "keterprintfiles"); // ה-Preset שהגדרת כ-Unsigned
+    formData.append("upload_preset", "keterprintfiles"); // ה-Preset שלך
     
     const response = await fetch("https://api.cloudinary.com/v1_1/dzchcrnje/image/upload", { // ה-Cloud Name שלך
       method: "POST",
@@ -103,7 +101,10 @@ export default function OrderPage() {
     if (!response.ok) throw new Error("Cloudinary upload failed");
     
     const data = await response.json();
-    return data.secure_url; // מחזיר לינק תקין שמתחיל ב-https
+    
+    // טריק ה-QA: שינוי ה-URL כדי לאלץ הורדה (fl_attachment)
+    // זה הופך את הלינק מ-תצוגה ל-הורדה ישירה
+    return data.secure_url.replace("/upload/", "/upload/fl_attachment/");
   };
 
   const handleSubmit = async (e) => {
@@ -117,12 +118,10 @@ export default function OrderPage() {
     try {
       let finalFileUrl = "לא הועלה קובץ";
 
-      // אם הלקוח העלה קובץ, נעלה אותו לענן לפני שליחת המייל
       if (orderData.raw_files.length > 0) {
         finalFileUrl = await uploadToCloudinary(orderData.raw_files[0]);
       }
 
-      // שליחת הנתונים ל-EmailJS עם הלינק התקין
       await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
         customer_name: orderData.customer_name,
         customer_email: orderData.customer_email,
@@ -133,14 +132,14 @@ export default function OrderPage() {
         quantity: orderData.quantity,
         paper_type: orderData.paper_type,
         color_type: orderData.color_type,
-        instructions: orderData.special_instructions || "אין הערות",
-        file_link: finalFileUrl // עכשיו הלינק יהיה לחיץ ותקין במייל של מנהל העבודה
+        instructions: orderData.special_instructions || "אין הערות", // שולח את ההערות מה-textarea
+        file_link: finalFileUrl
       }, PUBLIC_KEY);
 
       setSubmitSuccess(true);
     } catch (error) {
       console.error("Submit error:", error);
-      alert("חלה שגיאה בשליחה. וודא שביטלת את ה-Signing ב-Cloudinary Preset.");
+      alert("חלה שגיאה בשליחה.");
     } finally {
       setIsSubmitting(false);
     }
@@ -187,7 +186,6 @@ export default function OrderPage() {
             
             {currentStep === 2 && (
               <div className="space-y-6">
-                {/* העלאת קבצים למעלה כפי שביקשת */}
                 <FileUpload 
                   files={orderData.file_urls} 
                   onFileUpload={handleFileUpload} 
@@ -197,13 +195,23 @@ export default function OrderPage() {
                   }} 
                 />
                 
-                {/* מפרט טכני למטה */}
                 <OrderSpecs 
                   orderData={orderData} 
                   onInputChange={handleInputChange} 
                   onNext={() => setCurrentStep(3)} 
                   onBack={() => setCurrentStep(1)} 
                 />
+
+                {/* הוספת שדה הערות מיוחדות */}
+                <LocalCard className="p-6">
+                  <label className="block text-sm font-medium mb-2 text-gray-700">הערות מיוחדות להזמנה (אופציונלי)</label>
+                  <textarea 
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all min-h-[100px] text-right"
+                    placeholder="למשל: דחוף למחר, חיתוך פינות מעוגלות, סוג ציפוי מיוחד..."
+                    value={orderData.special_instructions}
+                    onChange={(e) => handleInputChange('special_instructions', e.target.value)}
+                  />
+                </LocalCard>
               </div>
             )}
 
