@@ -1,48 +1,83 @@
-<script src="https://cdn.jsdelivr.net/npm/accessibility@1.2.0/dist/accessibility.min.js"></script>
-<script>
-  window.addEventListener('load', function() {
-    new Accessibility({
-      language: {
-        en: {
-          menuTitle: 'נגישות דפוס כתר',
-          increaseText: 'הגדל טקסט',
-          decreaseText: 'הקטן טקסט',
-          increaseTextSpacing: 'מרווח טקסט',
-          invertColors: 'ניגודיות הפוכה (Contrast)',
-          grayHues: 'שחור לבן (Grayscale)',
-          bigCursor: 'סמן עכבר גדול',
-          readingGuide: 'קו מנחה לקריאה',
-          underlineLinks: 'הדגשת קישורים',
-          // הוספת כפתור הצהרת נגישות בתוך התפריט
-          accessibilityStatement: 'הצהרת נגישות'
-        }
-      },
-      buttons: {
-        // הגדרת הפיצ'רים שיופיעו בתפריט
-        font: { size: true },
-        contrast: true,
-        grayscale: true,
-        cursor: true,
-        guide: true,
-        link: true
-      },
-      // הוספת הלינק להצהרת הנגישות שנבנה ב-React
-      customButtons: [
-        {
-          title: 'הצהרת נגישות',
-          icon: '📋',
-          id: 'accStatement',
-          fn: function() {
-            window.location.href = '/AccessibilityStatement';
-          }
-        }
-      ],
-      icon: {
-        position: { bottom: { size: 20, units: 'px' }, right: { size: 20, units: 'px' } },
-        circular: true,
-        backgroundColor: '#2563eb',
-        img: 'accessibility'
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>דפוס כתר - הזמנות ומאמרים מקצועיים</title>
+    <meta name="description" content="מערכת הזמנות דפוס דיגיטלי מתקדמת ומאגר ידע מקצועי." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&display=swap" rel="stylesheet">
+
+    <style>
+      body {
+        font-family: 'Assistant', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9fafb;
       }
-    });
-  }, false);
-</script>
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="module" src="/src/main.jsx"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/accessibility@1.2.0/dist/accessibility.min.js"></script>
+    
+    <script>
+      // אנחנו מחכים שהדף ייטען לגמרי
+      window.addEventListener('load', function() {
+        // בדיקת בטיחות: מוודאים שהאובייקט Accessibility הוגדר ע"י ה-CDN
+        if (typeof Accessibility !== 'undefined') {
+          new Accessibility({
+            language: {
+              en: {
+                menuTitle: 'נגישות דפוס כתר',
+                increaseText: 'הגדל טקסט',
+                decreaseText: 'הקטן טקסט',
+                increaseTextSpacing: 'מרווח טקסט',
+                invertColors: 'ניגודיות הפוכה (Contrast)',
+                grayHues: 'שחור לבן (Grayscale)',
+                bigCursor: 'סמן עכבר גדול',
+                readingGuide: 'קו מנחה לקריאה',
+                underlineLinks: 'הדגשת קישורים',
+                accessibilityStatement: 'הצהרת נגישות'
+              }
+            },
+            buttons: {
+              font: { size: true },
+              contrast: true,
+              grayscale: true,
+              cursor: true,
+              guide: true,
+              link: true
+            },
+            customButtons: [
+              {
+                title: 'הצהרת נגישות',
+                icon: '📋',
+                id: 'accStatement',
+                fn: function() {
+                  window.location.href = '/AccessibilityStatement';
+                }
+              }
+            ],
+            icon: {
+              position: { bottom: { size: 20, units: 'px' }, right: { size: 20, units: 'px' } },
+              circular: true,
+              backgroundColor: '#2563eb', // כחול כתר
+              img: 'accessibility'
+            }
+          });
+        } else {
+          // QA Log - למקרה שהספריה לא נטענה
+          console.error("Accessibility library not loaded yet.");
+        }
+      }, false);
+    </script>
+  </body>
+</html>
