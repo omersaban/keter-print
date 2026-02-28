@@ -1,19 +1,21 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Printer, Phone, Mail, MapPin, Clock, CloudUpload, Menu } from "lucide-react";
+import { Printer, Phone, Mail, MapPin, Clock, CloudUpload, Menu, FileText, ShieldCheck } from "lucide-react";
 
 export default function Layout({ children }) {
   const location = useLocation();
 
+  // הוספת המאמרים והצהרת הנגישות לתפריט הניווט העליון
   const navigationItems = [
     { name: "דף הבית", path: "/" },
     { name: "אודות", path: "/About" },
-    { name: "הזמנה אונליין", path: "/Order" }
+    { name: "הזמנה אונליין", path: "/Order" },
+    { name: "מאמרים ומדע", path: "/Articles" },
+    { name: "הצהרת נגישות", path: "/AccessibilityStatement" }
   ];
 
   const isActive = (path) => location.pathname === path;
 
-  // עיצוב כפתור Tailwind פשוט כדי לעקוף בעיות ייבוא
   const buttonClass = "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500 disabled:pointer-events-none disabled:opacity-50";
   const primaryBtn = `${buttonClass} bg-blue-600 text-white shadow hover:bg-blue-700 h-9 px-4 py-2`;
   const ghostBtn = `${buttonClass} hover:bg-gray-100 hover:text-blue-600 h-9 px-4 py-2 text-gray-700`;
@@ -31,11 +33,11 @@ export default function Layout({ children }) {
               </div>
               <div className="flex flex-col">
                 <span className="text-xl font-bold text-gray-900 leading-none">Keter Print</span>
-                <span className="text-xs text-gray-500 mt-1">דפוס כתר - תל אביב</span>
+                <span className="text-xs text-gray-500 mt-1 text-right">דפוס כתר - תל אביב</span>
               </div>
             </Link>
 
-            {/* Navigation */}
+            {/* Navigation - כולל את כל העמודים בבאנר */}
             <nav className="hidden md:flex items-center space-x-reverse space-x-6">
               {navigationItems.map((item) => (
                 <Link
@@ -94,21 +96,25 @@ export default function Layout({ children }) {
               </p>
             </div>
 
-            {/* Contact Column */}
+            {/* Contact & Links Column */}
             <div className="space-y-4">
-              <h4 className="text-md font-bold text-white uppercase tracking-wider">צרו קשר</h4>
+              <h4 className="text-md font-bold text-white uppercase tracking-wider">מידע וניווט</h4>
               <ul className="space-y-3 text-slate-400 text-sm">
-                <li className="flex items-center space-x-reverse space-x-3">
+                <li>
+                  <Link to="/Articles" className="hover:text-blue-400 flex items-center space-x-reverse space-x-2">
+                    <FileText className="w-4 h-4" />
+                    <span>מאמרים מקצועיים</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/AccessibilityStatement" className="hover:text-blue-400 flex items-center space-x-reverse space-x-2 text-blue-400 font-bold">
+                    <ShieldCheck className="w-4 h-4" />
+                    <span>הצהרת נגישות</span>
+                  </Link>
+                </li>
+                <li className="flex items-center space-x-reverse space-x-3 pt-2">
                   <MapPin className="w-4 h-4 text-blue-500" />
                   <span>בן שמן 6, תל אביב (צמוד לעזריאלי)</span>
-                </li>
-                <li className="flex items-center space-x-reverse space-x-3">
-                  <Phone className="w-4 h-4 text-blue-500" />
-                  <span>03-555-0123</span>
-                </li>
-                <li className="flex items-center space-x-reverse space-x-3">
-                  <Mail className="w-4 h-4 text-blue-500" />
-                  <span>keter-ta@zahav.net.il</span>
                 </li>
               </ul>
             </div>
@@ -120,7 +126,7 @@ export default function Layout({ children }) {
                 <Clock className="w-4 h-4 text-blue-500 mt-0.5" />
                 <div>
                   <p>ראשון - חמישי: 07:00 - 17:00</p>
-                  <p className="mt-1">שישי ושבת: סגור</p>
+                  <p className="mt-1 text-red-400 italic">שישי ושבת: סגור</p>
                 </div>
               </div>
             </div>
@@ -129,8 +135,8 @@ export default function Layout({ children }) {
           <div className="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-slate-500 text-xs gap-4">
             <p>&copy; {new Date().getFullYear()} דפוס כתר בע"מ. כל הזכויות שמורות.</p>
             <div className="flex space-x-reverse space-x-6">
-              <span>איכות ללא פשרות</span>
-              <span>שירות מהיר</span>
+              <Link to="/AccessibilityStatement" className="underline hover:text-slate-300">נגישות האתר</Link>
+              <span>שירות מהיר ומקצועי</span>
             </div>
           </div>
         </div>
