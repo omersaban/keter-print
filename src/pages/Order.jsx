@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { CheckCircle, ShoppingCart, Calculator, Package, Upload as UploadIcon, X } from "lucide-react";
+import { CheckCircle, ShoppingCart, Calculator, Package, Upload as UploadIcon, X, Loader2 } from "lucide-react";
 import emailjs from '@emailjs/browser';
 
-// ייבוא רכיבי ההזמנה
+// ייבוא רכיבי ההזמנה - וודא שהקבצים קיימים בנתיבים אלו
 import ProductSelector from "@/components/order/ProductSelector.jsx";
 import OrderSpecs from "@/components/order/OrderSpecs.jsx";
 import OrderSummary from "@/components/order/OrderSummary.jsx";
 import FileUpload from "@/components/order/FileUpload.jsx";
 
+// רכיבי עזר פנימיים
 const LocalCard = ({ children, className = "" }) => (
   <div className={`bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden ${className}`}>{children}</div>
 );
@@ -69,6 +70,12 @@ export default function OrderPage() {
     setCurrentStep(1);
   };
 
+  const steps = [
+    { number: 1, title: "מוצר", icon: Package },
+    { number: 2, title: "מפרט וקבצים", icon: Calculator },
+    { number: 3, title: "פרטי התקשרות", icon: ShoppingCart }
+  ];
+
   const handleInputChange = (field, value) => {
     setOrderData(prev => ({ ...prev, [field]: value }));
   };
@@ -82,18 +89,21 @@ export default function OrderPage() {
     }));
   };
 
-  // פונקציה להעלאת הקובץ לשרת חיצוני כדי שיהיה לינק אמיתי
+  // פונקציית העלאת הקובץ לענן Cloudinary עם הפרטים שסיפקת
   const uploadToCloudinary = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "YOUR_UNSIGNED_PRESET"); // להחליף ב-Preset שלך
+    formData.append("upload_preset", "keterprintfiles"); // ה-Preset שהגדרת כ-Unsigned
     
-    const response = await fetch("https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/upload", {
+    const response = await fetch("https://api.cloudinary.com/v1_1/dzchcrnje/image/upload", { // ה-Cloud Name שלך
       method: "POST",
       body: formData,
     });
+
+    if (!response.ok) throw new Error("Cloudinary upload failed");
+    
     const data = await response.json();
-    return data.secure_url;
+    return data.secure_url; // מחזיר לינק תקין שמתחיל ב-https
   };
 
   const handleSubmit = async (e) => {
@@ -107,11 +117,12 @@ export default function OrderPage() {
     try {
       let finalFileUrl = "לא הועלה קובץ";
 
-      // העלאה ל-Cloudinary רק אם יש קובץ
+      // אם הלקוח העלה קובץ, נעלה אותו לענן לפני שליחת המייל
       if (orderData.raw_files.length > 0) {
         finalFileUrl = await uploadToCloudinary(orderData.raw_files[0]);
       }
 
+      // שליחת הנתונים ל-EmailJS עם הלינק התקין
       await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
         customer_name: orderData.customer_name,
         customer_email: orderData.customer_email,
@@ -123,13 +134,13 @@ export default function OrderPage() {
         paper_type: orderData.paper_type,
         color_type: orderData.color_type,
         instructions: orderData.special_instructions || "אין הערות",
-        file_link: finalFileUrl // כאן נשלח הלינק האמיתי
+        file_link: finalFileUrl // עכשיו הלינק יהיה לחיץ ותקין במייל של מנהל העבודה
       }, PUBLIC_KEY);
 
       setSubmitSuccess(true);
     } catch (error) {
-      console.error("EmailJS Error:", error);
-      alert("חלה שגיאה בשליחה.");
+      console.error("Submit error:", error);
+      alert("חלה שגיאה בשליחה. וודא שביטלת את ה-Signing ב-Cloudinary Preset.");
     } finally {
       setIsSubmitting(false);
     }
@@ -157,6 +168,17 @@ export default function OrderPage() {
           <h1 className="text-3xl font-bold text-gray-900 mb-2">מערכת הזמנות אונליין</h1>
         </div>
 
+        <div className="flex justify-center mb-12 space-x-reverse space-x-4">
+          {steps.map(s => (
+            <div key={s.number} className="flex items-center">
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${currentStep >= s.number ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-400'}`}>
+                <s.icon size={20} />
+              </div>
+              <span className={`mr-2 hidden sm:inline ${currentStep >= s.number ? 'text-blue-600 font-bold' : 'text-gray-400'}`}>{s.title}</span>
+            </div>
+          ))}
+        </div>
+
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             {currentStep === 1 && (
@@ -165,6 +187,7 @@ export default function OrderPage() {
             
             {currentStep === 2 && (
               <div className="space-y-6">
+                {/* העלאת קבצים למעלה כפי שביקשת */}
                 <FileUpload 
                   files={orderData.file_urls} 
                   onFileUpload={handleFileUpload} 
@@ -174,6 +197,7 @@ export default function OrderPage() {
                   }} 
                 />
                 
+                {/* מפרט טכני למטה */}
                 <OrderSpecs 
                   orderData={orderData} 
                   onInputChange={handleInputChange} 
@@ -194,7 +218,7 @@ export default function OrderPage() {
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-1">טלפון *</label>
-                      <LocalInput value={orderData.customer_phone} onChange={(e) => handleInputChange('customer_phone', e.target.value)} required />
+                      <LocalInput value={orderData.customer_phone} onChange={(e) => handleInputChange('customer_phone', e.target.value)} placeholder="050-0000000" required />
                     </div>
                   </div>
                   <div>
@@ -204,7 +228,12 @@ export default function OrderPage() {
                   <div className="flex justify-between mt-8">
                     <LocalButton variant="outline" onClick={() => setCurrentStep(2)}>חזור</LocalButton>
                     <LocalButton disabled={!orderData.customer_name || isSubmitting} type="submit">
-                      {isSubmitting ? "מעלה ושולח..." : "סיים הזמנה"}
+                      {isSubmitting ? (
+                        <span className="flex items-center">
+                          <Loader2 className="animate-spin ml-2" size={18} />
+                          מעלה ושולח...
+                        </span>
+                      ) : "סיים הזמנה"}
                     </LocalButton>
                   </div>
                 </form>
