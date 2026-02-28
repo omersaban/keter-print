@@ -1,17 +1,16 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Printer, Phone, Mail, MapPin, Clock, CloudUpload, Menu, FileText, ShieldCheck } from "lucide-react";
+import { Printer, Phone, Mail, MapPin, Clock, CloudUpload, Menu, ShieldCheck } from "lucide-react";
 
 export default function Layout({ children }) {
   const location = useLocation();
 
-  // הוספת המאמרים והצהרת הנגישות לתפריט הניווט העליון
+  // רשימת הניווט בבאנר העליון - ללא נגישות
   const navigationItems = [
     { name: "דף הבית", path: "/" },
     { name: "אודות", path: "/About" },
     { name: "הזמנה אונליין", path: "/Order" },
-    { name: "מאמרים ומדע", path: "/Articles" },
-    { name: "הצהרת נגישות", path: "/AccessibilityStatement" }
+    { name: "מאמרים", path: "/Articles" }
   ];
 
   const isActive = (path) => location.pathname === path;
@@ -22,7 +21,7 @@ export default function Layout({ children }) {
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans" dir="rtl">
-      {/* Header */}
+      {/* Header - הבאנר העליון */}
       <header className="bg-white shadow-sm border-b sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -33,11 +32,11 @@ export default function Layout({ children }) {
               </div>
               <div className="flex flex-col">
                 <span className="text-xl font-bold text-gray-900 leading-none">Keter Print</span>
-                <span className="text-xs text-gray-500 mt-1 text-right">דפוס כתר - תל אביב</span>
+                <span className="text-xs text-gray-500 mt-1">דפוס כתר - תל אביב</span>
               </div>
             </Link>
 
-            {/* Navigation - כולל את כל העמודים בבאנר */}
+            {/* Navigation */}
             <nav className="hidden md:flex items-center space-x-reverse space-x-6">
               {navigationItems.map((item) => (
                 <Link
@@ -54,7 +53,7 @@ export default function Layout({ children }) {
               ))}
             </nav>
 
-            {/* Actions */}
+            {/* Actions - הטלפון והכפתור */}
             <div className="hidden md:flex items-center space-x-reverse space-x-3">
               <a href="tel:03-555-0123" className={ghostBtn}>
                 <Phone className="w-4 h-4 ml-2" />
@@ -66,7 +65,6 @@ export default function Layout({ children }) {
               </Link>
             </div>
 
-            {/* Mobile Menu Icon */}
             <div className="md:hidden">
                 <Menu className="w-6 h-6 text-gray-600" />
             </div>
@@ -79,10 +77,11 @@ export default function Layout({ children }) {
         {children}
       </main>
 
-      {/* Footer */}
+      {/* Footer - המבנה המקורי עם הוספת הנגישות לרשימה */}
       <footer className="bg-slate-900 text-white border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-right">
+            
             {/* About Column */}
             <div className="space-y-4">
               <div className="flex items-center space-x-reverse space-x-3">
@@ -96,25 +95,28 @@ export default function Layout({ children }) {
               </p>
             </div>
 
-            {/* Contact & Links Column */}
+            {/* Contact Column - כאן הוספתי את הצהרת הנגישות */}
             <div className="space-y-4">
-              <h4 className="text-md font-bold text-white uppercase tracking-wider">מידע וניווט</h4>
+              <h4 className="text-md font-bold text-white uppercase tracking-wider">צרו קשר ומידע</h4>
               <ul className="space-y-3 text-slate-400 text-sm">
-                <li>
-                  <Link to="/Articles" className="hover:text-blue-400 flex items-center space-x-reverse space-x-2">
-                    <FileText className="w-4 h-4" />
-                    <span>מאמרים מקצועיים</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/AccessibilityStatement" className="hover:text-blue-400 flex items-center space-x-reverse space-x-2 text-blue-400 font-bold">
-                    <ShieldCheck className="w-4 h-4" />
-                    <span>הצהרת נגישות</span>
-                  </Link>
-                </li>
-                <li className="flex items-center space-x-reverse space-x-3 pt-2">
+                <li className="flex items-center space-x-reverse space-x-3">
                   <MapPin className="w-4 h-4 text-blue-500" />
                   <span>בן שמן 6, תל אביב (צמוד לעזריאלי)</span>
+                </li>
+                <li className="flex items-center space-x-reverse space-x-3">
+                  <Phone className="w-4 h-4 text-blue-500" />
+                  <span>03-555-0123</span>
+                </li>
+                <li className="flex items-center space-x-reverse space-x-3">
+                  <Mail className="w-4 h-4 text-blue-500" />
+                  <span>keter-ta@zahav.net.il</span>
+                </li>
+                {/* הקישור החדש להצהרת נגישות */}
+                <li className="flex items-center space-x-reverse space-x-3 pt-2">
+                  <ShieldCheck className="w-4 h-4 text-green-500" />
+                  <Link to="/AccessibilityStatement" className="text-blue-400 hover:underline font-bold">
+                    הצהרת נגישות האתר
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -126,7 +128,7 @@ export default function Layout({ children }) {
                 <Clock className="w-4 h-4 text-blue-500 mt-0.5" />
                 <div>
                   <p>ראשון - חמישי: 07:00 - 17:00</p>
-                  <p className="mt-1 text-red-400 italic">שישי ושבת: סגור</p>
+                  <p className="mt-1">שישי ושבת: סגור</p>
                 </div>
               </div>
             </div>
@@ -135,8 +137,8 @@ export default function Layout({ children }) {
           <div className="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-slate-500 text-xs gap-4">
             <p>&copy; {new Date().getFullYear()} דפוס כתר בע"מ. כל הזכויות שמורות.</p>
             <div className="flex space-x-reverse space-x-6">
-              <Link to="/AccessibilityStatement" className="underline hover:text-slate-300">נגישות האתר</Link>
-              <span>שירות מהיר ומקצועי</span>
+              <span>איכות ללא פשרות</span>
+              <span>שירות מהיר</span>
             </div>
           </div>
         </div>
