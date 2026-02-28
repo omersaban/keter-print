@@ -1,91 +1,61 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClientInstance } from '@/lib/query-client';
-import NavigationTracker from '@/lib/NavigationTracker';
-import PageNotFound from './lib/PageNotFound';
-import { AuthProvider, useAuth } from '@/lib/AuthContext';
-import UserNotRegisteredError from '@/components/UserNotRegisteredError';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { ShoppingCart, BookOpen, Printer } from 'lucide-react';
 
-// ייבוא ידני של העמודים וה-Layout שלך
-import Layout from './Layout';
-import Home from './pages/Home';
-import About from './pages/About';
-import Order from './pages/Order';
+// ייבוא העמודים
+import OrderPage from './pages/Order';
+import ArticlesPage from './pages/Articles';
 
-// עטיפת ה-Layout
-const LayoutWrapper = ({ children, currentPageName }) => {
-  return Layout ? (
-    <Layout currentPageName={currentPageName}>{children}</Layout>
-  ) : (
-    <>{children}</>
-  );
-};
+// קומפוננטת תפריט ניווט (Navbar)
+const Navbar = () => (
+  <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm" dir="rtl">
+    <div className="max-w-6xl mx-auto px-4">
+      <div className="flex justify-between items-center h-16">
+        {/* לוגו / שם העסק */}
+        <div className="flex items-center gap-2">
+          <div className="bg-blue-600 p-2 rounded-lg text-white">
+            <Printer size={24} />
+          </div>
+          <span className="text-xl font-bold text-gray-900">דפוס כתר</span>
+        </div>
 
-const AuthenticatedApp = () => {
-  const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
-
-  // הצגת טוען בזמן בדיקת אימות
-  if (isLoadingPublicSettings || isLoadingAuth) {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center">
-        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin"></div>
+        {/* קישורי ניווט */}
+        <div className="flex gap-8">
+          <Link to="/" className="flex items-center gap-2 text-gray-600 hover:text-blue-600 font-medium transition-colors">
+            <ShoppingCart size={18} />
+            <span>הזמנה אונליין</span>
+          </Link>
+          <Link to="/articles" className="flex items-center gap-2 text-gray-600 hover:text-blue-600 font-medium transition-colors">
+            <BookOpen size={18} />
+            <span>מאמרים ומדע</span>
+          </Link>
+        </div>
       </div>
-    );
-  }
-
-  // טיפול בשגיאות אימות
-  if (authError) {
-    if (authError.type === 'user_not_registered') {
-      return <UserNotRegisteredError />;
-    } else if (authError.type === 'auth_required') {
-      navigateToLogin();
-      return null;
-    }
-  }
-
-  // הראוטר החדש
-  return (
-    <Routes>
-      <Route path="/" element={
-        <LayoutWrapper currentPageName="Home">
-          <Home />
-        </LayoutWrapper>
-      } />
-
-      <Route path="/Home" element={
-        <LayoutWrapper currentPageName="Home">
-          <Home />
-        </LayoutWrapper>
-      } />
-      
-      <Route path="/About" element={
-        <LayoutWrapper currentPageName="About">
-          <About />
-        </LayoutWrapper>
-      } />
-      
-      <Route path="/Order" element={
-        <LayoutWrapper currentPageName="Order">
-          <Order />
-        </LayoutWrapper>
-      } />
-
-      <Route path="*" element={<PageNotFound />} />
-    </Routes>
-  );
-};
+    </div>
+  </nav>
+);
 
 function App() {
   return (
-    <AuthProvider>
-      <QueryClientProvider client={queryClientInstance}>
-        <Router>
-          <NavigationTracker />
-          <AuthenticatedApp />
-        </Router>
-      </QueryClientProvider>
-    </AuthProvider>
+    <Router>
+      <div className="min-h-screen bg-gray-50 flex flex-col">
+        {/* התפריט תמיד למעלה */}
+        <Navbar />
+
+        {/* תוכן העמודים משתנה לפי הכתובת */}
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<OrderPage />} />
+            <Route path="/articles" element={<ArticlesPage />} />
+          </Routes>
+        </main>
+
+        {/* Footer פשוט */}
+        <footer className="bg-white border-t py-6 text-center text-gray-400 text-sm">
+          © 2026 דפוס כתר - איכות, מדע ונגישות
+        </footer>
+      </div>
+    </Router>
   );
 }
 
