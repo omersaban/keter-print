@@ -51,7 +51,7 @@ export default function BrochuresArticle() {
           </p>
 
           <div className="bg-blue-50/50 p-6 md:p-8 rounded-2xl mt-10 border border-blue-100">
-            <h3 className="text-xl font-bold text-blue-900 mb-3">סיכום ללקוח:</h3>
+            <h3 className="text-xl font-bold text-blue-900 mb-3">לסיכום:</h3>
             <p className="text-lg text-gray-800 leading-relaxed">
               תכנון נכון של ברושור בבית הדפוס לוקח בחשבון את משקל הנייר, סוג הציפוי (למינציה מבריקה/מט או לכה), ואת כיוון הסיבים. שילוב מדויק של פרמטרים אלו מבטיח מוצר סופי אלגנטי, עמיד, שמשדר איכות ללא פשרות בידי הלקוח שלכם.
             </p>
