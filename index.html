@@ -1,34 +1,48 @@
-<!DOCTYPE html>
-<html lang="he" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <title>דפוס כתר - הזמנות וידע מקצועי</title>
-  <script src="https://cdn.jsdelivr.net/npm/accessibility@1.2.0/dist/accessibility.min.js"></script>
-</head>
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
-
-  <script>
-    // הגדרת הנגישות - מופרדת מהלוגיקה של React כדי למנוע התנגשויות
-    window.addEventListener('load', function() {
-      new Accessibility({
-        language: {
-          menuTitle: 'תפריט נגישות',
+<script src="https://cdn.jsdelivr.net/npm/accessibility@1.2.0/dist/accessibility.min.js"></script>
+<script>
+  window.addEventListener('load', function() {
+    new Accessibility({
+      language: {
+        en: {
+          menuTitle: 'נגישות דפוס כתר',
           increaseText: 'הגדל טקסט',
           decreaseText: 'הקטן טקסט',
-          invertColors: 'ניגודיות הפוכה',
-          grayHues: 'גווני אפור',
-          bigCursor: 'סמן גדול',
-          readingGuide: 'קו קריאה'
-        },
-        icon: {
-          position: { bottom: { size: 20, units: 'px' }, right: { size: 20, units: 'px' } },
-          backgroundColor: '#2563eb',
-          circular: true
+          increaseTextSpacing: 'מרווח טקסט',
+          invertColors: 'ניגודיות הפוכה (Contrast)',
+          grayHues: 'שחור לבן (Grayscale)',
+          bigCursor: 'סמן עכבר גדול',
+          readingGuide: 'קו מנחה לקריאה',
+          underlineLinks: 'הדגשת קישורים',
+          // הוספת כפתור הצהרת נגישות בתוך התפריט
+          accessibilityStatement: 'הצהרת נגישות'
         }
-      });
+      },
+      buttons: {
+        // הגדרת הפיצ'רים שיופיעו בתפריט
+        font: { size: true },
+        contrast: true,
+        grayscale: true,
+        cursor: true,
+        guide: true,
+        link: true
+      },
+      // הוספת הלינק להצהרת הנגישות שנבנה ב-React
+      customButtons: [
+        {
+          title: 'הצהרת נגישות',
+          icon: '📋',
+          id: 'accStatement',
+          fn: function() {
+            window.location.href = '/AccessibilityStatement';
+          }
+        }
+      ],
+      icon: {
+        position: { bottom: { size: 20, units: 'px' }, right: { size: 20, units: 'px' } },
+        circular: true,
+        backgroundColor: '#2563eb',
+        img: 'accessibility'
+      }
     });
-  </script>
-</body>
-</html>
+  }, false);
+</script>
