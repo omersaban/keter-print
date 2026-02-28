@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CheckCircle, ShoppingCart, Calculator, Package, Upload as UploadIcon, X } from "lucide-react";
 
-// ייבוא רכיבי ההזמנה - וודא שהקבצים קיימים בנתיבים אלו
+// ייבוא רכיבי ההזמנה המעודכנים
 import ProductSelector from "@/components/order/ProductSelector.jsx";
 import OrderSpecs from "@/components/order/OrderSpecs.jsx";
 import OrderSummary from "@/components/order/OrderSummary.jsx";
@@ -53,8 +53,9 @@ export default function OrderPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  // פונקציית איפוס - מונעת 404 כי היא לא מרעננת את הדפדפן
+  // פונקציית איפוס - הפתרון לבעיית ה-404 ב-Netlify
   const handleReset = () => {
+    // מאפסים את כל הנתונים לערכי ברירת המחדל
     setOrderData({
       customer_name: "",
       customer_email: "",
@@ -69,6 +70,7 @@ export default function OrderPage() {
       special_instructions: "",
       file_urls: []
     });
+    // סוגרים את מסך ההצלחה ומחזירים לשלב הראשון
     setSubmitSuccess(false);
     setCurrentStep(1);
   };
@@ -94,13 +96,13 @@ export default function OrderPage() {
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
-    // סימולציית שליחה
+    // סימולציית שליחה (כאן יבוא החיבור ל-API בעתיד)
     await new Promise(resolve => setTimeout(resolve, 1500));
     setSubmitSuccess(true);
     setIsSubmitting(false);
   };
 
-  // מסך הצלחה
+  // תצוגת מסך הצלחה
   if (submitSuccess) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 text-right" dir="rtl">
@@ -110,7 +112,8 @@ export default function OrderPage() {
           </div>
           <h1 className="text-2xl font-bold mb-4">בקשתך נשלחה!</h1>
           <p className="text-gray-600 mb-8">נציג מדפוס כתר יחזור אליך תוך זמן קצר עם הצעה מפורטת.</p>
-          {/* שינוי קריטי כאן: קריאה ל-handleReset במקום window.location.reload() */}
+          
+          {/* שימוש ב-handleReset שומר עלינו בתוך האפליקציה ומונע 404 */}
           <LocalButton onClick={handleReset}>שלח בקשה נוספת</LocalButton>
         </LocalCard>
       </div>
@@ -165,7 +168,7 @@ export default function OrderPage() {
 
             {currentStep === 3 && (
               <LocalCard>
-                <div className="bg-blue-600 p-4 text-white font-bold text-xl">פרטי התקשרות</div>
+                <div className="bg-blue-600 p-4 text-white font-bold text-xl text-center">פרטי התקשרות</div>
                 <div className="p-8 space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
