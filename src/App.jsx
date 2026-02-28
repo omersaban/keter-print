@@ -6,6 +6,7 @@ import NavigationTracker from '@/lib/NavigationTracker';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
+import AccessibilityStatement from './pages/AccessibilityStatement';
 
 // ייבוא ידני של העמודים וה-Layout שלך
 import Layout from './Layout';
@@ -46,42 +47,53 @@ const AuthenticatedApp = () => {
   }
 
   return (
-    <Routes>
-      <Route path="/" element={
-        <LayoutWrapper currentPageName="Home">
-          <Home />
-        </LayoutWrapper>
-      } />
-
-      <Route path="/Home" element={
-        <LayoutWrapper currentPageName="Home">
-          <Home />
-        </LayoutWrapper>
-      } />
-      
-      <Route path="/About" element={
-        <LayoutWrapper currentPageName="About">
-          <About />
-        </LayoutWrapper>
-      } />
-      
-      <Route path="/Order" element={
-        <LayoutWrapper currentPageName="Order">
-          <Order />
-        </LayoutWrapper>
-      } />
-
-      {/* העמוד החדש בתוך המבנה המקורי שלך */}
-      <Route path="/Articles" element={
-        <LayoutWrapper currentPageName="Articles">
-          <Articles />
-        </LayoutWrapper>
-      } />
-
-      <Route path="*" element={<PageNotFound />} />
-    </Routes>
-  );
-};
+      <Routes>
+        {/* דף הבית */}
+        <Route path="/" element={
+          <LayoutWrapper currentPageName="Home">
+            <Home />
+          </LayoutWrapper>
+        } />
+  
+        <Route path="/Home" element={
+          <LayoutWrapper currentPageName="Home">
+            <Home />
+          </LayoutWrapper>
+        } />
+        
+        {/* אודות */}
+        <Route path="/About" element={
+          <LayoutWrapper currentPageName="About">
+            <About />
+          </LayoutWrapper>
+        } />
+        
+        {/* מערכת ההזמנות */}
+        <Route path="/Order" element={
+          <LayoutWrapper currentPageName="Order">
+            <Order />
+          </LayoutWrapper>
+        } />
+  
+        {/* מאמרים ומדע */}
+        <Route path="/Articles" element={
+          <LayoutWrapper currentPageName="Articles">
+            <Articles />
+          </LayoutWrapper>
+        } />
+  
+        {/* הצהרת נגישות - הנתיב החדש עבור הווידג'ט */}
+        <Route path="/AccessibilityStatement" element={
+          <LayoutWrapper currentPageName="Accessibility">
+            <AccessibilityStatement />
+          </LayoutWrapper>
+        } />
+  
+        {/* דף שגיאה 404 */}
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    );
+  };
 
 function App() {
   return (
