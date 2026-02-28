@@ -87,9 +87,9 @@ export default function OrderPage() {
     setIsSubmitting(true);
 
     // --- חשוב: החלף את המפתחות האלה מהדשבורד של EmailJS ---
-    const SERVICE_ID = "service_xxxxxxx"; 
-    const TEMPLATE_ID = "template_xxxxxxx";
-    const PUBLIC_KEY = "xxxxxxxxxxxxxxxx";
+    const SERVICE_ID = "service_q0z5fgk"; 
+    const TEMPLATE_ID = "template_d8fln9g";
+    const PUBLIC_KEY = "Dhkw_j_fflQgeu4GQ";
 
     try {
       await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
