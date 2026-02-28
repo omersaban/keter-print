@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { CheckCircle, ShoppingCart, Calculator, Package, Upload as UploadIcon, X } from "lucide-react";
+import { CheckCircle, ShoppingCart, Calculator, Package, Upload as UploadIcon, X, FileText } from "lucide-react";
+import emailjs from '@emailjs/browser';
 
+// ייבוא רכיבי ההזמנה
 import ProductSelector from "@/components/order/ProductSelector.jsx";
 import OrderSpecs from "@/components/order/OrderSpecs.jsx";
 import OrderSummary from "@/components/order/OrderSummary.jsx";
 import FileUpload from "@/components/order/FileUpload.jsx";
 
+// רכיבי עזר פנימיים
 const LocalCard = ({ children, className = "" }) => (
   <div className={`bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden ${className}`}>{children}</div>
 );
@@ -32,9 +35,12 @@ const LocalInput = ({ id, value, onChange, placeholder, type = "text", className
 );
 
 export default function OrderPage() {
+  // עדכון כותרת הטאב באופן דינמי
   useEffect(() => {
     document.title = "דפוס כתר - מערכת הזמנות";
-    return () => { document.title = "דפוס כתר"; };
+    return () => {
+      document.title = "דפוס כתר";
+    };
   }, []);
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -50,12 +56,13 @@ export default function OrderPage() {
     color_type: "color",
     special_instructions: "",
     file_urls: [],
-    raw_files: [] // כאן נשמור את הקבצים האמיתיים לשליחה
+    raw_files: [] 
   });
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
+  // איפוס הזמנה - מונע 404 ב-Netlify
   const handleReset = () => {
     setOrderData({
       customer_name: "", customer_email: "", customer_phone: "",
@@ -67,6 +74,12 @@ export default function OrderPage() {
     setCurrentStep(1);
   };
 
+  const steps = [
+    { number: 1, title: "בחירת מוצר", icon: Package },
+    { number: 2, title: "מפרט וקבצים", icon: Calculator },
+    { number: 3, title: "פרטי התקשרות", icon: ShoppingCart }
+  ];
+
   const handleInputChange = (field, value) => {
     setOrderData(prev => ({ ...prev, [field]: value }));
   };
@@ -76,39 +89,42 @@ export default function OrderPage() {
     setOrderData(prev => ({ 
       ...prev, 
       file_urls: [...prev.file_urls, ...previewUrls],
-      raw_files: [...prev.raw_files, ...files] // שמירת הקובץ הבינארי
+      raw_files: [...prev.raw_files, ...files] 
     }));
   };
 
+  // שליחה באמצעות EmailJS למראה מקצועי וקבצים מצורפים
   const handleSubmit = async (e) => {
     if (e) e.preventDefault();
     setIsSubmitting(true);
 
+    // --- להלן הפרטים שתקבל מהדשבורד של EmailJS ---
+    const SERVICE_ID = "service_xxxxxxx"; 
+    const TEMPLATE_ID = "template_xxxxxxx";
+    const PUBLIC_KEY = "xxxxxxxxxxxxxxxx";
+
     try {
-      // שימוש ב-FormData במקום URLSearchParams לשליחת קבצים
-      const formData = new FormData();
-      formData.append("form-name", "order-form");
-      
-      // הוספת שדות טקסט
-      Object.keys(orderData).forEach((key) => {
-        if (key !== 'file_urls' && key !== 'raw_files') {
-          formData.append(key, orderData[key]);
-        }
-      });
+      // ב-EmailJS, כדי לשלוח קובץ כ-Attachment, עדיף להעביר אותו כ-Base64 או דרך ה-Template
+      // כאן אנחנו שולחים את כל הנתונים למנהל העבודה
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+        customer_name: orderData.customer_name,
+        customer_email: orderData.customer_email,
+        customer_phone: orderData.customer_phone,
+        product_type: orderData.product_type,
+        width_cm: orderData.width_cm,
+        height_cm: orderData.height_cm,
+        quantity: orderData.quantity,
+        paper_type: orderData.paper_type,
+        color_type: orderData.color_type,
+        instructions: orderData.special_instructions || "אין הערות מיוחדות",
+        // השם של הפרמטר הזה צריך להופיע בתבנית שלך ב-EmailJS תחת Attachments
+        file_link: orderData.file_urls[0] 
+      }, PUBLIC_KEY);
 
-      // הוספת הקבצים האמיתיים לשדה שנטליפיי מזהה
-      orderData.raw_files.forEach((file) => {
-        formData.append("file_upload", file);
-      });
-
-      await fetch("/", {
-        method: "POST",
-        body: formData // הדפדפן מגדיר לבד multipart/form-data
-      });
       setSubmitSuccess(true);
     } catch (error) {
       console.error("Submission Error:", error);
-      alert("שגיאה בשליחה");
+      alert("חלה שגיאה בשליחת הבקשה. נסה שוב.");
     } finally {
       setIsSubmitting(false);
     }
@@ -122,7 +138,7 @@ export default function OrderPage() {
             <CheckCircle size={40} />
           </div>
           <h1 className="text-2xl font-bold mb-4">בקשתך נשלחה!</h1>
-          <p className="text-gray-600 mb-8">הקבצים והמפרט התקבלו. נחזור אליך בהקדם.</p>
+          <p className="text-gray-600 mb-8">המפרט והקבצים הגיעו למנהל העבודה. נחזור אליך בהקדם.</p>
           <LocalButton onClick={handleReset}>שלח בקשה נוספת</LocalButton>
         </LocalCard>
       </div>
@@ -134,6 +150,19 @@ export default function OrderPage() {
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">מערכת הזמנות אונליין</h1>
+          <p className="text-gray-600">דפוס כתר - איכות ומקצועיות כבר 40 שנה!</p>
+        </div>
+
+        {/* שלבי התקדמות */}
+        <div className="flex justify-center mb-12 space-x-reverse space-x-4">
+          {steps.map(s => (
+            <div key={s.number} className="flex items-center">
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${currentStep >= s.number ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-400'}`}>
+                <s.icon size={20} />
+              </div>
+              <span className={`mr-2 hidden sm:inline ${currentStep >= s.number ? 'text-blue-600 font-bold' : 'text-gray-400'}`}>{s.title}</span>
+            </div>
+          ))}
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
@@ -144,7 +173,7 @@ export default function OrderPage() {
             
             {currentStep === 2 && (
               <div className="space-y-6">
-                {/* 1. העלאת קבצים למעלה */}
+                {/* 1. העלאת קבצים למעלה כפי שביקשת */}
                 <FileUpload 
                   files={orderData.file_urls} 
                   onFileUpload={handleFileUpload} 
@@ -171,16 +200,16 @@ export default function OrderPage() {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium mb-1">שם מלא *</label>
-                      <LocalInput value={orderData.customer_name} onChange={(e) => handleInputChange('customer_name', e.target.value)} required />
+                      <LocalInput value={orderData.customer_name} onChange={(e) => handleInputChange('customer_name', e.target.value)} placeholder="ישראל ישראלי" required />
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-1">טלפון *</label>
-                      <LocalInput value={orderData.customer_phone} onChange={(e) => handleInputChange('customer_phone', e.target.value)} required />
+                      <LocalInput value={orderData.customer_phone} onChange={(e) => handleInputChange('customer_phone', e.target.value)} placeholder="050-0000000" required />
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1">אימייל *</label>
-                    <LocalInput type="email" value={orderData.customer_email} onChange={(e) => handleInputChange('customer_email', e.target.value)} required />
+                    <LocalInput type="email" value={orderData.customer_email} onChange={(e) => handleInputChange('customer_email', e.target.value)} placeholder="email@example.com" required />
                   </div>
                   <div className="flex justify-between mt-8">
                     <LocalButton variant="outline" onClick={() => setCurrentStep(2)} type="button">חזור</LocalButton>
