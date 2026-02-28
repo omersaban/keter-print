@@ -12,11 +12,11 @@ const LocalCard = ({ children, className = "" }) => (
   <div className={`bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden ${className}`}>{children}</div>
 );
 
-const LocalButton = ({ children, onClick, disabled, variant = "primary", className = "" }) => {
+const LocalButton = ({ children, onClick, disabled, variant = "primary", className = "", type = "button" }) => {
   const base = "inline-flex items-center justify-center px-6 py-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed outline-none";
   const styles = variant === "primary" ? "bg-blue-600 text-white hover:bg-blue-700" : "border border-gray-300 text-gray-700 hover:bg-gray-50";
   return (
-    <button onClick={onClick} disabled={disabled} className={`${base} ${styles} ${className}`}>
+    <button onClick={onClick} disabled={disabled} className={`${base} ${styles} ${className}`} type={type}>
       {children}
     </button>
   );
@@ -82,16 +82,36 @@ export default function OrderPage() {
     }));
   };
 
+  // פונקציה להעלאת הקובץ לשרת חיצוני כדי שיהיה לינק אמיתי
+  const uploadToCloudinary = async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "YOUR_UNSIGNED_PRESET"); // להחליף ב-Preset שלך
+    
+    const response = await fetch("https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/upload", {
+      method: "POST",
+      body: formData,
+    });
+    const data = await response.json();
+    return data.secure_url;
+  };
+
   const handleSubmit = async (e) => {
     if (e) e.preventDefault();
     setIsSubmitting(true);
 
-    // --- חשוב: החלף את המפתחות האלה מהדשבורד של EmailJS ---
     const SERVICE_ID = "service_q0z5fgk"; 
     const TEMPLATE_ID = "template_d8fln9g";
     const PUBLIC_KEY = "Dhkw_j_fflQgeu4GQ";
 
     try {
+      let finalFileUrl = "לא הועלה קובץ";
+
+      // העלאה ל-Cloudinary רק אם יש קובץ
+      if (orderData.raw_files.length > 0) {
+        finalFileUrl = await uploadToCloudinary(orderData.raw_files[0]);
+      }
+
       await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
         customer_name: orderData.customer_name,
         customer_email: orderData.customer_email,
@@ -103,13 +123,13 @@ export default function OrderPage() {
         paper_type: orderData.paper_type,
         color_type: orderData.color_type,
         instructions: orderData.special_instructions || "אין הערות",
-        file_link: orderData.file_urls[0] || "לא הועלה קובץ"
+        file_link: finalFileUrl // כאן נשלח הלינק האמיתי
       }, PUBLIC_KEY);
 
       setSubmitSuccess(true);
     } catch (error) {
       console.error("EmailJS Error:", error);
-      alert("חלה שגיאה. בדוק אם המפתחות של EmailJS מעודכנים.");
+      alert("חלה שגיאה בשליחה.");
     } finally {
       setIsSubmitting(false);
     }
@@ -145,7 +165,6 @@ export default function OrderPage() {
             
             {currentStep === 2 && (
               <div className="space-y-6">
-                {/* 1. קבצים למעלה */}
                 <FileUpload 
                   files={orderData.file_urls} 
                   onFileUpload={handleFileUpload} 
@@ -155,7 +174,6 @@ export default function OrderPage() {
                   }} 
                 />
                 
-                {/* 2. מפרט למטה */}
                 <OrderSpecs 
                   orderData={orderData} 
                   onInputChange={handleInputChange} 
@@ -184,9 +202,9 @@ export default function OrderPage() {
                     <LocalInput type="email" value={orderData.customer_email} onChange={(e) => handleInputChange('customer_email', e.target.value)} required />
                   </div>
                   <div className="flex justify-between mt-8">
-                    <LocalButton variant="outline" onClick={() => setCurrentStep(2)} type="button">חזור</LocalButton>
+                    <LocalButton variant="outline" onClick={() => setCurrentStep(2)}>חזור</LocalButton>
                     <LocalButton disabled={!orderData.customer_name || isSubmitting} type="submit">
-                      {isSubmitting ? "שולח..." : "סיים הזמנה"}
+                      {isSubmitting ? "מעלה ושולח..." : "סיים הזמנה"}
                     </LocalButton>
                   </div>
                 </form>
