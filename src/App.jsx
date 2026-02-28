@@ -14,7 +14,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Order from './pages/Order';
 import Articles from './pages/Articles'; 
-import BrochuresArticle from './pages/BrochuresArticle'; // <--- הייבוא של העמוד החדש שיצרנו
+import BrochuresArticle from './pages/articles/BrochuresArticle'; // הייבוא של עמוד מאמר
 
 // עטיפת ה-Layout המקורית שלך
 const LayoutWrapper = ({ children, currentPageName }) => {
