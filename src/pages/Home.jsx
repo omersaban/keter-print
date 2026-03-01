@@ -191,7 +191,7 @@ export default function Home() {
               מה הלקוחות שלנו אומרים
             </h2>
             <div className="flex items-center justify-center gap-2 mb-4">
-              <span className="font-bold text-xl text-slate-800">4.8</span>
+              <span className="font-bold text-xl text-slate-800">4.9</span>
               <div className="flex text-yellow-400">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-5 h-5 fill-current" />
