@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { 
   MapPin, 
   Phone, 
-  Mail, 
   Clock, 
   Award, 
   Users,
@@ -16,7 +15,7 @@ export default function About() {
     document.title = "אודות";
   }, []);
 
-  // הגדרת עיצוב כרטיס מקומי כדי לעקוף בעיות ייבוא
+  // הגדרת עיצוב כרטיס מקומי
   const CardWrapper = ({ children, className = "" }) => (
     <div className={`bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden ${className}`}>
       {children}
@@ -120,7 +119,7 @@ export default function About() {
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-sans">
               הערכים שלנו
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -134,7 +133,7 @@ export default function About() {
                 <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
                   <value.icon className="w-8 h-8 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                <h3 className="text-xl font-semibold text-gray-900 mb-4 font-sans">
                   {value.title}
                 </h3>
                 <p className="text-gray-600">
@@ -146,7 +145,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Contact Information & Google Maps */}
+      {/* Contact Information & Google Maps - Fixed with markers */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32 pb-12">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-sans">בואו לבקר אותנו</h2>
@@ -159,7 +158,7 @@ export default function About() {
               <div className="flex items-start gap-4 text-right">
                 <MapPin className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-1">כתובת</h3>
+                  <h3 className="text-lg font-bold text-gray-900 mb-1 font-sans">כתובת</h3>
                   <p className="text-gray-600">בן שמן 6, תל אביב-יפו, 6744233</p>
                 </div>
               </div>
@@ -169,8 +168,8 @@ export default function About() {
               <div className="flex items-start gap-4 text-right">
                 <Phone className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-1">טלפון</h3>
-                  <p className="text-gray-600" dir="ltr">03-561-2165</p>
+                  <h3 className="text-lg font-bold text-gray-900 mb-1 font-sans">טלפון</h3>
+                  <p className="text-gray-600 font-medium" dir="ltr">03-561-2165</p>
                 </div>
               </div>
             </CardWrapper>
@@ -179,34 +178,34 @@ export default function About() {
               <div className="flex items-start gap-4 text-right">
                 <Clock className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-1">שעות פעילות</h3>
-                  <p className="text-gray-600 font-medium">א' - ה': 07:00 - 15:00</p>
+                  <h3 className="text-lg font-bold text-gray-900 mb-1 font-sans">שעות פעילות</h3>
+                  <p className="text-gray-600 font-medium tracking-wide">א' - ה': 07:00 - 15:00</p>
                 </div>
               </div>
             </CardWrapper>
             
             <a 
-              href="https://waze.com/ul?ll=32.075146,34.794435&navigate=yes" 
+              href="https://waze.com/ul?ll=32.07222,34.79167&navigate=yes" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full bg-[#33ccff] text-white font-bold py-4 rounded-2xl hover:bg-[#2dbbe9] transition-all shadow-lg hover:shadow-xl mt-4"
+              className="flex items-center justify-center gap-2 w-full bg-[#33ccff] text-white font-bold py-4 rounded-2xl hover:bg-[#2dbbe9] transition-all shadow-lg hover:shadow-xl mt-4 font-sans"
             >
               ניווט ב-Waze
             </a>
           </div>
 
-          {/* הטמעת מפת גוגל חיה - כולל ה-Pin המדויק של דפוס כתר יומטוב */}
+          {/* Google Maps Embed - Place mode for Pin visibility */}
           <div className="w-full h-full min-h-[400px] rounded-[2rem] overflow-hidden shadow-xl border-4 border-white relative">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3381.01186716949!2d34.792246076352934!3d32.07222442013146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4b78ea1c99c3%3A0xa8b8678aafa8d9b0!2zZHB1cyBrZXRlciB5b210b3Y!5e0!3m2!1siw!2sil!4v1714560000000!5m2!1siw!2sil"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3380.95750831623!2d34.79222587629532!3d32.070500819771144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4e78ea679905%3A0xa8b8678aafa8d9b0!2z15PXpNeoINeb16rXqCDZWorking-Heb15XXkdeB!5e0!3m2!1siw!2sil!4v1715500000000!5m2!1siw!2sil"
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
               allowFullScreen="" 
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
-              title="מיקום דפוס כתר יומטוב"
-              className="grayscale-[15%] hover:grayscale-0 transition-all duration-700"
+              title="מיקום דפוס כתר יומטוב בע''מ"
+              className="grayscale-[10%] hover:grayscale-0 transition-all duration-700"
             ></iframe>
           </div>
         </div>
