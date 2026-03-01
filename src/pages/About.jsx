@@ -147,58 +147,60 @@ export default function About() {
       </section>
 
       {/* Contact Information & Google Maps */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">בואו לבקר אותנו</h2>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32 pb-12"> {/* הגדלנו מרווח תחתון משמעותית */}
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-sans">בואו לבקר אותנו</h2>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 items-start">
-          <div className="space-y-4 text-right">
-            <CardWrapper className="p-4 hover:border-blue-200 transition-all duration-300">
-              <div className="flex items-start gap-4">
-                <MapPin className="w-5 h-5 text-blue-600 mt-1" />
+        <div className="grid lg:grid-cols-2 gap-12 items-stretch"> {/* gap-12 נותן מרווח גדול יותר בין המפה לכרטיסים */}
+          
+          {/* כרטיסי מידע - הוספנו מרווח פנימי (py-5) */}
+          <div className="flex flex-col gap-6 justify-between">
+            <CardWrapper className="p-5 hover:shadow-md transition-all border-blue-50">
+              <div className="flex items-start gap-4 text-right">
+                <MapPin className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-base font-bold text-gray-900 mb-0.5">כתובת</h3>
-                  <p className="text-gray-600 text-sm">בן שמן 6, תל-אביב (ליד עזריאלי)</p>
+                  <h3 className="text-lg font-bold text-gray-900 mb-1">כתובת</h3>
+                  <p className="text-gray-600">בן שמן 6, תל-אביב (ליד עזריאלי)</p>
                 </div>
               </div>
             </CardWrapper>
 
-            <CardWrapper className="p-4 hover:border-blue-200 transition-all duration-300">
-              <div className="flex items-start gap-4">
-                <Phone className="w-5 h-5 text-blue-600 mt-1" />
+            <CardWrapper className="p-5 hover:shadow-md transition-all border-blue-50">
+              <div className="flex items-start gap-4 text-right">
+                <Phone className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-base font-bold text-gray-900 mb-0.5">טלפון</h3>
-                  <p className="text-gray-600 text-sm" dir="ltr">03-555-0123</p>
+                  <h3 className="text-lg font-bold text-gray-900 mb-1">טלפון</h3>
+                  <p className="text-gray-600" dir="ltr">03-555-0123</p>
                 </div>
               </div>
             </CardWrapper>
 
-            <CardWrapper className="p-4 hover:border-blue-200 transition-all duration-300">
-              <div className="flex items-start gap-4">
-                <Clock className="w-5 h-5 text-blue-600 mt-1" />
+            <CardWrapper className="p-5 hover:shadow-md transition-all border-blue-50">
+              <div className="flex items-start gap-4 text-right">
+                <Clock className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-base font-bold text-gray-900 mb-0.5">שעות פעילות</h3>
-                  <p className="text-gray-600 text-sm">א' - ה': 07:00 - 17:00</p>
+                  <h3 className="text-lg font-bold text-gray-900 mb-1">שעות פעילות</h3>
+                  <p className="text-gray-600 font-medium">א' - ה': 07:00 - 17:00</p>
                 </div>
               </div>
             </CardWrapper>
             
-            {/* כפתור ניווט Waze */}
+            {/* כפתור Waze - הוספנו מרווח (mt-4) */}
             <a 
               href="https://waze.com/ul?ll=32.07222,34.79167&navigate=yes" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full bg-[#33ccff] text-white font-bold py-3 rounded-xl hover:bg-[#2dbbe9] transition-colors shadow-sm mt-2"
+              className="flex items-center justify-center gap-2 w-full bg-[#33ccff] text-white font-bold py-4 rounded-2xl hover:bg-[#2dbbe9] transition-all shadow-lg hover:shadow-xl mt-4"
             >
               ניווט ב-Waze
             </a>
           </div>
 
-          {/* מפת גוגל חיה */}
-          <div className="w-full h-[320px] rounded-3xl overflow-hidden shadow-inner border border-gray-200 group relative">
+          {/* הטמעת מפת גוגל חיה - לינק מתוקן */}
+          <div className="w-full h-full min-h-[400px] rounded-[2rem] overflow-hidden shadow-xl border-4 border-white relative">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d3380.8968!2d34.79167!3d32.07222!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4b998782a937%3A0x673c66f7f21f7d5c!2sBen+Shemen+St+6%2C+Tel+Aviv-Yafo!5e0!3m2!1sen!2sil!4v1700000000000"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d3381.112318464371!2d34.78923057580632!3d32.06611397396782!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4b967909388d%3A0xe10a6a383232!2zYmVuIHNoZW1lbiA2LCBUZWwgQXZpdi1ZYWZv!5e0!3m2!1sen!2sil!4v1700000000000!5m2!1sen!2sil"
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
@@ -206,7 +208,7 @@ export default function About() {
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
               title="מיקום דפוס כתר"
-              className="grayscale-[20%] group-hover:grayscale-0 transition-all duration-500"
+              className="grayscale-[20%] hover:grayscale-0 transition-all duration-700"
             ></iframe>
           </div>
         </div>
