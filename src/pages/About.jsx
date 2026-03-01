@@ -147,21 +147,20 @@ export default function About() {
       </section>
 
       {/* Contact Information & Google Maps */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32 pb-12"> {/* הגדלנו מרווח תחתון משמעותית */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32 pb-12">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-sans">בואו לבקר אותנו</h2>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-stretch"> {/* gap-12 נותן מרווח גדול יותר בין המפה לכרטיסים */}
+        <div className="grid lg:grid-cols-2 gap-12 items-stretch">
           
-          {/* כרטיסי מידע - הוספנו מרווח פנימי (py-5) */}
           <div className="flex flex-col gap-6 justify-between">
             <CardWrapper className="p-5 hover:shadow-md transition-all border-blue-50">
               <div className="flex items-start gap-4 text-right">
                 <MapPin className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                 <div>
                   <h3 className="text-lg font-bold text-gray-900 mb-1">כתובת</h3>
-                  <p className="text-gray-600">בן שמן 6, תל-אביב (ליד עזריאלי)</p>
+                  <p className="text-gray-600">בן שמן 6, תל אביב-יפו, 6744233</p>
                 </div>
               </div>
             </CardWrapper>
@@ -171,7 +170,7 @@ export default function About() {
                 <Phone className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                 <div>
                   <h3 className="text-lg font-bold text-gray-900 mb-1">טלפון</h3>
-                  <p className="text-gray-600" dir="ltr">03-555-0123</p>
+                  <p className="text-gray-600" dir="ltr">03-561-2165</p>
                 </div>
               </div>
             </CardWrapper>
@@ -181,14 +180,13 @@ export default function About() {
                 <Clock className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                 <div>
                   <h3 className="text-lg font-bold text-gray-900 mb-1">שעות פעילות</h3>
-                  <p className="text-gray-600 font-medium">א' - ה': 07:00 - 17:00</p>
+                  <p className="text-gray-600 font-medium">א' - ה': 07:00 - 15:00</p>
                 </div>
               </div>
             </CardWrapper>
             
-            {/* כפתור Waze - הוספנו מרווח (mt-4) */}
             <a 
-              href="https://waze.com/ul?ll=32.07222,34.79167&navigate=yes" 
+              href="https://waze.com/ul?ll=32.0751455,34.7944347&navigate=yes" 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 w-full bg-[#33ccff] text-white font-bold py-4 rounded-2xl hover:bg-[#2dbbe9] transition-all shadow-lg hover:shadow-xl mt-4"
@@ -197,20 +195,19 @@ export default function About() {
             </a>
           </div>
 
-          {/* הטמעת מפת גוגל חיה - לינק מתוקן */}
+          {/* הטמעת מפת גוגל חיה - מיקום מדויק של דפוס כתר יומטוב */}
           <div className="w-full h-full min-h-[400px] rounded-[2rem] overflow-hidden shadow-xl border-4 border-white relative">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3381.085816358896!2d34.79069507641044!3d32.07222302061917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4b834e555555%3A0x5555555555555555!2z157XnteV15DXqCDXn9ee15nXn9eQ!5e0!3m2!1siw!2sil!4v1700000000000!5m2!1siw!2sil"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m13!1d3380.916844976453!2d34.791859775745144!3d32.07514547396452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4b78ea1c99c3%3A0x8bb9e78aafd1dadb!2z15PXpNeoINeb16rXqCDZmdeV157XmNeV15Eg15HXoteUINecIn7XnCAhINeR15nXqiDXpNeo16VzINeR16rXnCDXkdeZ15EgISDXpNeo16VzINeT15nXkteZ16jXnCDXkdeq15wg15DXmdeg15nXprimeQ!5e0!3m2!1siw!2sil!4v1709400000000!5m2!1siw!2sil"
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
               allowFullScreen="" 
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
-              title="מיקום דפוס כתר"
-              className="grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+              title="מיקום מדויק - דפוס כתר יומטוב"
             ></iframe>
-         </div>
+          </div>
         </div>
       </section>
     </div>
