@@ -24,7 +24,7 @@ const ArticleCard = ({ title, content, icon: Icon, tag, path }) => (
 
 export default function ArticlesPage() {
   useEffect(() => {
-    document.title = "דפוס כתר - מדע הדפוס ומאמרים מקצועיים";
+    document.title = "דפוס כתר - מאמרים";
   }, []);
 
   const articles = [
