@@ -185,7 +185,7 @@ export default function About() {
             </CardWrapper>
             
             <a 
-              href="https://waze.com/ul?ll=32.071477,34.794446&navigate=yes" 
+              href="https://www.waze.com/en/live-map/directions/%D7%91%D7%9F-%D7%A9%D7%9E%D7%9F-6-%D7%AA%D7%9C-%D7%90%D7%91%D7%99%D7%91-%D7%99%D7%A4%D7%95?navigate=yes&place=w.22806849.228002952.42583" 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 w-full bg-[#33ccff] text-white font-bold py-5 rounded-2xl hover:bg-[#2dbbe9] transition-all shadow-lg hover:shadow-xl mt-4 font-sans text-lg"
@@ -197,7 +197,7 @@ export default function About() {
           {/* Google Maps Embed - Place ID Mode for Guaranteed Pin */}
           <div className="w-full h-full min-h-[450px] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white relative bg-gray-100">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3381.082604655546!2d34.79185107534431!3d32.071212873966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4b78ea6499c3%3A0xa8b8678aafa8d9b0!2z15PXpdis16Eg15vXqteYINmK15XXnteY15XXnyDXkdeelements9mNINu8INeR15nXqiDXk9ek15XXoCDXkde615wg15DXkdeZ15I!5e0!3m2!1siw!2sil!4v1711234567890!5m2!1siw!2sil"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d345.2438666743654!2d34.79468973056576!3d32.075312106038346!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4b78ea1c99c3%3A0xb8678aafd1dab0!2z15PXpNeV16Eg15vXqteoINeZ15XXnteY15XXkSDXkdei17TXniB8INeR15nXqiDXk9ek15XXoSDXkdeq15wg15DXkdeZ15EgfCDXk9ek15XXoSDXk9eZ15LXmdeY15zXmSDXkdeq15wg15DXkdeZ15E!5e0!3m2!1siw!2sil!4v1772372687155!5m2!1siw!2sil"
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
