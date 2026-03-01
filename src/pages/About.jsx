@@ -15,6 +15,9 @@ export default function About() {
     document.title = "אודות";
   }, []);
 
+  // הכתובת המדויקת שהבאת - מועתקת תו תו ללא שינוי
+  const mapUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3380.730302213898!2d34.7922264758713!3d32.07521741940984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4b78ead999c3%3A0xa8b8678aafa8d9b0!2zZHB1cyBrZXRlciB5b210b3YgYm0!5e0!3m2!1sen!2sil!4v1740843105740!5m2!1sen!2sil";
+
   // הגדרת עיצוב כרטיס מקומי
   const CardWrapper = ({ children, className = "" }) => (
     <div className={`bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden ${className}`}>
@@ -52,7 +55,7 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 font-sans">
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
                 אודות דפוס כתר
               </h1>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
@@ -60,11 +63,11 @@ export default function About() {
               </p>
               <div className="grid grid-cols-2 gap-6">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600 mb-2 font-sans">40+</div>
+                  <div className="text-3xl font-bold text-blue-600 mb-2">40+</div>
                   <div className="text-gray-600">שנות ניסיון</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600 mb-2 font-sans">5000+</div>
+                  <div className="text-3xl font-bold text-blue-600 mb-2">5000+</div>
                   <div className="text-gray-600">לקוחות מרוצים</div>
                 </div>
               </div>
@@ -78,8 +81,8 @@ export default function About() {
                   className="w-full h-64 object-cover rounded-2xl mb-4"
                 />
                 <div className="text-center">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-1 font-sans">הסדנה שלנו</h3>
-                  <p className="text-gray-600 font-sans">ציוד הדפסה מהמתקדמים בעולם</p>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-1">הסדנה שלנו</h3>
+                  <p className="text-gray-600">ציוד הדפסה מהמתקדמים בעולם</p>
                 </div>
               </div>
             </div>
@@ -93,14 +96,14 @@ export default function About() {
           <div>
             <div className="flex items-center mb-6">
               <History className="w-8 h-8 text-blue-600 ml-3" />
-              <h2 className="text-3xl font-bold text-gray-900 font-sans">הסיפור שלנו</h2>
+              <h2 className="text-3xl font-bold text-gray-900">הסיפור שלנו</h2>
             </div>
             <div className="space-y-4 text-gray-600 text-lg leading-relaxed">
               <p>
                 דפוס כתר, הפועל בלב תל אביב למעלה מ-40 שנה, הוא מוסד ותיק ומוערך של איכות ומקצועיות. התחלנו כעסק משפחתי קטן, ועם השנים צמחנו והתפתחנו, תוך שאנו שומרים על אותם ערכי ליבה: אמינות, שירות אישי, והתחייבות בלתי מתפשרת לתוצאה המושלמת.
               </p>
               <p>
-                הניסיון רב השנים שלנו מאפשר לנו להעניק פתרונות יצירתיים ומדויקים לכל פרויקט, מהזמנה קטנה ועד להפקה מורכבת. אנו גאים להיות שותפים להצלחה של מאות עסקים ולקוחות פרטיים.
+                הניסיון רב השנים שלנו מאפשר לנו להעניק פתרונות יצירתיים ומדויקים לכל פרויקט. אנו גאים להיות שותפים להצלחה של מאות עסקים ולקוחות פרטיים.
               </p>
             </div>
           </div>
@@ -119,7 +122,7 @@ export default function About() {
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-sans">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               הערכים שלנו
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -133,7 +136,7 @@ export default function About() {
                 <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
                   <value.icon className="w-8 h-8 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4 font-sans">
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">
                   {value.title}
                 </h3>
                 <p className="text-gray-600">
@@ -148,56 +151,56 @@ export default function About() {
       {/* Contact Information & Google Maps */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32 pb-12">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-sans">בואו לבקר אותנו</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">בואו לבקר אותנו</h2>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-stretch">
           
-          <div className="flex flex-col gap-6 justify-between">
-            <CardWrapper className="p-5 hover:shadow-md transition-all border-blue-50">
-              <div className="flex items-start gap-4 text-right">
+          <div className="flex flex-col gap-6 justify-between text-right">
+            <CardWrapper className="p-5 hover:border-blue-200 transition-all duration-300">
+              <div className="flex items-start gap-4">
                 <MapPin className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-1 font-sans">כתובת</h3>
-                  <p className="text-gray-600 text-sm">בן שמן 6, תל אביב-יפו, 6744233</p>
+                  <h3 className="text-lg font-bold text-gray-900 mb-1">כתובת</h3>
+                  <p className="text-gray-600">בן שמן 6, תל אביב-יפו, 6744233</p>
                 </div>
               </div>
             </CardWrapper>
 
-            <CardWrapper className="p-5 hover:shadow-md transition-all border-blue-50">
-              <div className="flex items-start gap-4 text-right">
+            <CardWrapper className="p-5 hover:border-blue-200 transition-all duration-300">
+              <div className="flex items-start gap-4">
                 <Phone className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-1 font-sans">טלפון</h3>
+                  <h3 className="text-lg font-bold text-gray-900 mb-1">טלפון</h3>
                   <p className="text-gray-600 font-medium" dir="ltr">03-561-2165</p>
                 </div>
               </div>
             </CardWrapper>
 
-            <CardWrapper className="p-5 hover:shadow-md transition-all border-blue-50">
-              <div className="flex items-start gap-4 text-right">
+            <CardWrapper className="p-5 hover:border-blue-200 transition-all duration-300">
+              <div className="flex items-start gap-4">
                 <Clock className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-1 font-sans">שעות פעילות</h3>
-                  <p className="text-gray-600 font-medium tracking-wide">א' - ה': 07:00 - 15:00</p>
+                  <h3 className="text-lg font-bold text-gray-900 mb-1">שעות פעילות</h3>
+                  <p className="text-gray-600 font-medium">א' - ה': 07:00 - 15:00</p>
                 </div>
               </div>
             </CardWrapper>
             
             <a 
-              href="https://waze.com/ul?ll=32.071477,34.794446&navigate=yes" 
+              href="https://waze.com/ul?ll=32.075217,34.792226&navigate=yes" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full bg-[#33ccff] text-white font-bold py-4 rounded-2xl hover:bg-[#2dbbe9] transition-all shadow-lg hover:shadow-xl mt-4 font-sans"
+              className="flex items-center justify-center gap-2 w-full bg-[#33ccff] text-white font-bold py-4 rounded-2xl hover:bg-[#2dbbe9] transition-all shadow-lg mt-4"
             >
               ניווט ב-Waze
             </a>
           </div>
 
-          {/* מפת גוגל חיה - הפתרון הסופי עם הקוד המקורי שלך */}
+          {/* מפת גוגל חיה */}
           <div className="w-full h-full min-h-[400px] rounded-[2rem] overflow-hidden shadow-xl border-4 border-white relative">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d3381.112318464371!2d34.78923057580632!3d32.06611397396782!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4b967909388d%3A0xe10a6a383232!2zYmVuIHNoZW1lbiA2LCBUZWwgQXZpdi1ZYWZv!5e0!3m2!1sen!2sil!4v1700000000000!5m2!1sen!2sil3" 
+              src={mapUrl}
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
