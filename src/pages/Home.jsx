@@ -22,7 +22,8 @@ const LocalButton = ({ children, variant = "primary", className = "", size = "md
   const baseStyles = "inline-flex items-center justify-center font-semibold transition-all duration-200 rounded-lg";
   const variants = {
     primary: "bg-white text-blue-600 hover:bg-blue-50",
-    outline: "border-2 border-white text-white hover:bg-white/10"
+    outline: "border-2 border-white text-white hover:bg-white/10",
+    cta: "bg-blue-600 text-white hover:bg-blue-700" // הוספנו וריאנט כחול ייעודי
   };
   const sizes = {
     md: "px-6 py-3 text-base",
@@ -82,7 +83,6 @@ export default function Home() {
     }
   ];
 
-  // ביקורות אמת שדגמתי מהפרופיל של דפוס כתר יומטוב
   const googleReviews = [
     {
       name: "אילן ג.",
@@ -225,7 +225,6 @@ export default function Home() {
                   
                   {/* Verified Review Section */}
                   <div className="pt-4 border-t border-slate-50 flex items-center gap-2">
-                    {/* אייקון Google G וקטורי שאינו נשבר */}
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="16px" height="16px"><path fill="#fbc02d" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12s5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.954,4,4,12.954,4,24s8.954,20,20,20s20-8.954,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#e53935" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4caf50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1565c0" d="M43.611,20.083L43.611,20.083L42,20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571l6.19,5.238C40.486,35.703,44,30.261,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
                     <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Verified Review</span>
                   </div>
@@ -237,7 +236,7 @@ export default function Home() {
           
           <div className="mt-12 text-center">
              <a 
-               href="https://www.google.com/maps/place/%D7%93%D7%A4%D7%95%D7%A1+%D7%9B%D7%AA%D7%A8+%D7%91%D7%A2%22%D7%9E%E2%80%8E/@32.071477,34.794446,16z/data=!4m8!3m7!1s0x151d4b78ea6499c3:0xa8b8678aafa8d9b0!8m2!3d32.071477!4d34.794446!9m1!1b1!16s%2Fg%2F1td53x91?entry=ttu" 
+               href="https://www.google.com/maps/place" 
                target="_blank" 
                rel="noopener noreferrer"
                className="text-blue-600 font-bold hover:underline inline-flex items-center gap-2"
@@ -248,14 +247,14 @@ export default function Home() {
         </div>
       </section>
       
-      {/* CTA Section */}
+      {/* CTA Section - התיקון כאן */}
       <section className="bg-slate-900 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 font-sans">
             מוכנים להדפיס איתנו?
           </h2>
           <Link to="/Order">
-            <LocalButton size="lg" className="bg-blue-600 text-white hover:bg-blue-700 shadow-xl shadow-blue-900/20">
+            <LocalButton variant="cta" size="lg" className="shadow-xl shadow-blue-900/20">
               התחילו הזמנה עכשיו
             </LocalButton>
           </Link>
