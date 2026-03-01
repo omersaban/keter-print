@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from 'react';
 import { 
   MapPin, 
   Phone, 
@@ -12,17 +12,17 @@ import {
 } from "lucide-react";
 
 export default function About() {
+  // עדכון כותרת העמוד בלשונית הדפדפן
+  useEffect(() => {
+    document.title = "אודות";
+  }, []);
+
   // הגדרת עיצוב כרטיס מקומי כדי לעקוף בעיות ייבוא
   const CardWrapper = ({ children, className = "" }) => (
     <div className={`bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden ${className}`}>
       {children}
     </div>
   );
-  
-  export default function ArticlesPage() {
-  useEffect(() => {
-    document.title = "דפוס כתר - אודות";
-  }, []);
 
   const values = [
     {
