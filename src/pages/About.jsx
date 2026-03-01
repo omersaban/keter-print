@@ -200,7 +200,7 @@ export default function About() {
           {/* הטמעת מפת גוגל חיה - לינק מתוקן */}
           <div className="w-full h-full min-h-[400px] rounded-[2rem] overflow-hidden shadow-xl border-4 border-white relative">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d3380.9333!2d34.7922!3d32.0751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4b78ea1c99c3%3A0x00b8678abf51dab3!2z15HXny3Xqdec158gNiwg16rXnC3XkN5XmdeR!5e0!3m2!1siw!2sil!4v1700000000000!5m2!1siw!2sil"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3381.085816358896!2d34.79069507641044!3d32.07222302061917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4b834e555555%3A0x5555555555555555!2z157XnteV15DXqCDXn9ee15nXn9eQ!5e0!3m2!1siw!2sil!4v1700000000000!5m2!1siw!2sil"
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
@@ -210,7 +210,7 @@ export default function About() {
               title="מיקום דפוס כתר"
               className="grayscale-[20%] hover:grayscale-0 transition-all duration-700"
             ></iframe>
-          </div>
+         </div>
         </div>
       </section>
     </div>
