@@ -18,6 +18,11 @@ export default function About() {
       {children}
     </div>
   );
+  
+  export default function ArticlesPage() {
+  useEffect(() => {
+    document.title = "דפוס כתר - אודות";
+  }, []);
 
   const values = [
     {
