@@ -159,7 +159,7 @@ export default function About() {
                 <MapPin className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                 <div>
                   <h3 className="text-lg font-bold text-gray-900 mb-1 font-sans">כתובת</h3>
-                  <p className="text-gray-600">בן שמן 6, תל אביב-יפו, 6744233</p>
+                  <p className="text-gray-600 text-sm">בן שמן 6, תל אביב-יפו, 6744233</p>
                 </div>
               </div>
             </CardWrapper>
@@ -184,9 +184,8 @@ export default function About() {
               </div>
             </CardWrapper>
             
-            {/* כפתור Waze - מבוסס על המיקום המדויק */}
             <a 
-              href="https://waze.com/ul?q=דפוס כתר יומטוב" 
+              href="https://waze.com/ul?ll=32.071477,34.794446&navigate=yes" 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 w-full bg-[#33ccff] text-white font-bold py-4 rounded-2xl hover:bg-[#2dbbe9] transition-all shadow-lg hover:shadow-xl mt-4 font-sans"
@@ -195,10 +194,10 @@ export default function About() {
             </a>
           </div>
 
-          {/* מפת גוגל חיה - הפתרון הסופי ל-PIN באמצעות Place ID */}
+          {/* מפת גוגל חיה - הפתרון הסופי עם הקוד המקורי שלך */}
           <div className="w-full h-full min-h-[400px] rounded-[2rem] overflow-hidden shadow-xl border-4 border-white relative">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d3381.123456789!2d34.7944347!3d32.0751455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4b78ea86b8a1%3A0xa8b8678aafa8d9b0!2z15PXpdisINeb16rXqCDZmdeV157XmteV15Eg15HXoteUINun15HXmdeqIN5616rXqCDXp9eZ15LXmdeY15zXmSDXkdeq15wg15DXm9eZ15E!5e0!3m2!1shiw!2sil!4v1700000000000!5m2!1shiw!2sil"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d3381.112318464371!2d34.78923057580632!3d32.06611397396782!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4b967909388d%3A0xe10a6a383232!2zYmVuIHNoZW1lbiA2LCBUZWwgQXZpdi1ZYWZv!5e0!3m2!1sen!2sil!4v1700000000000!5m2!1sen!2sil3" 
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
@@ -206,7 +205,7 @@ export default function About() {
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
               title="מיקום דפוס כתר יומטוב"
-              className="grayscale-[5%] hover:grayscale-0 transition-all duration-700"
+              className="grayscale-[10%] hover:grayscale-0 transition-all duration-700"
             ></iframe>
           </div>
         </div>
