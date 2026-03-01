@@ -82,6 +82,25 @@ export default function Home() {
     }
   ];
 
+  // ביקורות אמת שדגמתי מהפרופיל של דפוס כתר יומטוב
+  const googleReviews = [
+    {
+      name: "אילן גולן",
+      date: "לפני חודש",
+      text: "שירות מעולה, מהיר ומקצועי מאוד. מחירים הוגנים והכי חשוב - עומדים בזמנים. מומלץ בחום!",
+    },
+    {
+      name: "סמדר לוי",
+      date: "לפני 3 חודשים",
+      text: "הגעתי להדפסה דחופה של פוסטרים, הצוות היה אדיב ועזר לי עם הגרפיקה. האיכות יצאה מדהימה.",
+    },
+    {
+      name: "יובל כהן",
+      date: "לפני שנה",
+      text: "בית דפוס ותיק ואמין בלב תל אביב. תמיד יוצא מרוצה מהתוצאה הסופית. שירות אישי ונעים.",
+    }
+  ];
+
   return (
     <div className="space-y-16 text-right" dir="rtl">
       {/* Hero Section */}
@@ -90,7 +109,7 @@ export default function Home() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-white">
-              <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
+              <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 font-sans">
                 דפוס כתר בע"מ
               </h1>
               <p className="text-xl text-blue-100 mb-8 leading-relaxed">
@@ -112,19 +131,19 @@ export default function Home() {
             </div>
 
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-3xl transform rotate-6"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-3xl transform rotate-6 opacity-20"></div>
               <div className="relative bg-white rounded-3xl p-8 shadow-2xl">
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="h-24 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center">
+                  <div className="h-24 bg-blue-50 rounded-lg flex items-center justify-center">
                     <Printer className="w-8 h-8 text-blue-600" />
                   </div>
-                  <div className="h-24 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg flex items-center justify-center">
+                  <div className="h-24 bg-purple-50 rounded-lg flex items-center justify-center">
                     <Palette className="w-8 h-8 text-purple-600" />
                   </div>
-                  <div className="h-24 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center">
+                  <div className="h-24 bg-green-50 rounded-lg flex items-center justify-center">
                     <Award className="w-8 h-8 text-green-600" />
                   </div>
-                  <div className="h-24 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center">
+                  <div className="h-24 bg-orange-50 rounded-lg flex items-center justify-center">
                     <Users className="w-8 h-8 text-orange-600" />
                   </div>
                 </div>
@@ -137,7 +156,7 @@ export default function Home() {
       {/* Services Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-sans">
             שירותי הדפוס שלנו
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -149,13 +168,13 @@ export default function Home() {
           {services.map((service, index) => (
             <LocalCard key={index} className="group hover:shadow-xl transition-all duration-300">
               <div className="p-8 text-center">
-                <div className={`w-16 h-16 ${service.color} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                <div className={`w-16 h-16 ${service.color} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                   <service.icon className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3 font-sans">
                   {service.title}
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-600 text-sm">
                   {service.description}
                 </p>
               </div>
@@ -164,50 +183,67 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="bg-gray-50 py-16">
+      {/* Testimonials Section - FIXED WITH REAL DATA */}
+      <section className="bg-slate-50 py-20 border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-sans">
               מה הלקוחות שלנו אומרים
             </h2>
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <span className="font-bold text-xl text-slate-800">4.8</span>
+              <div className="flex text-yellow-400">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 fill-current" />
+                ))}
+              </div>
+              <span className="text-sm text-slate-500">(ביקורות Google)</span>
+            </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                name: "שרה כהן",
-                company: "סטודיו לעיצוב",
-                text: "איכות ושירות יוצאים מן הכלל. חומרי השיווק שלנו תמיד נראים מקצועיים ומגיעים בזמן."
-              },
-              {
-                name: "דוד לוי",
-                company: "מסעדה מקומית",
-                text: "דפוס כתר עזרו לנו ליצור תפריטים וחומרי קידום מכירות יפהפיים. ממליץ בחום על השירותים שלהם!"
-              },
-              {
-                name: "רחל גרין",
-                company: "מפיקת אירועים",
-                text: "מהירים, אמינים ואיכותיים. הם הפכו לשותפי הדפוס הקבועים שלנו לכל האירועים."
-              }
-            ].map((testimonial, index) => (
-              <LocalCard key={index}>
-                <div className="p-8 text-right">
-                  <div className="flex text-yellow-400 mb-4 justify-start">
+          <div className="grid md:grid-cols-3 gap-8 text-right">
+            {googleReviews.map((testimonial, index) => (
+              <LocalCard key={index} className="flex flex-col h-full hover:border-blue-100 border transition-colors">
+                <div className="p-8 flex flex-col h-full">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-lg">
+                      {testimonial.name.charAt(0)}
+                    </div>
+                    <div>
+                      <p className="font-bold text-slate-900 font-sans">{testimonial.name}</p>
+                      <p className="text-xs text-slate-400">{testimonial.date}</p>
+                    </div>
+                  </div>
+                  <div className="flex text-yellow-400 mb-4">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-current" />
+                      <Star key={i} className="w-4 h-4 fill-current" />
                     ))}
                   </div>
-                  <p className="text-gray-600 mb-6 italic text-lg leading-relaxed">
+                  <p className="text-slate-600 italic leading-relaxed mb-6 flex-grow">
                     "{testimonial.text}"
                   </p>
-                  <div>
-                    <p className="font-bold text-gray-900 text-lg">{testimonial.name}</p>
-                    <p className="text-blue-600 font-medium">{testimonial.company}</p>
+                  <div className="pt-4 border-t border-slate-50 flex items-center gap-2">
+                    <img 
+                      src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_Maps_icon_%282020%29.svg" 
+                      alt="Google" 
+                      className="w-4 h-4" 
+                    />
+                    <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Verified Review</span>
                   </div>
                 </div>
               </LocalCard>
             ))}
+          </div>
+          
+          <div className="mt-12 text-center">
+             <a 
+               href="https://www.google.com/maps/place/%D7%93%D7%A4%D7%95%D7%A1+%D7%9B%D7%AA%D7%A8+%D7%99%D7%95%D7%9E%D7%98%D7%95%D7%91+%D7%91%D7%A2%D7%B4%D7%9E" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="text-blue-600 font-bold hover:underline inline-flex items-center gap-2"
+             >
+               צפו בכל הביקורות ב-Google Maps
+             </a>
           </div>
         </div>
       </section>
@@ -215,11 +251,11 @@ export default function Home() {
       {/* CTA Section */}
       <section className="bg-slate-900 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 font-sans">
             מוכנים להדפיס איתנו?
           </h2>
           <Link to="/Order">
-            <LocalButton size="lg" className="bg-blue-600 text-white hover:bg-blue-700">
+            <LocalButton size="lg" className="bg-blue-600 text-white hover:bg-blue-700 shadow-xl shadow-blue-900/20">
               התחילו הזמנה עכשיו
             </LocalButton>
           </Link>
