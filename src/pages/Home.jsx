@@ -237,7 +237,7 @@ export default function Home() {
           
           <div className="mt-12 text-center">
              <a 
-               href="google.com/maps/place/דפוס+כתר+יומטוב+בע״מ+%7C+בית+דפוס+בתל+אביב+%7C+דפוס+דיגיטלי+בתל+אביב%E2%80%AD/@32.0753121,34.7946897,20.29z/data=!4m6!3m5!1s0x151d4b78ea1c99c3:0xb8678aafd1dab0!8m2!3d32.0751455!4d34.7944347!16s%2Fg%2F1td3bsgs?entry=tts&g_ep=EgoyMDI2MDIyNS4wIPu8ASoASAFQAw%3D%3D&skid=cfe680ad-38c9-400b-bbf5-06777e42ab40" 
+               href="https://maps.app.goo.gl/XN7RpXoznEMYZroz9" 
                target="_blank" 
                rel="noopener noreferrer"
                className="text-blue-600 font-bold hover:underline inline-flex items-center gap-2"
