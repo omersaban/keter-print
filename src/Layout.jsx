@@ -105,11 +105,13 @@ export default function Layout({ children }) {
                 </li>
                 <li className="flex items-center space-x-reverse space-x-3">
                   <Phone className="w-4 h-4 text-blue-500" />
-                  <span>03-555-0123</span>
+                  <span>03-561-2165</span>
                 </li>
                 <li className="flex items-center space-x-reverse space-x-3">
                   <Mail className="w-4 h-4 text-blue-500" />
-                  <span>keter-ta@zahav.net.il</span>
+                  <a href="mailto:keter-ta@zahav.net.il" className="hover:text-blue-400 transition-colors">
+                    keter-ta@zahav.net.il
+                  </a>
                 </li>
                 {/* הקישור להצהרת נגישות */}
                 <li className="flex items-center space-x-reverse space-x-3 pt-2">
