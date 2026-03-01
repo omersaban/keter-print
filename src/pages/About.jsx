@@ -153,6 +153,7 @@ export default function About() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-stretch">
+          
           <div className="flex flex-col gap-6 justify-between">
             <CardWrapper className="p-5 hover:shadow-md transition-all border-blue-50">
               <div className="flex items-start gap-4 text-right">
@@ -185,7 +186,7 @@ export default function About() {
             </CardWrapper>
             
             <a 
-              href="https://waze.com/ul?ll=32.07222,34.79167&navigate=yes" 
+              href="https://waze.com/ul?ll=32.075146,34.794435&navigate=yes" 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 w-full bg-[#33ccff] text-white font-bold py-4 rounded-2xl hover:bg-[#2dbbe9] transition-all shadow-lg hover:shadow-xl mt-4"
@@ -194,16 +195,17 @@ export default function About() {
             </a>
           </div>
 
+          {/* הטמעת מפת גוגל חיה - כולל ה-Pin המדויק של דפוס כתר יומטוב */}
           <div className="w-full h-full min-h-[400px] rounded-[2rem] overflow-hidden shadow-xl border-4 border-white relative">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3380.954844358535!2d34.792070075345714!3d32.07054997396656!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4b78ead999c3%3A0x0b8a678aafd1dacd!2z15PXpNeoINeb16rXqCDZmdeV157XmNeV15Eg15HXoteUINm_150!5e0!3m2!1siw!2sil!4v1714565678901!5m2!1siw!2sil"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3381.01186716949!2d34.792246076352934!3d32.07222442013146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4b78ea1c99c3%3A0xa8b8678aafa8d9b0!2zZHB1cyBrZXRlciB5b210b3Y!5e0!3m2!1siw!2sil!4v1714560000000!5m2!1siw!2sil"
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
               allowFullScreen="" 
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
-              title="מיקום דפוס כתר"
+              title="מיקום דפוס כתר יומטוב"
               className="grayscale-[15%] hover:grayscale-0 transition-all duration-700"
             ></iframe>
           </div>
