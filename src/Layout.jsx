@@ -57,7 +57,7 @@ export default function Layout({ children }) {
             <div className="hidden md:flex items-center space-x-reverse space-x-3">
               <a href="tel:03-555-0123" className={ghostBtn}>
                 <Phone className="w-4 h-4 ml-2" />
-                03-555-0123
+                03-561-2165
               </a>
               <Link to="/Order" className={primaryBtn}>
                 <CloudUpload className="w-4 h-4 ml-2" />
@@ -111,7 +111,7 @@ export default function Layout({ children }) {
                   <Mail className="w-4 h-4 text-blue-500" />
                   <span>keter-ta@zahav.net.il</span>
                 </li>
-                {/* הקישור החדש להצהרת נגישות */}
+                {/* הקישור להצהרת נגישות */}
                 <li className="flex items-center space-x-reverse space-x-3 pt-2">
                   <ShieldCheck className="w-4 h-4 text-green-500" />
                   <Link to="/AccessibilityStatement" className="text-blue-400 hover:underline font-bold">
@@ -127,7 +127,7 @@ export default function Layout({ children }) {
               <div className="flex items-start space-x-reverse space-x-3 text-slate-400 text-sm">
                 <Clock className="w-4 h-4 text-blue-500 mt-0.5" />
                 <div>
-                  <p>ראשון - חמישי: 07:00 - 17:00</p>
+                  <p>ראשון - חמישי: 07:00 - 15:00</p>
                   <p className="mt-1">שישי ושבת: סגור</p>
                 </div>
               </div>
@@ -137,8 +137,8 @@ export default function Layout({ children }) {
           <div className="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-slate-500 text-xs gap-4">
             <p>&copy; {new Date().getFullYear()} דפוס כתר בע"מ. כל הזכויות שמורות.</p>
             <div className="flex space-x-reverse space-x-6">
-              <span>איכות ללא פשרות</span>
-              <span>שירות מהיר</span>
+              <span></span>
+              <span></span>
             </div>
           </div>
         </div>
