@@ -6,7 +6,6 @@ import {
   Clock, 
   Award, 
   Users,
-  CheckCircle,
   History,
   Target
 } from "lucide-react";
@@ -45,15 +44,6 @@ export default function About() {
       title: "מחירים תחרותיים",
       description: "דפוס איכותי לא חייב להיות יקר. אנו מציעים מחירים תחרותיים מבלי להתפשר על האיכות."
     }
-  ];
-
-  const capabilities = [
-    "דפוס דיגיטלי ואופסט",
-    "הדפסה בפורמט רחב",
-    "שירותי עיצוב גרפי",
-    "גימורים וכריכה",
-    "הזמנות דחופות",
-    "שירות משלוחים"
   ];
 
   return (
@@ -119,7 +109,7 @@ export default function About() {
           <div className="relative">
             <img 
               src="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=600&h=400&fit=crop" 
-              alt="Printing process"
+              alt="תהליך הדפסה"
               className="w-full h-80 object-cover rounded-3xl shadow-xl"
             />
           </div>
@@ -156,50 +146,68 @@ export default function About() {
         </div>
       </section>
 
-      {/* Contact Information */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      {/* Contact Information & Google Maps */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">בואו לבקר אותנו</h2>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          <div className="space-y-6">
-            <CardWrapper className="p-6">
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
+          <div className="space-y-4 text-right">
+            <CardWrapper className="p-4 hover:border-blue-200 transition-all duration-300">
               <div className="flex items-start gap-4">
-                <MapPin className="w-6 h-6 text-blue-600 mt-1" />
+                <MapPin className="w-5 h-5 text-blue-600 mt-1" />
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-1">כתובת</h3>
-                  <p className="text-gray-600">בן שמן 6, תל-אביב (ליד עזריאלי)</p>
+                  <h3 className="text-base font-bold text-gray-900 mb-0.5">כתובת</h3>
+                  <p className="text-gray-600 text-sm">בן שמן 6, תל-אביב (ליד עזריאלי)</p>
                 </div>
               </div>
             </CardWrapper>
 
-            <CardWrapper className="p-6">
+            <CardWrapper className="p-4 hover:border-blue-200 transition-all duration-300">
               <div className="flex items-start gap-4">
-                <Phone className="w-6 h-6 text-blue-600 mt-1" />
+                <Phone className="w-5 h-5 text-blue-600 mt-1" />
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-1">טלפון</h3>
-                  <p className="text-gray-600" dir="ltr">03-555-0123</p>
+                  <h3 className="text-base font-bold text-gray-900 mb-0.5">טלפון</h3>
+                  <p className="text-gray-600 text-sm" dir="ltr">03-555-0123</p>
                 </div>
               </div>
             </CardWrapper>
 
-            <CardWrapper className="p-6">
+            <CardWrapper className="p-4 hover:border-blue-200 transition-all duration-300">
               <div className="flex items-start gap-4">
-                <Clock className="w-6 h-6 text-blue-600 mt-1" />
+                <Clock className="w-5 h-5 text-blue-600 mt-1" />
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-1">שעות פעילות</h3>
-                  <p className="text-gray-600">א' - ה': 07:00 - 17:00</p>
+                  <h3 className="text-base font-bold text-gray-900 mb-0.5">שעות פעילות</h3>
+                  <p className="text-gray-600 text-sm">א' - ה': 07:00 - 17:00</p>
                 </div>
               </div>
             </CardWrapper>
+            
+            {/* כפתור ניווט Waze */}
+            <a 
+              href="https://waze.com/ul?ll=32.07222,34.79167&navigate=yes" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 w-full bg-[#33ccff] text-white font-bold py-3 rounded-xl hover:bg-[#2dbbe9] transition-colors shadow-sm mt-2"
+            >
+              ניווט ב-Waze
+            </a>
           </div>
 
-          <div className="h-80 bg-gray-100 rounded-3xl flex items-center justify-center border border-dashed border-gray-300">
-             <div className="text-center text-gray-400">
-                <MapPin className="w-12 h-12 mx-auto mb-2 opacity-20" />
-                <p>מפת הגעה - בן שמן 6, תל אביב</p>
-             </div>
+          {/* מפת גוגל חיה */}
+          <div className="w-full h-[320px] rounded-3xl overflow-hidden shadow-inner border border-gray-200 group relative">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d3380.8968!2d34.79167!3d32.07222!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4b998782a937%3A0x673c66f7f21f7d5c!2sBen+Shemen+St+6%2C+Tel+Aviv-Yafo!5e0!3m2!1sen!2sil!4v1700000000000"
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen="" 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              title="מיקום דפוס כתר"
+              className="grayscale-[20%] group-hover:grayscale-0 transition-all duration-500"
+            ></iframe>
           </div>
         </div>
       </section>
