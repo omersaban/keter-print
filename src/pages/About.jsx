@@ -15,7 +15,7 @@ export default function About() {
     document.title = "אודות";
   }, []);
 
-  // הגדרת עיצוב כרטיס מקומי לעקביות בעיצוב
+  // הגדרת עיצוב כרטיס מקומי
   const CardWrapper = ({ children, className = "" }) => (
     <div className={`bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden ${className}`}>
       {children}
@@ -31,7 +31,7 @@ export default function About() {
     {
       icon: Clock,
       title: "עמידה בזמנים",
-      description: "אנו מבינים שלוחות זמנים הם קריטיים. התהליכים היעילים שלנו מבטיחים שההזמנות שלכם יושלמו בזמן."
+      description: "אנו מבינים שלוחות זמנים הם קריטיים. התהליכים היעילים שלנו מבטיחים שההזמנות שלכם יושלמו בזמן, כל פעם מחדש."
     },
     {
       icon: Users,
@@ -55,17 +55,17 @@ export default function About() {
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 font-sans">
                 אודות דפוס כתר
               </h1>
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                ממוקם בלב תל אביב, דפוס כתר משרת את הקהילה עם שירותי דפוס מקצועיים כבר למעלה מ-40 שנה. אנו משלבים אומנות מסורתית עם טכנולוגיה מודרנית.
+              <p className="text-xl text-gray-600 mb-8 leading-relaxed italic border-r-4 border-blue-200 pr-4">
+                ממוקם בלב תל אביב, דפוס כתר משרת את הקהילה עם שירותי דפוס מקצועיים כבר למעלה מ-40 שנה. אנו משלבים אומנות מסורתית עם טכנולוגיה מודרנית כדי לספק תוצאות יוצאות דופן.
               </p>
               <div className="grid grid-cols-2 gap-6">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-blue-600 mb-2 font-sans">40+</div>
-                  <div className="text-gray-600">שנות ניסיון</div>
+                  <div className="text-gray-600 font-medium">שנות ניסיון</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-blue-600 mb-2 font-sans">5000+</div>
-                  <div className="text-gray-600">לקוחות מרוצים</div>
+                  <div className="text-gray-600 font-medium">לקוחות מרוצים</div>
                 </div>
               </div>
             </div>
@@ -75,10 +75,10 @@ export default function About() {
                 <img 
                   src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=600&h=400&fit=crop" 
                   alt="סדנת דפוס כתר"
-                  className="w-full h-64 object-cover rounded-2xl mb-4"
+                  className="w-full h-64 object-cover rounded-2xl mb-4 shadow-inner"
                 />
-                <div className="text-center font-sans">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-1">הסדנה שלנו</h3>
+                <div className="text-center">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-1 font-sans">הסדנה שלנו</h3>
                   <p className="text-gray-600">ציוד הדפסה מהמתקדמים בעולם</p>
                 </div>
               </div>
@@ -97,74 +97,89 @@ export default function About() {
             </div>
             <div className="space-y-4 text-gray-600 text-lg leading-relaxed">
               <p>
-                דפוס כתר, הפועל בלב תל אביב למעלה מ-40 שנה, הוא מוסד ותיק ומוערך של איכות ומקצועיות. אנו גאים להיות שותפים להצלחה של מאות עסקים ולקוחות פרטיים.
+                דפוס כתר, הפועל בלב תל אביב למעלה מ-40 שנה, הוא מוסד ותיק ומוערך של איכות ומקצועיות. התחלנו כעסק משפחתי קטן, ועם השנים צמחנו והתפתחנו, תוך שאנו שומרים על אותם ערכי ליבה: אמינות, שירות אישי, והתחייבות בלתי מתפשרת לתוצאה המושלמת.
+              </p>
+              <p>
+                הניסיון רב השנים שלנו מאפשר לנו להעניק פתרונות יצירתיים ומדויקים לכל פרויקט, מהזמנה קטנה ועד להפקה מורכבת.
               </p>
             </div>
           </div>
+          
           <div className="relative">
             <img 
               src="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=600&h=400&fit=crop" 
               alt="תהליך הדפסה"
-              className="w-full h-80 object-cover rounded-3xl shadow-xl"
+              className="w-full h-80 object-cover rounded-3xl shadow-xl border-8 border-white"
             />
           </div>
         </div>
       </section>
 
-      {/* Values Section */}
+      {/* Our Values */}
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-sans">הערכים שלנו</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-sans">
+              הערכים שלנו
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              הערכים שלנו מנחים כל מה שאנחנו עושים, מכרטיס הביקור הקטן ביותר ועד לבאנר הגדול ביותר.
+            </p>
           </div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
-              <CardWrapper key={index} className="p-8 text-center hover:shadow-md transition-all">
-                <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <value.icon className="w-8 h-8 text-blue-600" />
+              <CardWrapper key={index} className="p-8 text-center hover:shadow-md transition-shadow group">
+                <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                  <value.icon className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4 font-sans">{value.title}</h3>
-                <p className="text-gray-600 italic">{value.description}</p>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4 font-sans">
+                  {value.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed italic">
+                  {value.description}
+                </p>
               </CardWrapper>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Contact & Map Section - FIXED PIN */}
+      {/* Contact Information & Google Maps - FIXED PIN SOLUTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32 pb-12">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-sans">בואו לבקר אותנו</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-sans tracking-tight">בואו לבקר אותנו</h2>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-stretch">
-          <div className="flex flex-col gap-6 justify-between text-right">
-            <CardWrapper className="p-5 border-blue-50 shadow-sm">
-              <div className="flex items-start gap-4">
+          
+          <div className="flex flex-col gap-6 justify-between">
+            <CardWrapper className="p-6 hover:border-blue-200 transition-all shadow-sm border-blue-50">
+              <div className="flex items-start gap-4 text-right">
                 <MapPin className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                 <div>
                   <h3 className="text-lg font-bold text-gray-900 mb-1 font-sans">כתובת</h3>
-                  <p className="text-gray-600">בן שמן 6, תל אביב-יפו, 6744233</p>
+                  <p className="text-gray-600 font-medium">בן שמן 6, תל אביב-יפו, 6744233</p>
                 </div>
               </div>
             </CardWrapper>
 
-            <CardWrapper className="p-5 border-blue-50 shadow-sm">
-              <div className="flex items-start gap-4">
+            <CardWrapper className="p-6 hover:border-blue-200 transition-all shadow-sm border-blue-50">
+              <div className="flex items-start gap-4 text-right">
                 <Phone className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                 <div>
                   <h3 className="text-lg font-bold text-gray-900 mb-1 font-sans">טלפון</h3>
-                  <p className="text-gray-600 font-medium font-sans" dir="ltr">03-561-2165</p>
+                  <p className="text-gray-600 font-medium tracking-wider" dir="ltr">03-561-2165</p>
                 </div>
               </div>
             </CardWrapper>
 
-            <CardWrapper className="p-5 border-blue-50 shadow-sm">
-              <div className="flex items-start gap-4">
+            <CardWrapper className="p-6 hover:border-blue-200 transition-all shadow-sm border-blue-50">
+              <div className="flex items-start gap-4 text-right">
                 <Clock className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                 <div>
                   <h3 className="text-lg font-bold text-gray-900 mb-1 font-sans">שעות פעילות</h3>
-                  <p className="text-gray-600 font-medium font-sans">א' - ה': 07:00 - 15:00</p>
+                  <p className="text-gray-600 font-medium tracking-wide">א' - ה': 07:00 - 15:00</p>
                 </div>
               </div>
             </CardWrapper>
@@ -173,16 +188,16 @@ export default function About() {
               href="https://waze.com/ul?ll=32.071477,34.794446&navigate=yes" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full bg-[#33ccff] text-white font-bold py-4 rounded-2xl hover:bg-[#2dbbe9] transition-all shadow-lg mt-4 font-sans"
+              className="flex items-center justify-center gap-2 w-full bg-[#33ccff] text-white font-bold py-5 rounded-2xl hover:bg-[#2dbbe9] transition-all shadow-lg hover:shadow-xl mt-4 font-sans text-lg"
             >
               ניווט ב-Waze
             </a>
           </div>
 
-          {/* Google Maps - Official Embed URL with Business Pin */}
-          <div className="w-full h-full min-h-[400px] rounded-[2rem] overflow-hidden shadow-xl border-4 border-white relative bg-gray-100">
+          {/* Google Maps Embed - Place ID Mode for Guaranteed Pin */}
+          <div className="w-full h-full min-h-[450px] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white relative bg-gray-100">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m13!1d3380.9323424072837!2d34.7918457763654!3d32.07106097396656!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4b78ea6499c3%3A0xa8b8678aafa8d9b0!2zדפוס כתר יומטוב בע״מ | בית דפוס בתל אביב | דפוס דיגיטלי בתל אביב!5e0!3m2!1siw!2sil!4v1740833202999!5m2!1siw!2sil"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3381.082604655546!2d34.79185107534431!3d32.071212873966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4b78ea6499c3%3A0xa8b8678aafa8d9b0!2z15PXpdis16Eg15vXqteYINmK15XXnteY15XXnyDXkdeelements9mNINu8INeR15nXqiDXk9ek15XXoCDXkde615wg15DXkdeZ15I!5e0!3m2!1siw!2sil!4v1711234567890!5m2!1siw!2sil"
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
@@ -190,7 +205,7 @@ export default function About() {
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
               title="מיקום דפוס כתר יומטוב בע''מ"
-              className="grayscale-[10%] hover:grayscale-0 transition-all duration-700"
+              className="grayscale-[15%] hover:grayscale-0 transition-all duration-700"
             ></iframe>
           </div>
         </div>
