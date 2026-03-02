@@ -5,52 +5,44 @@ module.exports = {
   theme: {
   	extend: {
   		borderRadius: {
-  			lg: '0.75rem', // עיגול פינות עדין ומדויק בסגנון אפל
-  			md: 'calc(0.75rem - 2px)',
-  			sm: 'calc(0.75rem - 4px)'
+  			lg: 'var(--radius)',
+  			md: 'calc(var(--radius) - 2px)',
+  			sm: 'calc(var(--radius) - 4px)'
   		},
   		colors: {
-            // פלטת הצבעים הייעודית של Apple
-            apple: {
-                black: '#1d1d1f',    // הטקסט הכהה והיוקרתי
-                gray: '#86868b',     // טקסט משני ותיאורים
-                bg: '#f5f5f7',       // רקע בהיר "אלומיניום"
-                blue: '#0066cc',     // כחול מערכת iOS/macOS
-                silver: '#e8e8ed',   // גבולות ודיביידרים עדינים
-            },
-  			background: '#f5f5f7',   // עדכון הרקע הכללי ללבן-אפל
-  			foreground: '#1d1d1f',   // עדכון הטקסט הכללי לשחור-אפל
+  			background: 'hsl(var(--background))',
+  			foreground: 'hsl(var(--foreground))',
   			card: {
-  				DEFAULT: '#ffffff',
-  				foreground: '#1d1d1f'
+  				DEFAULT: 'hsl(var(--card))',
+  				foreground: 'hsl(var(--card-foreground))'
   			},
   			popover: {
-  				DEFAULT: '#ffffff',
-  				foreground: '#1d1d1f'
+  				DEFAULT: 'hsl(var(--popover))',
+  				foreground: 'hsl(var(--popover-foreground))'
   			},
   			primary: {
-  				DEFAULT: '#0066cc',  // הכחול המדויק של אפל
-  				foreground: '#ffffff'
+  				DEFAULT: 'hsl(var(--primary))',
+  				foreground: 'hsl(var(--primary-foreground))'
   			},
   			secondary: {
-  				DEFAULT: '#f5f5f7',
-  				foreground: '#1d1d1f'
+  				DEFAULT: 'hsl(var(--secondary))',
+  				foreground: 'hsl(var(--secondary-foreground))'
   			},
   			muted: {
-  				DEFAULT: '#86868b',
-  				foreground: '#f5f5f7'
+  				DEFAULT: 'hsl(var(--muted))',
+  				foreground: 'hsl(var(--muted-foreground))'
   			},
   			accent: {
-  				DEFAULT: '#e8e8ed',
-  				foreground: '#1d1d1f'
+  				DEFAULT: 'hsl(var(--accent))',
+  				foreground: 'hsl(var(--accent-foreground))'
   			},
   			destructive: {
   				DEFAULT: 'hsl(var(--destructive))',
   				foreground: 'hsl(var(--destructive-foreground))'
   			},
-  			border: '#e8e8ed',
-  			input: '#e8e8ed',
-  			ring: '#0066cc',
+  			border: 'hsl(var(--border))',
+  			input: 'hsl(var(--input))',
+  			ring: 'hsl(var(--ring))',
   			chart: {
   				'1': 'hsl(var(--chart-1))',
   				'2': 'hsl(var(--chart-2))',
