@@ -11,9 +11,9 @@ import {
   Star
 } from "lucide-react";
 
-// רכיבי עזר מקומיים - פאלטת Midnight & Gold
+// רכיבי עזר מקומיים - פאלטת Ink & Cyan
 const LocalCard = ({ children, className = "" }) => (
-  <div className={`bg-white rounded-2xl shadow-lg border-0 overflow-hidden ${className}`}>
+  <div className={`bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden ${className}`}>
     {children}
   </div>
 );
@@ -21,9 +21,9 @@ const LocalCard = ({ children, className = "" }) => (
 const LocalButton = ({ children, variant = "primary", className = "", size = "md" }) => {
   const baseStyles = "inline-flex items-center justify-center font-semibold transition-all duration-200 rounded-lg";
   const variants = {
-    primary: "bg-[#C5A059] text-white hover:bg-[#b08e4d]", 
+    primary: "bg-[#06B6D4] text-white hover:bg-[#0891B2]", // Cyan
     outline: "border-2 border-white text-white hover:bg-white/10",
-    cta: "bg-[#C5A059] text-white hover:bg-[#b08e4d]" 
+    cta: "bg-[#06B6D4] text-white hover:bg-[#0891B2]" // Cyan
   };
   const sizes = {
     md: "px-6 py-3 text-base",
@@ -43,25 +43,25 @@ export default function Home() {
       icon: Printer,
       title: "ברושורים ופליירים",
       description: "חומרי שיווק איכותיים שיוצרים רושם",
-      color: "bg-[#0F172A]"
+      color: "bg-[#1E1B4B]" // Indigo
     },
     {
       icon: Palette,
       title: "כרטיסי ביקור",
       description: "כרטיסים מקצועיים שמייצגים את המותג שלך",
-      color: "bg-[#1E293B]"
+      color: "bg-[#64748B]" // Steel Gray
     },
     {
       icon: Award,
       title: "באנרים ורול-אפים",
       description: "תצוגות מרשימות לאירועים וקידום מכירות",
-      color: "bg-[#C5A059]"
+      color: "bg-[#06B6D4]" // Cyan
     },
     {
       icon: Users,
       title: "לוחות שנה ופוסטרים",
       description: "עיצובים מותאמים אישית לעסקים ולפרטיים",
-      color: "bg-[#0F172A]"
+      color: "bg-[#1E1B4B]"
     }
   ];
 
@@ -86,7 +86,7 @@ export default function Home() {
   return (
     <div className="space-y-16 text-right" dir="rtl">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0F172A]">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#1E1B4B] via-[#2D2A5A] to-[#1E1B4B]">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -94,7 +94,7 @@ export default function Home() {
               <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 font-sans">
                 דפוס כתר בע"מ
               </h1>
-              <p className="text-xl text-slate-100 mb-8 leading-relaxed">
+              <p className="text-xl text-slate-200 mb-8 leading-relaxed">
                 מכרטיסי ביקור ועד באנרים ענקיים, אנו מספקים הדפסות באיכות יוצאת דופן ובזמני אספקה מהירים. החזון שלכם, מודפס באופן מושלם.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -113,20 +113,20 @@ export default function Home() {
             </div>
 
             <div className="relative">
-              <div className="absolute inset-0 bg-[#C5A059] rounded-3xl transform rotate-6 opacity-20"></div>
+              <div className="absolute inset-0 bg-[#06B6D4] rounded-3xl transform rotate-6 opacity-20"></div>
               <div className="relative bg-white rounded-3xl p-8 shadow-2xl">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="h-24 bg-slate-50 rounded-lg flex items-center justify-center">
-                    <Printer className="w-8 h-8 text-[#0F172A]" />
+                    <Printer className="w-8 h-8 text-[#1E1B4B]" />
                   </div>
                   <div className="h-24 bg-slate-50 rounded-lg flex items-center justify-center">
-                    <Palette className="w-8 h-8 text-[#C5A059]" />
+                    <Palette className="w-8 h-8 text-[#06B6D4]" />
                   </div>
                   <div className="h-24 bg-slate-50 rounded-lg flex items-center justify-center">
-                    <Award className="w-8 h-8 text-[#C5A059]" />
+                    <Award className="w-8 h-8 text-[#06B6D4]" />
                   </div>
                   <div className="h-24 bg-slate-50 rounded-lg flex items-center justify-center">
-                    <Users className="w-8 h-8 text-[#0F172A]" />
+                    <Users className="w-8 h-8 text-[#1E1B4B]" />
                   </div>
                 </div>
               </div>
@@ -138,10 +138,10 @@ export default function Home() {
       {/* Services Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#0F172A] mb-4 font-sans">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#1E1B4B] mb-4 font-sans">
             שירותי הדפוס שלנו
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-[#64748B] max-w-3xl mx-auto">
             פתרונות הדפסה מקצועיים לכל הצרכים העסקיים והאישיים שלכם
           </p>
         </div>
@@ -153,10 +153,10 @@ export default function Home() {
                 <div className={`w-16 h-16 ${service.color} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                   <service.icon className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold text-[#0F172A] mb-3 font-sans">
+                <h3 className="text-xl font-semibold text-[#1E1B4B] mb-3 font-sans">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 text-sm">
+                <p className="text-[#64748B] text-sm">
                   {service.description}
                 </p>
               </div>
@@ -169,12 +169,12 @@ export default function Home() {
       <section className="bg-slate-50 py-20 border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#0F172A] mb-4 font-sans">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1E1B4B] mb-4 font-sans">
               מה הלקוחות שלנו אומרים
             </h2>
             <div className="flex items-center justify-center gap-2 mb-4">
-              <span className="font-bold text-xl text-[#0F172A]">4.9</span>
-              <div className="flex text-[#C5A059]">
+              <span className="font-bold text-xl text-[#1E1B4B]">4.9</span>
+              <div className="flex text-[#06B6D4]">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-5 h-5 fill-current" />
                 ))}
@@ -185,10 +185,10 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-8 text-right">
             {googleReviews.map((testimonial, index) => (
-              <LocalCard key={index} className="flex flex-col h-full hover:border-[#C5A059] border transition-colors">
+              <LocalCard key={index} className="flex flex-col h-full hover:border-[#06B6D4] border transition-colors">
                 <div className="p-8 flex flex-col h-full">
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 bg-[#0F172A] rounded-full flex items-center justify-center text-[#C5A059] font-bold text-lg">
+                    <div className="w-12 h-12 bg-[#1E1B4B] rounded-full flex items-center justify-center text-[#06B6D4] font-bold text-lg">
                       {testimonial.name.charAt(0)}
                     </div>
                     <div>
@@ -196,7 +196,7 @@ export default function Home() {
                       <p className="text-xs text-slate-400">{testimonial.date}</p>
                     </div>
                   </div>
-                  <div className="flex text-[#C5A059] mb-4">
+                  <div className="flex text-[#06B6D4] mb-4">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="w-4 h-4 fill-current" />
                     ))}
@@ -217,7 +217,7 @@ export default function Home() {
       </section>
       
       {/* CTA Section */}
-      <section className="bg-[#0F172A] py-16">
+      <section className="bg-[#1E1B4B] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 font-sans">
             מוכנים להדפיס איתנו?
