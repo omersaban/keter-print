@@ -85,7 +85,7 @@ export default function Home() {
 
   return (
     <div className="space-y-16 text-right" dir="rtl">
-      {/* Hero Section - עודכן עם תמונה מקצועית במקום האייקונים */}
+      {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
@@ -114,11 +114,11 @@ export default function Home() {
 
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-3xl transform rotate-6 opacity-20"></div>
-              {/* החלפת הריבוע הלבן בתמונה של דפוס פרימיום */}
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20">
+              {/* החלפת התמונה לתמונה החדשה והמתוקנת */}
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 h-[400px]">
                 <img 
-                  src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&q=80&w=800&h=600" 
-                  alt="Professional Printing Services" 
+                  src="http://googleusercontent.com/image_generation_content/2" 
+                  alt="Professional Printing Services Keter Print" 
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
@@ -166,7 +166,6 @@ export default function Home() {
               מה הלקוחות שלנו אומרים
             </h2>
             <div className="flex items-center justify-center gap-2 mb-4">
-              {/* עדכון הדירוג ל-4.9 כפי שמופיע בגוגל */}
               <span className="font-bold text-xl text-slate-800">4.9</span>
               <div className="flex text-yellow-400">
                 {[...Array(5)].map((_, i) => (
