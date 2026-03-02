@@ -23,7 +23,7 @@ const LocalButton = ({ children, variant = "primary", className = "", size = "md
   const variants = {
     primary: "bg-white text-blue-600 hover:bg-blue-50",
     outline: "border-2 border-white text-white hover:bg-white/10",
-    cta: "bg-blue-600 text-white hover:bg-blue-700" // הוספנו וריאנט כחול ייעודי
+    cta: "bg-blue-600 text-white hover:bg-blue-700" 
   };
   const sizes = {
     md: "px-6 py-3 text-base",
@@ -65,24 +65,6 @@ export default function Home() {
     }
   ];
 
-  const features = [
-    {
-      icon: Clock,
-      title: "אספקה מהירה",
-      description: "רוב ההזמנות מוכנות תוך 24-48 שעות"
-    },
-    {
-      icon: Award,
-      title: "איכות פרימיום",
-      description: "טכנולוגיית הדפסה מהמתקדמות בעולם"
-    },
-    {
-      icon: Truck,
-      title: "שירות משלוחים",
-      description: "משלוח חינם באזור תל-אביב"
-    }
-  ];
-
   const googleReviews = [
     {
       name: "אילן ג.",
@@ -103,7 +85,7 @@ export default function Home() {
 
   return (
     <div className="space-y-16 text-right" dir="rtl">
-      {/* Hero Section */}
+      {/* Hero Section - עודכן עם תמונה מקצועית במקום האייקונים */}
       <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
@@ -132,21 +114,14 @@ export default function Home() {
 
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-3xl transform rotate-6 opacity-20"></div>
-              <div className="relative bg-white rounded-3xl p-8 shadow-2xl">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="h-24 bg-blue-50 rounded-lg flex items-center justify-center">
-                    <Printer className="w-8 h-8 text-blue-600" />
-                  </div>
-                  <div className="h-24 bg-purple-50 rounded-lg flex items-center justify-center">
-                    <Palette className="w-8 h-8 text-purple-600" />
-                  </div>
-                  <div className="h-24 bg-green-50 rounded-lg flex items-center justify-center">
-                    <Award className="w-8 h-8 text-green-600" />
-                  </div>
-                  <div className="h-24 bg-orange-50 rounded-lg flex items-center justify-center">
-                    <Users className="w-8 h-8 text-orange-600" />
-                  </div>
-                </div>
+              {/* החלפת הריבוע הלבן בתמונה של דפוס פרימיום */}
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20">
+                <img 
+                  src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&q=80&w=800&h=600" 
+                  alt="Professional Printing Services" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
               </div>
             </div>
           </div>
@@ -191,6 +166,7 @@ export default function Home() {
               מה הלקוחות שלנו אומרים
             </h2>
             <div className="flex items-center justify-center gap-2 mb-4">
+              {/* עדכון הדירוג ל-4.9 כפי שמופיע בגוגל */}
               <span className="font-bold text-xl text-slate-800">4.9</span>
               <div className="flex text-yellow-400">
                 {[...Array(5)].map((_, i) => (
@@ -223,12 +199,10 @@ export default function Home() {
                     "{testimonial.text}"
                   </p>
                   
-                  {/* Verified Review Section */}
                   <div className="pt-4 border-t border-slate-50 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="16px" height="16px"><path fill="#fbc02d" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12s5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.954,4,4,12.954,4,24s8.954,20,20,20s20-8.954,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#e53935" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4caf50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1565c0" d="M43.611,20.083L43.611,20.083L42,20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571l6.19,5.238C40.486,35.703,44,30.261,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
                     <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Verified Review</span>
                   </div>
-                  
                 </div>
               </LocalCard>
             ))}
@@ -236,7 +210,7 @@ export default function Home() {
           
           <div className="mt-12 text-center">
              <a 
-               href="https://maps.app.goo.gl/Dyfpkb1tAcRQDnQD6" 
+               href="https://www.google.com/maps" 
                target="_blank" 
                rel="noopener noreferrer"
                className="text-blue-600 font-bold hover:underline inline-flex items-center gap-2"
@@ -247,7 +221,7 @@ export default function Home() {
         </div>
       </section>
       
-      {/* CTA Section - התיקון כאן */}
+      {/* CTA Section */}
       <section className="bg-slate-900 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 font-sans">
