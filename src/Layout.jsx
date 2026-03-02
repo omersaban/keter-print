@@ -1,10 +1,22 @@
-import React, { useState } from "react"; // הוספת useState
+import React, { useState, useEffect } from "react"; // הוספת useState ו-useEffect
 import { Link, useLocation } from "react-router-dom";
 import { Printer, Phone, Mail, MapPin, Clock, CloudUpload, Menu, X, ShieldCheck } from "lucide-react"; // הוספת X
 
 export default function Layout({ children }) {
   const [isOpen, setIsOpen] = useState(false); // ניהול מצב התפריט
   const location = useLocation();
+
+  // עדכון כותרת הטאב לפי הנתיב הנוכחי
+  useEffect(() => {
+    const pageTitles = {
+      "/": "דפוס כתר - דף הבית",
+      "/About": "דפוס כתר - אודות",
+      "/Order": "דפוס כתר - הזמנה אונליין",
+      "/Articles": "דפוס כתר - מאמרים",
+      "/AccessibilityStatement": "דפוס כתר - הצהרת נגישות"
+    };
+    document.title = pageTitles[location.pathname] || "דפוס כתר";
+  }, [location.pathname]);
 
   // רשימת הניווט בבאנר העליון - ללא נגישות
   const navigationItems = [
