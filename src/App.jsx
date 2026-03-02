@@ -6,14 +6,18 @@ import NavigationTracker from '@/lib/NavigationTracker';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
+import AccessibilityStatement from './pages/AccessibilityStatement';
 
 // ייבוא ידני של העמודים וה-Layout שלך
 import Layout from './Layout';
 import Home from './pages/Home';
 import About from './pages/About';
 import Order from './pages/Order';
+import Articles from './pages/Articles'; 
+import BrochuresArticle from './pages/articles/BrochuresArticle'; // הייבוא של עמוד מאמר
+import OffsetArticle from './pages/articles/OffsetArticle'; // <--- תוספת חדשה: ייבוא מאמר אופסט
 
-// עטיפת ה-Layout
+// עטיפת ה-Layout המקורית שלך
 const LayoutWrapper = ({ children, currentPageName }) => {
   return Layout ? (
     <Layout currentPageName={currentPageName}>{children}</Layout>
@@ -44,37 +48,68 @@ const AuthenticatedApp = () => {
     }
   }
 
-  // הראוטר החדש
   return (
-    <Routes>
-      <Route path="/" element={
-        <LayoutWrapper currentPageName="Home">
-          <Home />
-        </LayoutWrapper>
-      } />
+      <Routes>
+        {/* דף הבית */}
+        <Route path="/" element={
+          <LayoutWrapper currentPageName="Home">
+            <Home />
+          </LayoutWrapper>
+        } />
+  
+        <Route path="/Home" element={
+          <LayoutWrapper currentPageName="Home">
+            <Home />
+          </LayoutWrapper>
+        } />
+        
+        {/* אודות */}
+        <Route path="/About" element={
+          <LayoutWrapper currentPageName="About">
+            <About />
+          </LayoutWrapper>
+        } />
+        
+        {/* מערכת ההזמנות */}
+        <Route path="/Order" element={
+          <LayoutWrapper currentPageName="Order">
+            <Order />
+          </LayoutWrapper>
+        } />
+  
+        {/* מאמרים ומדע (העמוד הראשי של המאמרים) */}
+        <Route path="/Articles" element={
+          <LayoutWrapper currentPageName="Articles">
+            <Articles />
+          </LayoutWrapper>
+        } />
 
-      <Route path="/Home" element={
-        <LayoutWrapper currentPageName="Home">
-          <Home />
-        </LayoutWrapper>
-      } />
-      
-      <Route path="/About" element={
-        <LayoutWrapper currentPageName="About">
-          <About />
-        </LayoutWrapper>
-      } />
-      
-      <Route path="/Order" element={
-        <LayoutWrapper currentPageName="Order">
-          <Order />
-        </LayoutWrapper>
-      } />
+        {/* <--- תוספת הראוט החדש למאמר הברושורים ---> */}
+        <Route path="/Articles/Brochures" element={
+          <LayoutWrapper currentPageName="Articles">
+            <BrochuresArticle />
+          </LayoutWrapper>
+        } />
 
-      <Route path="*" element={<PageNotFound />} />
-    </Routes>
-  );
-};
+        {/* <--- תוספת הראוט החדש למאמר אופסט ---> */}
+        <Route path="/Articles/Offset" element={
+          <LayoutWrapper currentPageName="Articles">
+            <OffsetArticle />
+          </LayoutWrapper>
+        } />
+  
+        {/* הצהרת נגישות */}
+        <Route path="/AccessibilityStatement" element={
+          <LayoutWrapper currentPageName="Accessibility">
+            <AccessibilityStatement />
+          </LayoutWrapper>
+        } />
+  
+        {/* דף שגיאה 404 */}
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    );
+  };
 
 function App() {
   return (

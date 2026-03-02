@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { CheckCircle, ShoppingCart, Calculator, Package, Upload as UploadIcon, X } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { CheckCircle, ShoppingCart, Calculator, Package, Upload as UploadIcon, X, Loader2 } from "lucide-react";
+import emailjs from '@emailjs/browser';
 
-// ייבוא רכיבי ההזמנה - הנתיב תוקן (הוסר /order/) והתווספה סיומת .jsx למניעת שגיאות ENOENT
+// ייבוא רכיבי ההזמנה
 import ProductSelector from "@/components/order/ProductSelector.jsx";
-import PriceCalculator from "@/components/order/PriceCalculator.jsx";
+import OrderSpecs from "@/components/order/OrderSpecs.jsx";
 import OrderSummary from "@/components/order/OrderSummary.jsx";
 import FileUpload from "@/components/order/FileUpload.jsx";
 
-// רכיבי עזר פנימיים למניעת שגיאות ייבוא מה-UI - עוקפים את הצורך בקבצים חיצוניים בתיקיית ה-UI
 const LocalCard = ({ children, className = "" }) => (
   <div className={`bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden ${className}`}>{children}</div>
 );
 
-const LocalButton = ({ children, onClick, disabled, variant = "primary", className = "" }) => {
+const LocalButton = ({ children, onClick, disabled, variant = "primary", className = "", type = "button" }) => {
   const base = "inline-flex items-center justify-center px-6 py-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed outline-none";
   const styles = variant === "primary" ? "bg-blue-600 text-white hover:bg-blue-700" : "border border-gray-300 text-gray-700 hover:bg-gray-50";
   return (
-    <button onClick={onClick} disabled={disabled} className={`${base} ${styles} ${className}`}>
+    <button onClick={onClick} disabled={disabled} className={`${base} ${styles} ${className}`} type={type}>
       {children}
     </button>
   );
@@ -34,6 +34,11 @@ const LocalInput = ({ id, value, onChange, placeholder, type = "text", className
 );
 
 export default function OrderPage() {
+  useEffect(() => {
+    document.title = "דפוס כתר - מערכת הזמנות";
+    return () => { document.title = "דפוס כתר"; };
+  }, []);
+
   const [currentStep, setCurrentStep] = useState(1);
   const [orderData, setOrderData] = useState({
     customer_name: "",
@@ -42,20 +47,31 @@ export default function OrderPage() {
     product_type: "",
     width_cm: "",
     height_cm: "",
-    length_cm: "",
     quantity: 1,
     paper_type: "standard",
     color_type: "color",
     special_instructions: "",
-    file_urls: [], 
-    estimated_price: 0
+    file_urls: [],
+    raw_files: [] 
   });
+  
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
+  const handleReset = () => {
+    setOrderData({
+      customer_name: "", customer_email: "", customer_phone: "",
+      product_type: "", width_cm: "", height_cm: "", quantity: 1,
+      paper_type: "standard", color_type: "color", special_instructions: "",
+      file_urls: [], raw_files: []
+    });
+    setSubmitSuccess(false);
+    setCurrentStep(1);
+  };
+
   const steps = [
-    { number: 1, title: "בחירת מוצר", icon: Package },
-    { number: 2, title: "מפרט טכני", icon: Calculator },
+    { number: 1, title: "מוצר", icon: Package },
+    { number: 2, title: "מפרט וקבצים", icon: Calculator },
     { number: 3, title: "פרטי התקשרות", icon: ShoppingCart }
   ];
 
@@ -64,31 +80,76 @@ export default function OrderPage() {
   };
 
   const handleFileUpload = async (files) => {
-    try {
-      const simulatedUrls = files.map(file => URL.createObjectURL(file));
-      setOrderData(prev => ({ ...prev, file_urls: [...prev.file_urls, ...simulatedUrls] }));
-    } catch (error) {
-      console.error("Error uploading files:", error);
-    }
+    const previewUrls = files.map(file => URL.createObjectURL(file));
+    setOrderData(prev => ({ 
+      ...prev, 
+      file_urls: [...prev.file_urls, ...previewUrls],
+      raw_files: [...prev.raw_files, ...files] 
+    }));
   };
 
-  const calculatePrice = () => {
-    const { product_type, width_cm, height_cm, quantity, paper_type, color_type } = orderData;
-    if (!product_type || !width_cm || !height_cm || !quantity) return 0;
-    const area = (parseFloat(width_cm) / 100) * (parseFloat(height_cm) / 100);
-    const basePrices = { brochure: 15, flyer: 8, calendar: 25, roll_up: 120, business_cards: 0.5, posters: 20, banners: 30, stickers: 5 };
-    const paperMultipliers = { standard: 1, premium: 1.3, glossy: 1.2, matte: 1.1, canvas: 1.5 };
-    const colorMultiplier = color_type === "color" ? 1 : 0.7;
-    let basePrice = basePrices[product_type] || 10;
-    let totalPrice = basePrice * area * quantity * paperMultipliers[paper_type] * colorMultiplier;
-    return Math.round(Math.max(totalPrice, 20));
+  const uploadToCloudinary = async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "keterprintfiles");
+    
+    const response = await fetch("https://api.cloudinary.com/v1_1/dzchcrnje/image/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) throw new Error("Cloudinary upload failed");
+    const data = await response.json();
+    // אילוץ הורדה ישירה
+    return data.secure_url.replace("/upload/", "/upload/fl_attachment/");
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    if (e) e.preventDefault();
     setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setSubmitSuccess(true);
-    setIsSubmitting(false);
+
+    const SERVICE_ID = "service_q0z5fgk"; 
+    const TEMPLATE_ID = "template_d8fln9g";
+    const PUBLIC_KEY = "Dhkw_j_fflQgeu4GQ";
+
+    // תרגום סוגי מוצרים לעברית עבור האימייל
+    const productTranslation = {
+      "calendar": "לוח-שנה",
+      "business-card": "כרטיס ביקור",
+      "flyer": "פלייר",
+      "poster": "פוסטר"
+      // תוכל להוסיף כאן עוד תרגומים לפי הצורך
+    };
+
+    const translatedProduct = productTranslation[orderData.product_type] || orderData.product_type;
+
+    try {
+      let finalFileUrl = "לא הועלה קובץ";
+      if (orderData.raw_files.length > 0) {
+        finalFileUrl = await uploadToCloudinary(orderData.raw_files[0]);
+      }
+
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+        customer_name: orderData.customer_name,
+        customer_email: orderData.customer_email,
+        customer_phone: orderData.customer_phone,
+        product_type: translatedProduct, // כאן נשלח הערך המתורגם
+        width_cm: orderData.width_cm,
+        height_cm: orderData.height_cm,
+        quantity: orderData.quantity,
+        paper_type: orderData.paper_type,
+        color_type: orderData.color_type,
+        instructions: orderData.special_instructions || "אין הערות",
+        file_link: finalFileUrl
+      }, PUBLIC_KEY);
+
+      setSubmitSuccess(true);
+    } catch (error) {
+      console.error("Submit error:", error);
+      alert("חלה שגיאה בשליחה.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (submitSuccess) {
@@ -99,8 +160,8 @@ export default function OrderPage() {
             <CheckCircle size={40} />
           </div>
           <h1 className="text-2xl font-bold mb-4">בקשתך נשלחה!</h1>
-          <p className="text-gray-600 mb-8">נציג מדפוס כתר יחזור אליך תוך זמן קצר עם הצעה מפורטת.</p>
-          <LocalButton onClick={() => window.location.reload()}>שלח בקשה נוספת</LocalButton>
+          <p className="text-gray-600 mb-8">המפרט והקבצים התקבלו. נחזור אליך בהקדם.</p>
+          <LocalButton onClick={handleReset}>שלח בקשה נוספת</LocalButton>
         </LocalCard>
       </div>
     );
@@ -111,10 +172,8 @@ export default function OrderPage() {
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">מערכת הזמנות אונליין</h1>
-          <p className="text-gray-600">דפוס כתר - איכות ומקצועיות כבר 40 שנה!</p>
         </div>
 
-        {/* Steps Navbar */}
         <div className="flex justify-center mb-12 space-x-reverse space-x-4">
           {steps.map(s => (
             <div key={s.number} className="flex items-center">
@@ -131,43 +190,75 @@ export default function OrderPage() {
             {currentStep === 1 && (
               <ProductSelector orderData={orderData} onInputChange={handleInputChange} onNext={() => setCurrentStep(2)} />
             )}
+            
             {currentStep === 2 && (
               <div className="space-y-6">
-                <PriceCalculator orderData={orderData} onInputChange={handleInputChange} calculatePrice={calculatePrice} onNext={() => setCurrentStep(3)} onBack={() => setCurrentStep(1)} />
-                <FileUpload files={orderData.file_urls} onFileUpload={handleFileUpload} onRemoveFile={(i) => handleInputChange('file_urls', orderData.file_urls.filter((_, idx) => idx !== i))} />
+                {/* העלאת קבצים למעלה */}
+                <FileUpload 
+                  files={orderData.file_urls} 
+                  onFileUpload={handleFileUpload} 
+                  onRemoveFile={(i) => {
+                    handleInputChange('file_urls', orderData.file_urls.filter((_, idx) => idx !== i));
+                    handleInputChange('raw_files', orderData.raw_files.filter((_, idx) => idx !== i));
+                  }} 
+                />
+                
+                <OrderSpecs 
+                  orderData={orderData} 
+                  onInputChange={handleInputChange} 
+                  onNext={() => setCurrentStep(3)} 
+                  onBack={() => setCurrentStep(1)} 
+                />
+
+                {/* שדה הערות מיוחדות */}
+                <LocalCard className="p-6">
+                  <label className="block text-sm font-medium mb-2 text-gray-700">הערות מיוחדות להזמנה</label>
+                  <textarea 
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none min-h-[100px] text-right"
+                    placeholder="למשל: דחוף למחר, חיתוך פינות מעוגלות, סוג ציפוי מיוחד..."
+                    value={orderData.special_instructions}
+                    onChange={(e) => handleInputChange('special_instructions', e.target.value)}
+                  />
+                </LocalCard>
               </div>
             )}
+
             {currentStep === 3 && (
               <LocalCard>
-                <div className="bg-blue-600 p-4 text-white font-bold text-xl">פרטי התקשרות</div>
-                <div className="p-8 space-y-6">
+                <div className="bg-blue-600 p-4 text-white font-bold text-xl text-center">פרטי התקשרות</div>
+                <form onSubmit={handleSubmit} className="p-8 space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium mb-1">שם מלא *</label>
-                      <LocalInput value={orderData.customer_name} onChange={(e) => handleInputChange('customer_name', e.target.value)} placeholder="ישראל ישראלי" />
+                      <LocalInput value={orderData.customer_name} onChange={(e) => handleInputChange('customer_name', e.target.value)} placeholder="ישראל ישראלי" required />
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-1">טלפון *</label>
-                      <LocalInput value={orderData.customer_phone} onChange={(e) => handleInputChange('customer_phone', e.target.value)} placeholder="050-0000000" />
+                      <LocalInput value={orderData.customer_phone} onChange={(e) => handleInputChange('customer_phone', e.target.value)} placeholder="050-0000000" required />
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1">אימייל *</label>
-                    <LocalInput type="email" value={orderData.customer_email} onChange={(e) => handleInputChange('customer_email', e.target.value)} placeholder="email@example.com" />
+                    <LocalInput type="email" value={orderData.customer_email} onChange={(e) => handleInputChange('customer_email', e.target.value)} required />
                   </div>
                   <div className="flex justify-between mt-8">
                     <LocalButton variant="outline" onClick={() => setCurrentStep(2)}>חזור</LocalButton>
-                    <LocalButton onClick={handleSubmit} disabled={!orderData.customer_name || isSubmitting}>
-                      {isSubmitting ? "שולח..." : "סיים הזמנה"}
+                    <LocalButton disabled={!orderData.customer_name || isSubmitting} type="submit">
+                      {isSubmitting ? (
+                        <span className="flex items-center">
+                          <Loader2 className="animate-spin ml-2" size={18} />
+                          מעלה ושולח...
+                        </span>
+                      ) : "סיים הזמנה"}
                     </LocalButton>
                   </div>
-                </div>
+                </form>
               </LocalCard>
             )}
           </div>
 
           <div className="lg:col-span-1">
-            <OrderSummary orderData={orderData} estimatedPrice={calculatePrice()} />
+            <OrderSummary orderData={orderData} />
           </div>
         </div>
       </div>
