@@ -11,7 +11,7 @@ import {
   Star
 } from "lucide-react";
 
-// רכיבי עזר מקומיים - פאלטת Slate & Amber
+// רכיבי עזר מקומיים - פאלטת Midnight & Gold
 const LocalCard = ({ children, className = "" }) => (
   <div className={`bg-white rounded-2xl shadow-lg border-0 overflow-hidden ${className}`}>
     {children}
@@ -21,9 +21,9 @@ const LocalCard = ({ children, className = "" }) => (
 const LocalButton = ({ children, variant = "primary", className = "", size = "md" }) => {
   const baseStyles = "inline-flex items-center justify-center font-semibold transition-all duration-200 rounded-lg";
   const variants = {
-    primary: "bg-[#D97706] text-white hover:bg-[#b46405]", // Amber
+    primary: "bg-[#C5A059] text-white hover:bg-[#b08e4d]", 
     outline: "border-2 border-white text-white hover:bg-white/10",
-    cta: "bg-[#D97706] text-white hover:bg-[#b46405]" // Amber
+    cta: "bg-[#C5A059] text-white hover:bg-[#b08e4d]" 
   };
   const sizes = {
     md: "px-6 py-3 text-base",
@@ -43,25 +43,25 @@ export default function Home() {
       icon: Printer,
       title: "ברושורים ופליירים",
       description: "חומרי שיווק איכותיים שיוצרים רושם",
-      color: "bg-[#334155]" // Slate
+      color: "bg-[#0F172A]"
     },
     {
       icon: Palette,
       title: "כרטיסי ביקור",
       description: "כרטיסים מקצועיים שמייצגים את המותג שלך",
-      color: "bg-[#475569]"
+      color: "bg-[#1E293B]"
     },
     {
       icon: Award,
       title: "באנרים ורול-אפים",
       description: "תצוגות מרשימות לאירועים וקידום מכירות",
-      color: "bg-[#D97706]" // Amber
+      color: "bg-[#C5A059]"
     },
     {
       icon: Users,
       title: "לוחות שנה ופוסטרים",
       description: "עיצובים מותאמים אישית לעסקים ולפרטיים",
-      color: "bg-[#334155]"
+      color: "bg-[#0F172A]"
     }
   ];
 
@@ -86,7 +86,7 @@ export default function Home() {
   return (
     <div className="space-y-16 text-right" dir="rtl">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#334155] via-[#475569] to-[#334155]">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0F172A]">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -113,20 +113,20 @@ export default function Home() {
             </div>
 
             <div className="relative">
-              <div className="absolute inset-0 bg-[#D97706] rounded-3xl transform rotate-6 opacity-20"></div>
+              <div className="absolute inset-0 bg-[#C5A059] rounded-3xl transform rotate-6 opacity-20"></div>
               <div className="relative bg-white rounded-3xl p-8 shadow-2xl">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="h-24 bg-slate-50 rounded-lg flex items-center justify-center">
-                    <Printer className="w-8 h-8 text-[#334155]" />
-                  </div>
-                  <div className="h-24 bg-orange-50 rounded-lg flex items-center justify-center">
-                    <Palette className="w-8 h-8 text-[#D97706]" />
-                  </div>
-                  <div className="h-24 bg-slate-100 rounded-lg flex items-center justify-center">
-                    <Award className="w-8 h-8 text-[#D97706]" />
+                    <Printer className="w-8 h-8 text-[#0F172A]" />
                   </div>
                   <div className="h-24 bg-slate-50 rounded-lg flex items-center justify-center">
-                    <Users className="w-8 h-8 text-[#334155]" />
+                    <Palette className="w-8 h-8 text-[#C5A059]" />
+                  </div>
+                  <div className="h-24 bg-slate-50 rounded-lg flex items-center justify-center">
+                    <Award className="w-8 h-8 text-[#C5A059]" />
+                  </div>
+                  <div className="h-24 bg-slate-50 rounded-lg flex items-center justify-center">
+                    <Users className="w-8 h-8 text-[#0F172A]" />
                   </div>
                 </div>
               </div>
@@ -138,7 +138,7 @@ export default function Home() {
       {/* Services Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#334155] mb-4 font-sans">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#0F172A] mb-4 font-sans">
             שירותי הדפוס שלנו
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -153,7 +153,7 @@ export default function Home() {
                 <div className={`w-16 h-16 ${service.color} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                   <service.icon className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold text-[#334155] mb-3 font-sans">
+                <h3 className="text-xl font-semibold text-[#0F172A] mb-3 font-sans">
                   {service.title}
                 </h3>
                 <p className="text-gray-600 text-sm">
@@ -169,12 +169,12 @@ export default function Home() {
       <section className="bg-slate-50 py-20 border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#334155] mb-4 font-sans">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#0F172A] mb-4 font-sans">
               מה הלקוחות שלנו אומרים
             </h2>
             <div className="flex items-center justify-center gap-2 mb-4">
-              <span className="font-bold text-xl text-[#334155]">4.9</span>
-              <div className="flex text-[#D97706]">
+              <span className="font-bold text-xl text-[#0F172A]">4.9</span>
+              <div className="flex text-[#C5A059]">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-5 h-5 fill-current" />
                 ))}
@@ -185,10 +185,10 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-8 text-right">
             {googleReviews.map((testimonial, index) => (
-              <LocalCard key={index} className="flex flex-col h-full hover:border-[#D97706] border transition-colors">
+              <LocalCard key={index} className="flex flex-col h-full hover:border-[#C5A059] border transition-colors">
                 <div className="p-8 flex flex-col h-full">
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-[#334155] font-bold text-lg">
+                    <div className="w-12 h-12 bg-[#0F172A] rounded-full flex items-center justify-center text-[#C5A059] font-bold text-lg">
                       {testimonial.name.charAt(0)}
                     </div>
                     <div>
@@ -196,7 +196,7 @@ export default function Home() {
                       <p className="text-xs text-slate-400">{testimonial.date}</p>
                     </div>
                   </div>
-                  <div className="flex text-[#D97706] mb-4">
+                  <div className="flex text-[#C5A059] mb-4">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="w-4 h-4 fill-current" />
                     ))}
@@ -205,7 +205,6 @@ export default function Home() {
                     "{testimonial.text}"
                   </p>
                   
-                  {/* Verified Review Section */}
                   <div className="pt-4 border-t border-slate-50 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="16px" height="16px"><path fill="#fbc02d" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12s5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.954,4,4,12.954,4,24s8.954,20,20,20s20-8.954,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#e53935" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4caf50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1565c0" d="M43.611,20.083L43.611,20.083L42,20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571l6.19,5.238C40.486,35.703,44,30.261,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
                     <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Verified Review</span>
@@ -217,8 +216,8 @@ export default function Home() {
         </div>
       </section>
       
-      {/* CTA Section - חזרה לטקסט ולמבנה המקורי */}
-      <section className="bg-[#334155] py-16">
+      {/* CTA Section */}
+      <section className="bg-[#0F172A] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 font-sans">
             מוכנים להדפיס איתנו?
