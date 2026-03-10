@@ -147,7 +147,7 @@ export default function Layout({ children }) {
                 <h3 className="text-lg font-bold tracking-tight">Keter Print</h3>
               </div>
               <p className="text-slate-400 text-sm leading-relaxed">
-                שירותי דפוס מקצועיים בלב תל אביב כבר למעלה מ-40 שנה. אנו מתמחים בפתרונות דפוס דיגיטלי ואופסט לעסקים ופרטיים.
+                שירותי דפוס מקצועיים בלב תל אביב כבר למעלה מ-40 שנה. אנו מתמחים בפתרונות דפוס דיגיטלי ואופסט ללקוחות מהמגזר העסקי, הפרטי, המוסדי והממשלתי.
               </p>
             </div>
 
