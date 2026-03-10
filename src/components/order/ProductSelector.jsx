@@ -15,7 +15,7 @@ export default function ProductSelector({ orderData, onInputChange, onNext }) {
           <Card 
             key={product.id}
             /* החלפנו את aspect-square ב-min-h-[180px] כדי להבטיח גודל גדול וקבוע שלא חותך טקסט */
-            className={`relative cursor-pointer transition-all hover:shadow-xl border-2 flex flex-col min-h-[150px] ${
+            className={`relative cursor-pointer transition-all hover:shadow-xl border-2 flex flex-col min-h-[200px] ${
               orderData.product_type === product.id 
               ? 'border-blue-600 bg-blue-50/30 shadow-md scale-[1.02]' 
               : 'border-transparent bg-white hover:border-gray-200'
