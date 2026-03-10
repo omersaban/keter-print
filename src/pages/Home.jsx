@@ -85,44 +85,30 @@ export default function Home() {
 
   return (
     <div className="space-y-16 text-right" dir="rtl">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800">
-        <div className="absolute inset-0 bg-black/10"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="text-white">
-              <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 font-sans">
-                דפוס כתר בע"מ
-              </h1>
-              <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-                מכרטיסי ביקור ועד באנרים ענקיים, אנו מספקים הדפסות באיכות יוצאת דופן ובזמני אספקה מהירים. החזון שלכם, מודפס באופן מושלם.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/Order">
-                  <LocalButton size="lg">
-                    הזמנה אונליין
-                    <ArrowRight className="mr-2 w-5 h-5 transform -scale-x-100" />
-                  </LocalButton>
-                </Link>
-                <Link to="/About">
-                  <LocalButton variant="outline" size="lg">
-                    למידע נוסף
-                  </LocalButton>
-                </Link>
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-3xl transform rotate-6 opacity-20"></div>
-              {/* החלפת התמונה לתמונה החדשה והמתוקנת */}
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 h-[400px]">
-                <img 
-                  src="http://googleusercontent.com/image_generation_content/2" 
-                  alt="Professional Printing Services Keter Print" 
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-              </div>
+      {/* Hero Section - שימוש בבאנר החדש main-banner.png */}
+      <section className="relative w-full overflow-hidden shadow-inner">
+        <div className="relative w-full">
+          <img 
+            src="/main-banner.png" 
+            alt="דפוס כתר - באנר ראשי" 
+            className="w-full h-auto block"
+          />
+          
+          {/* שכבת קישורים שקופה מעל הכפתורים בתוך התמונה */}
+          <div className="absolute inset-0 flex items-end justify-start p-[4%] md:p-[6%] lg:p-[8%]">
+            <div className="flex flex-row-reverse gap-4">
+               {/* קישור מעל כפתור "הזמנה אונליין" */}
+               <Link 
+                to="/Order" 
+                className="w-[120px] h-[40px] md:w-[160px] md:h-[55px] opacity-0 cursor-pointer"
+                aria-label="הזמנה אונליין"
+               />
+               {/* קישור מעל כפתור "למידע נוסף" */}
+               <Link 
+                to="/About" 
+                className="w-[100px] h-[40px] md:w-[130px] md:h-[55px] opacity-0 cursor-pointer"
+                aria-label="למידע נוסף"
+               />
             </div>
           </div>
         </div>
@@ -209,7 +195,7 @@ export default function Home() {
           
           <div className="mt-12 text-center">
              <a 
-               href="https://www.google.com/maps" 
+               href="https://maps.google.com" 
                target="_blank" 
                rel="noopener noreferrer"
                className="text-blue-600 font-bold hover:underline inline-flex items-center gap-2"
