@@ -107,7 +107,7 @@ export default function About() {
           
           <div className="relative">
             <img 
-              src="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=600&h=400&fit=crop" 
+              src="/images/printer-about-page.jpg" 
               alt="תהליך הדפסה"
               className="w-full h-80 object-cover rounded-3xl shadow-xl border-8 border-white"
             />
