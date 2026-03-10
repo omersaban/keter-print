@@ -6,5 +6,7 @@ export const products = [
   { id: "business_cards", name: "כרטיסי ביקור", description: "כרטיסי ביקור מקצועיים שיוצרים רושם", iconName: "CreditCard", color: "bg-indigo-500", popular: true },
   { id: "posters", name: "פוסטרים", description: "פוסטרים בפורמט גדול לפרסום ועיצוב", iconName: "Bookmark", color: "bg-red-500" },
   { id: "banners", name: "באנרים", description: "באנרים מותאמים אישית לאירועים", iconName: "Package", color: "bg-yellow-500" },
-  { id: "stickers", name: "מדבקות", description: "מדבקות ותוויות מותאמות אישית", iconName: "Tag", color: "bg-pink-500" }
+  { id: "stickers", name: "מדבקות", description: "מדבקות ותוויות מותאמות אישית", iconName: "Tag", color: "bg-pink-500" },
+  { id: "booklet", name: "חוברות", description: "חוברות הידוק, ספירלה או כריכה רכה", iconName: "BookOpen", color: "bg-emerald-600" },
+  { id: "other", name: "אחר", description: "מוצר בהתאמה אישית לפי דרישה", iconName: "PlusCircle", color: "bg-slate-600" },
 ];
