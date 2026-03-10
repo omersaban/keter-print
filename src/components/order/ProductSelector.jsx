@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 
 export default function ProductSelector({ orderData, onInputChange, onNext }) {
   return (
-    /* gap-8 הוא המפתח: הוא מותח את הגובה הכללי של הגריד כדי שיתאים לסיכום משמאל */
+    /* פריסה של 5 עמודות עם Gap 8 - זה המפתח למתיחה של הגובה מול הצד השמאלי */
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 p-2" dir="rtl">
       {products.map((product) => {
         const IconComponent = Icons[product.iconName] || Icons.Package;
@@ -14,11 +14,11 @@ export default function ProductSelector({ orderData, onInputChange, onNext }) {
         return (
           <Card 
             key={product.id}
-            /* aspect-square מבטיח ריבוע. overflow-hidden מבטיח הגנה מחריגות טקסט */
-            className={`relative cursor-pointer transition-all hover:shadow-lg border-2 aspect-square overflow-hidden ${
+            /* aspect-square שומר על הצורה. overflow-hidden מבטיח הגנה */
+            className={`relative cursor-pointer transition-all hover:shadow-xl border-2 aspect-square group ${
               orderData.product_type === product.id 
               ? 'border-blue-600 bg-blue-50/30 shadow-md scale-[1.02]' 
-              : 'border-transparent bg-white'
+              : 'border-transparent bg-white hover:border-gray-200'
             }`}
             onClick={() => {
               onInputChange('product_type', product.id);
@@ -26,25 +26,25 @@ export default function ProductSelector({ orderData, onInputChange, onNext }) {
             }}
           >
             {product.popular && (
-              <Badge className="absolute top-1 left-1 bg-yellow-400 text-black border-none text-[8px] px-1 py-0 z-10">
+              <Badge className="absolute top-2 left-2 bg-yellow-400 text-black border-none text-[9px] px-1.5 py-0.5 z-10 font-bold">
                 פופולרי
               </Badge>
             )}
             
-            {/* p-2.5 נותן מקסימום שטח לטקסט בתוך הריבוע המוגבל */}
-            <CardContent className="p-2.5 flex flex-col items-center justify-center h-full text-center">
-              {/* אייקון מוקטן מעט (w-8) כדי שלא ינגוס בשטח של הטקסט */}
-              <div className={`w-8 h-8 rounded-lg ${product.color} flex items-center justify-center mb-1.5 text-white shadow-sm flex-shrink-0`}>
-                <IconComponent size={18} />
+            {/* תוכן הריבוע: שימוש ב-p-4 ומרכוז מלא */}
+            <CardContent className="p-4 flex flex-col items-center justify-center h-full text-center">
+              {/* אייקון - גודל בינוני w-11 h-11 נותן מספיק מקום לטקסט מתחתיו */}
+              <div className={`w-11 h-11 rounded-xl ${product.color} flex items-center justify-center mb-3 text-white shadow-sm flex-shrink-0 transition-transform group-hover:scale-110`}>
+                <IconComponent size={22} />
               </div>
               
-              {/* שם המוצר - text-[13px] */}
-              <h3 className="text-[13px] font-bold text-slate-900 mb-0.5 leading-tight w-full px-1 truncate">
+              {/* שם המוצר - text-sm (14px) מודגש */}
+              <h3 className="text-sm font-bold text-slate-900 mb-1 leading-tight w-full px-1">
                 {product.name}
               </h3>
               
-              {/* התיאור - text-[10px] עם line-clamp בטוח ל-2 שורות */}
-              <p className="text-[10px] text-slate-500 leading-[1.1] px-1 line-clamp-2">
+              {/* התיאור - text-[11px] - הגודל האידיאלי כדי שלא ייחתך בריבוע של 5 עמודות */}
+              <p className="text-[11px] text-slate-500 leading-snug px-1 overflow-hidden">
                 {product.description}
               </p>
             </CardContent>
