@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"; // הוספת useState ו-useEffect
 import { Link, useLocation } from "react-router-dom";
-import { Crown, Printer, Phone, Mail, MapPin, Clock, CloudUpload, Menu, X, ShieldCheck } from "lucide-react"; // הוספת X
+import { Crown, Printer, Phone, Mail, MapPin, Clock, Facebook, CloudUpload, Menu, X, ShieldCheck } from "lucide-react"; // הוספת X
 
 export default function Layout({ children }) {
   const [isOpen, setIsOpen] = useState(false); // ניהול מצב התפריט
@@ -68,6 +68,17 @@ export default function Layout({ children }) {
 
             {/* Actions (Desktop) */}
             <div className="hidden md:flex items-center space-x-reverse space-x-3">
+              {/* Facebook Link */}
+              <a 
+                href="https://www.facebook.com/KeterPrint/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-2 text-gray-400 hover:text-blue-600 transition-colors"
+                title="עקבו אחרינו בפייסבוק"
+              >
+                <Facebook className="w-5 h-5" />
+              </a>
+
               <a href="tel:03-561-2165" className={ghostBtn}>
                 <Phone className="w-4 h-4 ml-2" />
                 03-561-2165
@@ -78,7 +89,7 @@ export default function Layout({ children }) {
               </Link>
             </div>
 
-            {/* Mobile Menu Button - כפתור ההמבורגר המתוקן */}
+            {/* Mobile Menu Button */}
             <div className="md:hidden">
                 <button 
                   onClick={() => setIsOpen(!isOpen)} 
@@ -91,7 +102,7 @@ export default function Layout({ children }) {
           </div>
         </div>
 
-        {/* Mobile Navigation Dropdown - התפריט הנפתח */}
+        {/* Mobile Navigation Dropdown */}
         {isOpen && (
           <div className="md:hidden bg-white border-t border-gray-100 shadow-xl absolute w-full left-0 z-50">
             <div className="px-4 pt-2 pb-6 space-y-1">
@@ -99,7 +110,7 @@ export default function Layout({ children }) {
                 <Link
                   key={item.name}
                   to={item.path}
-                  onClick={() => setIsOpen(false)} // סגירה בלחיצה
+                  onClick={() => setIsOpen(false)} 
                   className={`block px-3 py-4 text-base font-semibold rounded-xl transition-all ${
                     isActive(item.path) 
                       ? "bg-blue-50 text-blue-600" 
@@ -113,6 +124,16 @@ export default function Layout({ children }) {
                 <a href="tel:03-561-2165" className="flex items-center px-3 py-3 text-gray-700 font-bold">
                   <Phone className="w-5 h-5 ml-3 text-blue-600" />
                   03-561-2165
+                </a>
+                {/* Facebook Mobile Link */}
+                <a 
+                  href="https://www.facebook.com/KeterPrint/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center px-3 py-3 text-gray-700 font-bold hover:bg-gray-50 rounded-xl"
+                >
+                  <Facebook className="w-5 h-5 ml-3 text-blue-600" />
+                  עקבו אחרינו בפייסבוק
                 </a>
                 <Link 
                   to="/Order" 
@@ -133,7 +154,7 @@ export default function Layout({ children }) {
         {children}
       </main>
 
-      {/* Footer - המבנה המקורי */}
+      {/* Footer */}
       <footer className="bg-slate-900 text-white border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-right">
@@ -169,7 +190,6 @@ export default function Layout({ children }) {
                     keter-ta@zahav.net.il
                   </a>
                 </li>
-                {/* הקישור להצהרת נגישות */}
                 <li className="flex items-center space-x-reverse space-x-3 pt-2">
                   <ShieldCheck className="w-4 h-4 text-green-500" />
                   <Link to="/AccessibilityStatement" className="text-blue-400 hover:underline font-bold">
@@ -195,8 +215,10 @@ export default function Layout({ children }) {
           <div className="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-slate-500 text-xs gap-4">
             <p>&copy; {new Date().getFullYear()} דפוס כתר בע"מ. כל הזכויות שמורות.</p>
             <div className="flex space-x-reverse space-x-6">
-              <span></span>
-              <span></span>
+              {/* Facebook Link Footer */}
+              <a href="https://www.facebook.com/KeterPrint/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                <Facebook className="w-4 h-4" />
+              </a>
             </div>
           </div>
         </div>
