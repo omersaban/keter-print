@@ -73,7 +73,7 @@ export default function Layout({ children }) {
                 href="https://www.facebook.com/KeterPrint/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="p-2 text-gray-400 hover:text-blue-600 transition-colors"
+                className="p-2 text-gray-400 hover:text-blue-600 transition-colors mr-1"
                 title="עקבו אחרינו בפייסבוק"
               >
                 <Facebook className="w-5 h-5" />
