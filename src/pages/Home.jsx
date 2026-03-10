@@ -95,12 +95,12 @@ export default function Home() {
           <div className="absolute inset-0">
             <Link 
               to="/Order" 
-              className="absolute bottom-[13%] right-[15%] w-[14%] h-[10%] opacity-0 cursor-pointer z-10"
+              className="absolute bottom-[13%] right-[15%] w-[15%] h-[13%] opacity-0 cursor-pointer z-10"
               aria-label="הזמנה אונליין"
             />
             <Link 
               to="/About" 
-              className="absolute bottom-[13%] right-[31%] w-[12%] h-[10%] opacity-0 cursor-pointer z-10"
+              className="absolute bottom-[13%] right-[31%] w-[30%] h-[14%] opacity-0 cursor-pointer z-10"
               aria-label="למידע נוסף"
             />
             <Link to="/Order" className="absolute top-[45%] right-[15%] w-[12%] h-[15%] opacity-0 cursor-pointer z-10" />
