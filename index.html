@@ -1,14 +1,94 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="https://base44.com/logo_v2.svg" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="manifest" href="/manifest.json" />
-    <title>Base44 APP</title>
+    
+    <title>דפוס כתר</title>
+    <meta name="description" content="אתר הבית של דפוס כתר תל אביב המציע מערך הזמנות אונליין ומאמרי ידע בתחום טכנולוגיות הדפוס." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&display=swap" rel="stylesheet">
+
+    <style>
+      body {
+        font-family: 'Assistant', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9fafb;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
+
     <script type="module" src="/src/main.jsx"></script>
+
+    <script src="./accessibility.js"></script>
+    
+    <script>
+      // המתנה לטעינה מלאה של ה-DOM והמשאבים
+      window.addEventListener('load', function() {
+        // בדיקת בטיחות: מוודאים שהאובייקט Accessibility הוגדר
+        if (typeof Accessibility !== 'undefined') {
+          new Accessibility({
+            language: {
+              en: {
+                menuTitle: 'נגישות דפוס כתר',
+                increaseText: 'הגדל טקסט',
+                decreaseText: 'הקטן טקסט',
+                increaseTextSpacing: 'מרווח טקסט',
+                invertColors: 'ניגודיות (Contrast)',
+                grayHues: 'שחור לבן (Grayscale)',
+                bigCursor: 'סמן עכבר גדול',
+                readingGuide: 'קו קריאה',
+                underlineLinks: 'הדגשת קישורים',
+                accessibilityStatement: 'הצהרת נגישות'
+              }
+            },
+            buttons: {
+              font: { size: true },
+              contrast: true,
+              grayscale: true,
+              cursor: true,
+              guide: true,
+              link: true
+            },
+            customButtons: [
+              {
+                title: 'הצהרת נגישות',
+                icon: '📋',
+                id: 'accStatement',
+                fn: function() {
+                  // מעבר לעמוד שבנינו ב-React
+                  window.location.href = '/AccessibilityStatement';
+                }
+              }
+            ],
+            icon: {
+              position: { 
+                bottom: { size: 25, units: 'px' }, 
+                right: { size: 25, units: 'px' } 
+              },
+              dimensions: {
+                width: { size: 30, units: 'px' },
+                height: { size: 30, units: 'px' }
+              },
+              circular: true,
+              backgroundColor: '#2563eb', // כחול כתר
+              img: 'accessibility',
+              // התיקון הקריטי: מבטיח שהכפתור יצוף מעל ה-React Layout
+              zIndex: 99999 
+            }
+          });
+          console.log("Accessibility Widget Initialized Successfully");
+        } else {
+          // הודעת שגיאה במקרה שהחסימה בדפדפן עדיין פעילה
+          console.error("Accessibility library blocked by browser/extension.");
+        }
+      }, false);
+    </script>
   </body>
 </html>
