@@ -73,7 +73,7 @@ export default function About() {
             <div className="relative">
               <div className="bg-white rounded-3xl p-4 shadow-2xl">
                 <img 
-                  src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=600&h=400&fit=crop" 
+                  src="/images/keter-internal.jpg" 
                   alt="סדנת דפוס כתר"
                   className="w-full h-64 object-cover rounded-2xl mb-4 shadow-inner"
                 />
