@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {
-  Printer,
+  Crown,
   Award,
   Clock,
   Truck,
@@ -40,7 +40,7 @@ const LocalButton = ({ children, variant = "primary", className = "", size = "md
 export default function Home() {
   const services = [
     {
-      icon: Printer,
+      icon: Crown,
       title: "ברושורים ופליירים",
       description: "חומרי שיווק איכותיים שיוצרים רושם",
       color: "bg-blue-500"
@@ -85,7 +85,7 @@ export default function Home() {
 
   return (
     <div className="space-y-16 text-right" dir="rtl">
-      {/* Hero Section - שכבת קישורים שקופה מתוקנת */}
+      {/* Hero Section */}
       <section className="relative w-full overflow-hidden shadow-inner">
         <div className="relative w-full">
           <img 
@@ -94,23 +94,23 @@ export default function Home() {
             className="w-full h-auto block"
           />
           
-          {/* שכבת קישורים שקופה מדויקת */}
+          {/* שכבת קישורים שקופה */}
           <div className="absolute inset-0">
-            {/* כפתור "הזמנה אונליין" - לבן */}
+            {/* כפתור הזמנה אונליין */}
             <Link 
               to="/Order" 
               className="absolute bottom-[11%] right-[11.2%] w-[18.8%] h-[13%] opacity-0 cursor-pointer"
               aria-label="הזמנה אונליין"
             />
             
-            {/* כפתור "למידע נוסף" - מסגרת שקופה */}
+            {/* כפתור למידע נוסף - מעביר לעמוד אודות כפי שביקשת */}
             <Link 
               to="/About" 
               className="absolute bottom-[11%] right-[32.2%] w-[14.2%] h-[13%] opacity-0 cursor-pointer"
               aria-label="למידע נוסף"
             />
 
-            {/* קישורים לארבעת ריבועי השירותים בתוך הבאנר */}
+            {/* קישורים נוספים לשירותים בתוך הבאנר */}
             <Link to="/Order" className="absolute top-[44%] right-[11%] w-[13.5%] h-[17%] opacity-0 cursor-pointer" />
             <Link to="/Order" className="absolute top-[44%] right-[26%] w-[13.5%] h-[17%] opacity-0 cursor-pointer" />
             <Link to="/Order" className="absolute top-[63%] right-[11%] w-[13.5%] h-[17%] opacity-0 cursor-pointer" />
