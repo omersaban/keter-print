@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.jsx";
 import { Button } from "@/components/ui/button.jsx";
 import { Input } from "@/components/ui/input.jsx";
-import { Badge } from "@/components/ui/badge.jsx";
 import { Upload, FileText, Image as ImageIcon, X } from "lucide-react";
 
 export default function FileUpload({ files, onFileUpload, onRemoveFile }) {
@@ -31,8 +30,8 @@ export default function FileUpload({ files, onFileUpload, onRemoveFile }) {
   const handleDragOver = (e) => e.preventDefault();
 
   return (
-    <Card className="border-0 shadow-lg max-w-2xl mx-auto overflow-hidden">
-      {/* Header קומפקטי */}
+    /* הוסר max-w-2xl ו-mx-auto כדי שיתפוס את כל רוחב העמודה כמו השאר */
+    <Card className="border-0 shadow-lg w-full overflow-hidden">
       <CardHeader className="bg-gradient-to-r from-purple-600 to-purple-700 text-white p-3">
         <CardTitle className="text-base flex items-center gap-2 font-bold">
           <Upload className="w-4 h-4" />
@@ -41,7 +40,6 @@ export default function FileUpload({ files, onFileUpload, onRemoveFile }) {
       </CardHeader>
       
       <CardContent className="p-3">
-        {/* אזור העלאה דק במבנה אופקי */}
         <div
           className="border-2 border-dashed border-gray-200 rounded-lg p-3 flex items-center justify-between hover:border-purple-300 hover:bg-purple-50/30 transition-all cursor-pointer group"
           onClick={() => fileInputRef.current?.click()}
@@ -81,7 +79,6 @@ export default function FileUpload({ files, onFileUpload, onRemoveFile }) {
           className="hidden"
         />
 
-        {/* רשימת קבצים - מופיעה רק אם יש קבצים */}
         {files.length > 0 && (
           <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
             {files.map((fileUrl, index) => (
@@ -115,7 +112,6 @@ export default function FileUpload({ files, onFileUpload, onRemoveFile }) {
           </div>
         )}
 
-        {/* Tip Box דקיק */}
         <div className="mt-3 py-1.5 px-3 bg-blue-50/50 rounded-md border border-blue-100">
           <p className="text-[10px] text-blue-800 text-center">
              העלאת קבצים עוזרת לנו לספק לכם תוצאה מדויקת ומהירה יותר.
