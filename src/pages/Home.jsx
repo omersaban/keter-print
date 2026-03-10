@@ -103,7 +103,7 @@ export default function Home() {
             {/* כפתור למידע נוסף - צד שמאל (זז שמאלה ולמטה) */}
             <Link 
               to="/About" 
-              className="absolute bottom-[12%] right-[5%] w-[10%] h-[12%] cursor-pointer z-10 hover:bg-white/10 transition-colors rounded-lg"
+              className="absolute bottom-[13%] right-[5%] w-[10%] h-[12%] cursor-pointer z-10 hover:bg-white/10 transition-colors rounded-lg"
               aria-label="למידע נוסף"
             />
           </div>
