@@ -100,7 +100,6 @@ export default function OrderPage() {
 
     if (!response.ok) throw new Error("Cloudinary upload failed");
     const data = await response.json();
-    // אילוץ הורדה ישירה
     return data.secure_url.replace("/upload/", "/upload/fl_attachment/");
   };
 
@@ -112,7 +111,6 @@ export default function OrderPage() {
     const TEMPLATE_ID = "template_d8fln9g";
     const PUBLIC_KEY = "Dhkw_j_fflQgeu4GQ";
 
-    // תרגום סוגי מוצרים לעברית עבור האימייל
     const productTranslation = {
       "calendar": "לוח-שנה",
       "business-card": "כרטיס ביקור",
@@ -120,7 +118,6 @@ export default function OrderPage() {
       "poster": "פוסטר",
       "booklet": "חוברות",
       "other": "אחר",
-      // תוכל להוסיף כאן עוד תרגומים לפי הצורך
     };
 
     const translatedProduct = productTranslation[orderData.product_type] || orderData.product_type;
@@ -135,7 +132,7 @@ export default function OrderPage() {
         customer_name: orderData.customer_name,
         customer_email: orderData.customer_email,
         customer_phone: orderData.customer_phone,
-        product_type: translatedProduct, // כאן נשלח הערך המתורגם
+        product_type: translatedProduct,
         width_cm: orderData.width_cm,
         height_cm: orderData.height_cm,
         quantity: orderData.quantity,
@@ -195,7 +192,18 @@ export default function OrderPage() {
             
             {currentStep === 2 && (
               <div className="space-y-6">
-                {/* העלאת קבצים למעלה */}
+                {/* 1. תיאור ההזמנה - עבר למקום הראשון */}
+                <LocalCard className="p-6">
+                  <label className="block text-sm font-medium mb-2 text-gray-700">תיאור ההזמנה</label>
+                  <textarea 
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none min-h-[100px] text-right"
+                    placeholder="למשל: דחוף למחר, חיתוך פינות מעוגלות, סוג ציפוי מיוחד..."
+                    value={orderData.special_instructions}
+                    onChange={(e) => handleInputChange('special_instructions', e.target.value)}
+                  />
+                </LocalCard>
+
+                {/* 2. העלאת קבצים - עבר למקום השני */}
                 <FileUpload 
                   files={orderData.file_urls} 
                   onFileUpload={handleFileUpload} 
@@ -205,23 +213,13 @@ export default function OrderPage() {
                   }} 
                 />
                 
+                {/* 3. מפרט טכני - עבר למקום השלישי */}
                 <OrderSpecs 
                   orderData={orderData} 
                   onInputChange={handleInputChange} 
                   onNext={() => setCurrentStep(3)} 
                   onBack={() => setCurrentStep(1)} 
                 />
-
-                {/* שדה הערות מיוחדות */}
-                <LocalCard className="p-6">
-                  <label className="block text-sm font-medium mb-2 text-gray-700">הערות מיוחדות להזמנה</label>
-                  <textarea 
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none min-h-[100px] text-right"
-                    placeholder="למשל: דחוף למחר, חיתוך פינות מעוגלות, סוג ציפוי מיוחד..."
-                    value={orderData.special_instructions}
-                    onChange={(e) => handleInputChange('special_instructions', e.target.value)}
-                  />
-                </LocalCard>
               </div>
             )}
 
