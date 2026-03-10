@@ -192,18 +192,17 @@ export default function OrderPage() {
             
             {currentStep === 2 && (
               <div className="space-y-6">
-                {/* 1. תיאור ההזמנה - עבר למקום הראשון */}
-                <LocalCard className="p-6">
-                  <label className="block text-sm font-medium mb-2 text-gray-700">תיאור ההזמנה</label>
-                  <textarea 
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none min-h-[100px] text-right"
-                    placeholder="למשל: דחוף למחר, חיתוך פינות מעוגלות, סוג ציפוי מיוחד..."
+                {/* 1. תיאור ההזמנה - שורה אחת בלבד */}
+                <LocalCard className="p-4">
+                  <label className="block text-sm font-medium mb-2 text-gray-700">תיאור ההזמנה והערות</label>
+                  <LocalInput 
                     value={orderData.special_instructions}
                     onChange={(e) => handleInputChange('special_instructions', e.target.value)}
+                    placeholder="למשל: דחוף למחר, חיתוך פינות מעוגלות, סוג ציפוי מיוחד..."
                   />
                 </LocalCard>
 
-                {/* 2. העלאת קבצים - עבר למקום השני */}
+                {/* 2. העלאת קבצים */}
                 <FileUpload 
                   files={orderData.file_urls} 
                   onFileUpload={handleFileUpload} 
@@ -213,7 +212,7 @@ export default function OrderPage() {
                   }} 
                 />
                 
-                {/* 3. מפרט טכני - עבר למקום השלישי */}
+                {/* 3. מפרט טכני */}
                 <OrderSpecs 
                   orderData={orderData} 
                   onInputChange={handleInputChange} 
