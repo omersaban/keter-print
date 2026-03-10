@@ -6,8 +6,7 @@ import {
   Award, 
   Users,
   History,
-  Target,
-  Book
+  Target
 } from "lucide-react";
 
 export default function About() {
@@ -93,7 +92,6 @@ export default function About() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <div className="flex items-center mb-6">
-              <Book className="w-8 h-8 text-blue-600 ml-3" />
               <h2 className="text-3xl font-bold text-gray-900 font-sans">הסיפור שלנו</h2>
             </div>
             <div className="space-y-4 text-gray-600 text-lg leading-relaxed">
