@@ -117,7 +117,9 @@ export default function OrderPage() {
       "calendar": "לוח-שנה",
       "business-card": "כרטיס ביקור",
       "flyer": "פלייר",
-      "poster": "פוסטר"
+      "poster": "פוסטר",
+      "booklet": "חוברות",
+      "other": "אחר",
       // תוכל להוסיף כאן עוד תרגומים לפי הצורך
     };
 
