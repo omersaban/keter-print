@@ -85,7 +85,7 @@ export default function Home() {
 
   return (
     <div className="space-y-16 text-right" dir="rtl">
-      {/* Hero Section - שימוש בבאנר החדש main-banner.png */}
+      {/* Hero Section - שכבת קישורים שקופה מתוקנת */}
       <section className="relative w-full overflow-hidden shadow-inner">
         <div className="relative w-full">
           <img 
@@ -94,22 +94,27 @@ export default function Home() {
             className="w-full h-auto block"
           />
           
-          {/* שכבת קישורים שקופה מעל הכפתורים בתוך התמונה */}
-          <div className="absolute inset-0 flex items-end justify-start p-[4%] md:p-[6%] lg:p-[8%]">
-            <div className="flex flex-row-reverse gap-4">
-               {/* קישור מעל כפתור "הזמנה אונליין" */}
-               <Link 
-                to="/Order" 
-                className="w-[120px] h-[40px] md:w-[160px] md:h-[55px] opacity-0 cursor-pointer"
-                aria-label="הזמנה אונליין"
-               />
-               {/* קישור מעל כפתור "למידע נוסף" */}
-               <Link 
-                to="/About" 
-                className="w-[100px] h-[40px] md:w-[130px] md:h-[55px] opacity-0 cursor-pointer"
-                aria-label="למידע נוסף"
-               />
-            </div>
+          {/* שכבת קישורים שקופה מדויקת */}
+          <div className="absolute inset-0">
+            {/* כפתור "הזמנה אונליין" - לבן */}
+            <Link 
+              to="/Order" 
+              className="absolute bottom-[11%] right-[11.2%] w-[18.8%] h-[13%] opacity-0 cursor-pointer"
+              aria-label="הזמנה אונליין"
+            />
+            
+            {/* כפתור "למידע נוסף" - מסגרת שקופה */}
+            <Link 
+              to="/About" 
+              className="absolute bottom-[11%] right-[32.2%] w-[14.2%] h-[13%] opacity-0 cursor-pointer"
+              aria-label="למידע נוסף"
+            />
+
+            {/* קישורים לארבעת ריבועי השירותים בתוך הבאנר */}
+            <Link to="/Order" className="absolute top-[44%] right-[11%] w-[13.5%] h-[17%] opacity-0 cursor-pointer" />
+            <Link to="/Order" className="absolute top-[44%] right-[26%] w-[13.5%] h-[17%] opacity-0 cursor-pointer" />
+            <Link to="/Order" className="absolute top-[63%] right-[11%] w-[13.5%] h-[17%] opacity-0 cursor-pointer" />
+            <Link to="/Order" className="absolute top-[63%] right-[26%] w-[13.5%] h-[17%] opacity-0 cursor-pointer" />
           </div>
         </div>
       </section>
