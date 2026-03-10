@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {
-  Crown,
+  Printer,
   Award,
   Clock,
   Truck,
@@ -11,7 +11,6 @@ import {
   Star
 } from "lucide-react";
 
-// רכיבי עזר מקומיים לעקיפת שגיאות ייבוא
 const LocalCard = ({ children, className = "" }) => (
   <div className={`bg-white rounded-2xl shadow-lg border-0 overflow-hidden ${className}`}>
     {children}
@@ -40,7 +39,7 @@ const LocalButton = ({ children, variant = "primary", className = "", size = "md
 export default function Home() {
   const services = [
     {
-      icon: Crown,
+      icon: Printer,
       title: "ברושורים ופליירים",
       description: "חומרי שיווק איכותיים שיוצרים רושם",
       color: "bg-blue-500"
@@ -85,7 +84,6 @@ export default function Home() {
 
   return (
     <div className="space-y-16 text-right" dir="rtl">
-      {/* Hero Section */}
       <section className="relative w-full overflow-hidden shadow-inner">
         <div className="relative w-full">
           <img 
@@ -94,32 +92,25 @@ export default function Home() {
             className="w-full h-auto block"
           />
           
-          {/* שכבת קישורים שקופה */}
           <div className="absolute inset-0">
-            {/* כפתור הזמנה אונליין */}
             <Link 
               to="/Order" 
-              className="absolute bottom-[11%] right-[11.2%] w-[18.8%] h-[13%] opacity-0 cursor-pointer"
+              className="absolute bottom-[13%] right-[15%] w-[14%] h-[10%] opacity-0 cursor-pointer z-10"
               aria-label="הזמנה אונליין"
             />
-            
-            {/* כפתור למידע נוסף - מעביר לעמוד אודות כפי שביקשת */}
             <Link 
               to="/About" 
-              className="absolute bottom-[11%] right-[32.2%] w-[14.2%] h-[13%] opacity-0 cursor-pointer"
+              className="absolute bottom-[13%] right-[31%] w-[12%] h-[10%] opacity-0 cursor-pointer z-10"
               aria-label="למידע נוסף"
             />
-
-            {/* קישורים נוספים לשירותים בתוך הבאנר */}
-            <Link to="/Order" className="absolute top-[44%] right-[11%] w-[13.5%] h-[17%] opacity-0 cursor-pointer" />
-            <Link to="/Order" className="absolute top-[44%] right-[26%] w-[13.5%] h-[17%] opacity-0 cursor-pointer" />
-            <Link to="/Order" className="absolute top-[63%] right-[11%] w-[13.5%] h-[17%] opacity-0 cursor-pointer" />
-            <Link to="/Order" className="absolute top-[63%] right-[26%] w-[13.5%] h-[17%] opacity-0 cursor-pointer" />
+            <Link to="/Order" className="absolute top-[45%] right-[15%] w-[12%] h-[15%] opacity-0 cursor-pointer z-10" />
+            <Link to="/Order" className="absolute top-[45%] right-[29%] w-[12%] h-[15%] opacity-0 cursor-pointer z-10" />
+            <Link to="/Order" className="absolute top-[64%] right-[15%] w-[12%] h-[15%] opacity-0 cursor-pointer z-10" />
+            <Link to="/Order" className="absolute top-[64%] right-[29%] w-[12%] h-[15%] opacity-0 cursor-pointer z-10" />
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-sans">
@@ -149,7 +140,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
       <section className="bg-slate-50 py-20 border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -211,7 +201,6 @@ export default function Home() {
         </div>
       </section>
       
-      {/* CTA Section */}
       <section className="bg-slate-900 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 font-sans">
