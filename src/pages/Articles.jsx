@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom"; 
-import { Microscope, Layout, BookOpen, Clock } from "lucide-react";
+import { Clock, Layout, BookOpen, Printer } from "lucide-react";
 
 const ArticleCard = ({ title, content, icon: Icon, tag, path }) => (
   <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 hover:shadow-md transition-all text-right flex flex-col h-full" dir="rtl">
@@ -36,6 +36,13 @@ export default function ArticlesPage() {
       content: "ברושור הוא לא רק דף מקופל, הוא מבנה תלת-ממדי. ננתח את החשיבות של כיוון סיבי הנייר (Grain Direction) ואת המכניקה של תהליך הביג (Creasing) המונעת מתיחה ושבירה של שכבת הדיו והפולימר בנקודת הכיפוף."
     },
     {
+      tag: "כימיה ומכניקה",
+      title: "מדע האופסט: למה שמן ומים לא מתערבבים?",
+      icon: Printer,
+      path: "/Articles/Offset",
+      content: "דפוס אופסט הוא הבסיס לתעשיית ההדפסה המסחרית. נחקור את העיקרון הליתוגרפי של דחיית מים ושמן, ואת המעבר המכני של הדיו מגלופת האלומיניום אל גליל הגומי הרך ומשם אל הנייר."
+    },
+    {
       tag: "טכנולוגיה ותהליכים",
       title: "מהירות מול איכות בעבודות דפוס ובקרת איכות",
       icon: Clock,
@@ -43,17 +50,10 @@ export default function ArticlesPage() {
       content: "הדילמה המוכרת בתעשיית הדפוס: הצורך באספקה מהירה מול הדרישה לאיכות ללא פשרות. נחקור את השפעת מהירות המכונה על התרחבות נקודת הרשת (Dot Gain) ואת החשיבות של בקרת איכות בזמן אמת."
     },
     {
-      tag: "כימיה",
-      title: "ספקטרופוטומטריה: למה ה-RGB לא נראה כמו ה-CMYK?",
-      icon: Microscope,
-      path: "/Articles/ColorManagement",
-      content: "ההבדל בין אור חוזר (נייר) לאור מוקרן (מסך) הוא עמוק. ננתח את מודל הצבע החיסורי, את חשיבות ה-Gamut ואת המדע של ניהול צבע (ICC Profiles)."
-    },
-    {
       tag: "טכנולוגיה",
       title: "רזולוציה אופטית מול נתפסת: מעבר ל-DPI",
       icon: Layout,
-      path: "/Articles/Resolution",
+      path: "/Articles/Resolution", // נתיב עתידי
       content: "האם 1200 DPI באמת נראה טוב יותר מ-600? נחקור את המדע של ה-Halftoning (רשת נקודות) וכיצד העין האנושית משלימה גוונים רציפים מתוך אוסף של נקודות בודדות."
     }
   ];
