@@ -62,9 +62,6 @@ export default function ArticlesPage() {
     <div className="min-h-screen bg-gray-50 py-20 font-sans" dir="rtl">
       <div className="max-w-5xl mx-auto px-6">
         <header className="text-center mb-20">
-          <div className="inline-block px-4 py-1.5 mb-4 text-sm font-semibold tracking-wide text-blue-600 uppercase bg-blue-100 rounded-full">
-            Knowledge Base
-          </div>
           <h1 className="text-5xl font-extrabold text-gray-900 mb-6">מאמרים</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
             אנחנו בדפוס כתר מאמינים שאיכות מתחילה בהבנה עמוקה. היכנסו למאמרים המקצועיים שלנו על הנדסת דפוס וטכנולוגיה.
