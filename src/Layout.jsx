@@ -66,6 +66,17 @@ export default function Layout({ children }) {
 
             {/* Actions (Desktop) */}
             <div className="hidden md:flex items-center space-x-reverse space-x-3">
+              {/* Facebook Icon Header - הוחזר לצד ימין (תחילת השורה) */}
+              <a 
+                href="https://www.facebook.com/KeterPrint/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-2 text-gray-400 hover:text-blue-600 transition-colors ml-1"
+                aria-label="פייסבוק"
+              >
+                <Facebook className="w-5 h-5" />
+              </a>
+
               <a href="tel:03-561-2165" className={ghostBtn}>
                 <Phone className="w-4 h-4 ml-2" />
                 03-561-2165
@@ -74,17 +85,6 @@ export default function Layout({ children }) {
                 <CloudUpload className="w-4 h-4 ml-2" />
                 הזמנה חדשה
               </Link>
-              
-              {/* Facebook Icon Header */}
-              <a 
-                href="https://www.facebook.com/KeterPrint/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-2 text-gray-400 hover:text-blue-600 transition-colors mr-1"
-                aria-label="פייסבוק"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
             </div>
 
             {/* Mobile Menu Button */}
@@ -187,7 +187,7 @@ export default function Layout({ children }) {
                     keter-ta@zahav.net.il
                   </a>
                 </li>
-                {/* Facebook Link - נוסף כאן תחת צרו קשר ומידע */}
+                {/* Facebook Link Footer */}
                 <li className="flex items-center space-x-reverse space-x-3">
                   <Facebook className="w-4 h-4 text-blue-500" />
                   <a 
