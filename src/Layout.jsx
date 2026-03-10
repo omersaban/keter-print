@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"; // הוספת useState ו-useEffect
 import { Link, useLocation } from "react-router-dom";
-import { Printer, Phone, Mail, MapPin, Clock, CloudUpload, Menu, X, ShieldCheck } from "lucide-react"; // הוספת X
+import { Crown, Printer, Phone, Mail, MapPin, Clock, CloudUpload, Menu, X, ShieldCheck } from "lucide-react"; // הוספת X
 
 export default function Layout({ children }) {
   const [isOpen, setIsOpen] = useState(false); // ניהול מצב התפריט
@@ -41,7 +41,7 @@ export default function Layout({ children }) {
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-reverse space-x-3 group">
               <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-blue-200 transition-all">
-                <Printer className="w-6 h-6 text-white" />
+                <Crown className="w-6 h-6 text-white" />
               </div>
               <div className="flex flex-col text-right">
                 <span className="text-xl font-bold text-gray-900 leading-none">Keter Print</span>
