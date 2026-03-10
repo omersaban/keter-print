@@ -142,7 +142,7 @@ export default function Layout({ children }) {
             <div className="space-y-4">
               <div className="flex items-center space-x-reverse space-x-3">
                 <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center">
-                  <Printer className="w-5 h-5 text-white" />
+                  <Crown className="w-5 h-5 text-white" />
                 </div>
                 <h3 className="text-lg font-bold tracking-tight">Keter Print</h3>
               </div>
