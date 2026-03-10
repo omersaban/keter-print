@@ -8,13 +8,13 @@ import { Input } from "@/components/ui/input";
 export default function OrderSpecs({ orderData, onInputChange, onNext, onBack }) {
   return (
     <Card className="border-0 shadow-lg text-right" dir="rtl">
-      <CardHeader className="bg-slate-50 border-b border-slate-100">
+      <CardHeader className="bg-slate-50 border-b border-slate-100 p-3">
         <CardTitle className="text-xl flex items-center gap-2 text-slate-800">
-          <Ruler className="w-5 h-5 text-blue-600" /> מפרט טכני ומידות
+          <Ruler className="w-4 h-4 text-blue-600" /> מפרט טכני ומידות
         </CardTitle>
       </CardHeader>
       
-      <CardContent className="p-8 space-y-6">
+      <CardContent className="p-4 space-y-3">
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-2">
             <Label>רוחב (ס"מ)</Label>
