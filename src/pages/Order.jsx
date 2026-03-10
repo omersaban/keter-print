@@ -192,13 +192,15 @@ export default function OrderPage() {
             
             {currentStep === 2 && (
               <div className="space-y-6">
-                {/* 1. תיאור ההזמנה - שורה אחת בלבד */}
+                {/* 1. תיאור ההזמנה - חזר להיות Textarea נמתח אך דק בתור התחלה */}
                 <LocalCard className="p-4">
-                  <label className="block text-sm font-medium mb-2 text-gray-700">תיאור ההזמנה והערות</label>
-                  <LocalInput 
+                  <label className="block text-sm font-medium mb-2 text-gray-700 font-bold">תיאור ההזמנה והערות</label>
+                  <textarea 
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none min-h-[45px] text-right resize-y block transition-all"
+                    placeholder="למשל: דחוף למחר, חיתוך פינות מעוגלות, סוג ציפוי מיוחד..."
                     value={orderData.special_instructions}
                     onChange={(e) => handleInputChange('special_instructions', e.target.value)}
-                    placeholder="למשל: דחוף למחר, חיתוך פינות מעוגלות, סוג ציפוי מיוחד..."
+                    rows={1}
                   />
                 </LocalCard>
 
