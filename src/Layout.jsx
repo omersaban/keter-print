@@ -215,9 +215,6 @@ export default function Layout({ children }) {
           <div className="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-slate-500 text-xs gap-4">
             <p>&copy; {new Date().getFullYear()} דפוס כתר בע"מ. כל הזכויות שמורות.</p>
             <div className="flex space-x-reverse space-x-6">
-              {/* Facebook Link Footer */}
-              <a href="https://www.facebook.com/KeterPrint/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                <Facebook className="w-4 h-4" />
               </a>
             </div>
           </div>
