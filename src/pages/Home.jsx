@@ -96,14 +96,14 @@ export default function Home() {
             {/* כפתור הזמנה אונליין - צד ימין (זז ימינה ולמטה) */}
             <Link 
               to="/Order" 
-              className="absolute bottom-[12%] right-[8%] w-[15%] h-[12%] cursor-pointer z-10 hover:bg-white/10 transition-colors rounded-lg"
+              className="absolute bottom-[12%] right-[20%] w-[15%] h-[12%] cursor-pointer z-10 hover:bg-white/10 transition-colors rounded-lg"
               aria-label="הזמנה אונליין"
             />
             
             {/* כפתור למידע נוסף - צד שמאל (זז שמאלה ולמטה) */}
             <Link 
               to="/About" 
-              className="absolute bottom-[12%] right-[29%] w-[14%] h-[12%] cursor-pointer z-10 hover:bg-white/10 transition-colors rounded-lg"
+              className="absolute bottom-[12%] right-[35%] w-[14%] h-[12%] cursor-pointer z-10 hover:bg-white/10 transition-colors rounded-lg"
               aria-label="למידע נוסף"
             />
           </div>
