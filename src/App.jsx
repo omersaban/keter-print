@@ -17,6 +17,7 @@ import Articles from './pages/Articles';
 import BrochuresArticle from './pages/articles/BrochuresArticle'; // הייבוא של עמוד מאמר
 import OffsetArticle from './pages/articles/OffsetArticle'; // <--- תוספת חדשה: ייבוא מאמר אופסט
 import SpeedVsQualityArticle from './pages/articles/SpeedVsQuality'; //
+import ResolutionArticle from './pages/articles/Resolution'; //
 
 // עטיפת ה-Layout המקורית שלך
 const LayoutWrapper = ({ children, currentPageName }) => {
@@ -99,10 +100,17 @@ const AuthenticatedApp = () => {
           </LayoutWrapper>
         } />
 
-         {/* <--- תוספת הראוט החדש למאמר אופסט ---> */}
+         {/* <--- תוספת הראוט החדש למאמר מהירות אל מול איכות ---> */}
         <Route path="/Articles/SpeedVsQuality" element={
           <LayoutWrapper currentPageName="Articles">
             <SpeedVsQualityArticle />
+          </LayoutWrapper>
+        } />
+
+        {/* <--- תוספת הראוט החדש למאמר רזולוציה ---> */}
+        <Route path="/Articles/Resolution" element={
+          <LayoutWrapper currentPageName="Articles">
+            <ResolutionArticle />
           </LayoutWrapper>
         } />
   
