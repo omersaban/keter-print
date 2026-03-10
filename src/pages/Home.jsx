@@ -89,7 +89,7 @@ export default function Home() {
       <section className="relative w-full overflow-hidden shadow-inner">
         <div className="relative w-full">
           <img 
-            src="/main-banner.png" 
+            src="/public/images/main-banner.png" 
             alt="דפוס כתר - באנר ראשי" 
             className="w-full h-auto block"
           />
